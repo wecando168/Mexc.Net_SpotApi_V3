@@ -1,0 +1,131 @@
+{
+    "makerCommission": 20,
+    "takerCommission": 20,
+    "buyerCommission": 0,
+    "sellerCommission": 0,
+    "canTrade": true,
+    "canWithdraw": true,
+    "canDeposit": true,
+    "updateTime": null,
+    "accountType": "SPOT",
+    "balances": [
+        {
+            "asset": "USDT",
+            "free": "0.4493134213633428",
+            "locked": "19.4208"
+        },
+        {
+            "asset": "BTC",
+            "free": "0.00039",
+            "locked": "0"
+        },
+        {
+            "asset": "MX",
+            "free": "71.96374588",
+            "locked": "0"
+        },
+        {
+            "asset": "SHIB",
+            "free": "10000000",
+            "locked": "0"
+        },
+        {
+            "asset": "RACA",
+            "free": "13565.21",
+            "locked": "0"
+        },
+        {
+            "asset": "GNX",
+            "free": "2000",
+            "locked": "0"
+        },
+        {
+            "asset": "HOT",
+            "free": "5000",
+            "locked": "0"
+        },
+        {
+            "asset": "FIL",
+            "free": "1.2652375718529691",
+            "locked": "0"
+        },
+        {
+            "asset": "CFX",
+            "free": "399.1",
+            "locked": "0"
+        },
+        {
+            "asset": "FIL36",
+            "free": "7.93378845",
+            "locked": "19"
+        },
+        {
+            "asset": "AKITA",
+            "free": "120000000",
+            "locked": "0"
+        },
+        {
+            "asset": "PAINT",
+            "free": "100000",
+            "locked": "0"
+        },
+        {
+            "asset": "PET",
+            "free": "2000",
+            "locked": "0"
+        },
+        {
+            "asset": "SC",
+            "free": "2486.44",
+            "locked": "0"
+        },
+        {
+            "asset": "WIN",
+            "free": "1531318.77",
+            "locked": "0"
+        },
+        {
+            "asset": "XVG",
+            "free": "1408.43",
+            "locked": "0"
+        },
+        {
+            "asset": "PIG",
+            "free": "3272130745.14402524",
+            "locked": "5500000000"
+        },
+        {
+            "asset": "SMARS",
+            "free": "1911048579.500592",
+            "locked": "0"
+        },
+        {
+            "asset": "YFX",
+            "free": "209.78",
+            "locked": "0"
+        },
+        {
+            "asset": "BUNNY",
+            "free": "1",
+            "locked": "0"
+        },
+        {
+            "asset": "ASS",
+            "free": "6103248060.311955",
+            "locked": "0"
+        },
+        {
+            "asset": "KISHU",
+            "free": "108312752237.22163251",
+            "locked": "0"
+        },
+        {
+            "asset": "SFM",
+            "free": "34996.921818604009",
+            "locked": "0"
+        }
+    ],
+    "permissions": [
+        "SPOT"
+    ]
+}

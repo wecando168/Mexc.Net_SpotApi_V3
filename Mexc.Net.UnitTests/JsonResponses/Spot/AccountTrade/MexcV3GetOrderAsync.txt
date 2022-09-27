@@ -1,0 +1,20 @@
+{
+    "symbol": "USDCUSDT",
+    "orderId": "8649fbcfa28c4fd98bfd87f67b2794ed",
+    "orderListId": -1,
+    "clientOrderId": "NewOrder1660987901567",
+    "price": "0.9",
+    "origQty": "6",
+    "executedQty": "0",
+    "cummulativeQuoteQty": "0",
+    "status": "NEW",
+    "timeInForce": null,
+    "type": "LIMIT",
+    "side": "BUY",
+    "stopPrice": null,
+    "icebergQty": null,
+    "time": 1661023230000,
+    "updateTime": 1661023230000,
+    "isWorking": true,
+    "origQuoteOrderQty": "5.4"
+}

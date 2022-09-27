@@ -1,0 +1,14 @@
+{
+    "tranId":"11945860693",
+    "fromAccount":"master@test.com",
+    "toAccount":"subaccount1@test.com",
+    "clientTranId":"test",
+    "asset":"BTC",
+    "amount":"0.1",
+    "fromAccountType":"SPOT",
+    "toAccountType":"FUTURE",
+    "fromSymbol":"SPOT",
+    "toSymbol":"FUTURE",
+    "status":"SUCCESS",
+    "timestamp":1544433325000
+  }

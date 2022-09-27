@@ -1,0 +1,25 @@
+﻿[
+  {
+    "rows": [
+      {
+          "isolatedSymbol": "MXUSDT", 
+          "id": "12807067523",
+          "asset": "MX",
+          "timestamp": 1555056425000,
+          "amount": "315.53307675",
+          "dealAmount": "319.26088158",
+          "dealQuantity": "23768.97",
+          "fee": "0",
+          "feeCurrency": "USDT",
+          "orderType": "STOP_OUT",
+          "price": "0.013275",
+          "quantity": "23768.97",
+                "remainQuantity": "0",
+          "remainAmount": "300",
+                "side": "SELL",
+                "status": "FILLED"
+      }
+    ],
+    "total": 1
+  }
+]

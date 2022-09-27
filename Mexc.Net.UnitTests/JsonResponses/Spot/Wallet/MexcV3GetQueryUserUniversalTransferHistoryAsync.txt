@@ -1,0 +1,30 @@
+﻿[
+  {
+    "rows":[
+    {
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    },
+    {
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    }],
+    "total": 2,
+  }
+]

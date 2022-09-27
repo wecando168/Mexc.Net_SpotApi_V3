@@ -1,0 +1,14 @@
+{
+    "subAccounts":[
+        {
+            "subAccount":"mexc666",
+            "isFreeze":false,
+            "createTime":1544433328000
+        },
+        {
+            "subAccount":"mexc888",
+            "isFreeze":false,
+            "createTime":1544433328000
+        }
+    ]
+}

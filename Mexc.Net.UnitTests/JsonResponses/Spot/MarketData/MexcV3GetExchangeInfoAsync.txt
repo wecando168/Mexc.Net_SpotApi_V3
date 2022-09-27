@@ -1,0 +1,66 @@
+{
+    "timezone": "CST",
+    "serverTime": 1660838759068,
+    "rateLimits": [],
+    "exchangeFilters": [],
+    "symbols": [
+        {
+            "symbol": "BTCUSDT",
+            "status": "ENABLED",
+            "baseAsset": "BTC",
+            "baseAssetPrecision": 6,
+            "quoteAsset": "USDT",
+            "quotePrecision": 2,
+            "quoteAssetPrecision": 2,
+            "baseCommissionPrecision": 6,
+            "quoteCommissionPrecision": 2,
+            "orderTypes": [
+                "LIMIT",
+                "MARKET",
+                "LIMIT_MAKER"
+            ],
+            "quoteOrderQtyMarketAllowed": false,
+            "isSpotTradingAllowed": true,
+            "isMarginTradingAllowed": true,
+            "quoteAmountPrecision": "5",
+            "baseSizePrecision": "0.000001",
+            "permissions": [
+                "SPOT",
+                "MARGIN"
+            ],
+            "filters": [],
+            "maxQuoteAmount": "5000000",
+            "makerCommission": "0.002",
+            "takerCommission": "0.002"
+        },
+        {
+            "symbol": "ETHUSDT",
+            "status": "ENABLED",
+            "baseAsset": "ETH",
+            "baseAssetPrecision": 5,
+            "quoteAsset": "USDT",
+            "quotePrecision": 2,
+            "quoteAssetPrecision": 2,
+            "baseCommissionPrecision": 5,
+            "quoteCommissionPrecision": 2,
+            "orderTypes": [
+                "LIMIT",
+                "MARKET",
+                "LIMIT_MAKER"
+            ],
+            "quoteOrderQtyMarketAllowed": false,
+            "isSpotTradingAllowed": true,
+            "isMarginTradingAllowed": true,
+            "quoteAmountPrecision": "5",
+            "baseSizePrecision": "0.0001",
+            "permissions": [
+                "SPOT",
+                "MARGIN"
+            ],
+            "filters": [],
+            "maxQuoteAmount": "5000000",
+            "makerCommission": "0.002",
+            "takerCommission": "0.002"
+        }
+    ]
+}

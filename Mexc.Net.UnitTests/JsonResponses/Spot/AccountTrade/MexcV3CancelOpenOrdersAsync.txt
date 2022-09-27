@@ -1,0 +1,24 @@
+[
+    {
+        "symbol": "DAIUSDT",
+        "orderId": "342839c90edf48a1a49658d6461bc17f",
+        "price": "0.5",
+        "origQty": "10",
+        "type": "LIMIT",
+        "side": "BUY",
+        "executedQty": "0",
+        "cummulativeQuoteQty": "0",
+        "status": "NEW"
+    },
+    {
+        "symbol": "DAIUSDT",
+        "orderId": "d65aca910dd34dbaad46020f5721bbbc",
+        "price": "0.96",
+        "origQty": "6",
+        "type": "LIMIT",
+        "side": "BUY",
+        "executedQty": "0",
+        "cummulativeQuoteQty": "0",
+        "status": "NEW"
+    }
+]

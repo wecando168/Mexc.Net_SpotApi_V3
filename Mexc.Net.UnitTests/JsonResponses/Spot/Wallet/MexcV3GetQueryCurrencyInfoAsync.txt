@@ -1,0 +1,38 @@
+﻿[
+  {
+    "coin": "BTC",
+    "name": "Bitcoin",
+    "networkList": [
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-TRX",
+          "network": "TRC20",
+          "withdrawEnable": false,
+          "withdrawFee": "0.000100000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "40.000000000000000000",
+          "withdrawMin": "0.001000000000000000",
+          "sameAddress": false,
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+      },
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-BSC",
+          "network": "BEP20(BSC)",
+          "withdrawEnable": true,
+          "withdrawFee": "0.000010000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "100.000000000000000000",
+          "withdrawMin": "0.000100000000000000",
+          "sameAddress": false,
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+      }
+    ]
+  },
+]

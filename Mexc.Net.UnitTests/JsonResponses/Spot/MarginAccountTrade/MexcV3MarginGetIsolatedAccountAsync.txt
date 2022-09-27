@@ -1,0 +1,41 @@
+﻿[
+  {
+   "assets":[
+      {
+        "baseAsset": {
+          "asset": "BTC",
+          "borrowEnabled": true,
+          "borrowed": "0",
+          "free": "0.00022998",
+          "interest": "0",
+          "locked": "0",
+          "netAsset": "0.00022998",
+          "netAssetOfBtc": "0.00022998",
+          "repayEnabled": true,
+          "totalAsset": "0.00022998"
+        },
+        "quoteAsset": {
+          "asset": "USDT",
+          "borrowEnabled": true,
+          "borrowed": "0",
+          "free": "10",
+          "interest": "0",
+          "locked": "0",
+          "netAsset": "10",
+          "netAssetOfBtc": "0.000458278339932541",
+          "repayEnabled": true,
+          "totalAsset": "10"
+        },
+        "symbol": "BTCUSDT",
+        "isolatedCreated": true,
+        "enabled": true,
+        "marginLevel": "1.00006882",
+        "marginRatio": "9",
+        "indexPrice": "21804.199655172413793103",
+        "liquidatePrice": "--",
+        "liquidateRate": "--",
+        "tradeEnabled": true
+      }
+   ]
+  }
+]

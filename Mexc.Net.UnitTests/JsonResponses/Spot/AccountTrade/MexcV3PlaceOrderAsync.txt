@@ -1,0 +1,10 @@
+{
+    "symbol": "USDCUSDT",
+    "orderId": "a530ab8761104dceb3a59e6f1eef36b9",
+    "orderListId": -1,
+    "price": "0.9",
+    "origQty": "6",
+    "type": "LIMIT",
+    "side": "BUY",
+    "transactTime": 1660987670540
+}

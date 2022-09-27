@@ -1,0 +1,16 @@
+﻿[
+  {
+        "id": "17bc9f68c3b740c5947c074748d42c3",
+        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
+        "amount": "1501",
+        "transferType": 0,
+        "status": 7,
+        "transactionFee": "1",
+        "confirmNo": null,
+        "applyTime": 1658625828000,
+        "remark": ""
+  }
+]

@@ -1,0 +1,9 @@
+﻿[
+  {
+  "symbol": "BTCUSDT",
+  "orderId": "693471305432961024",
+  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
+  "isIsolated": true,       
+  "transactTime": 1507725176595
+  }
+]

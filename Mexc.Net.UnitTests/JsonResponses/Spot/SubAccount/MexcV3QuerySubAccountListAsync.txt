@@ -1,0 +1,9 @@
+{
+    "subAccount": "mexc1",
+    "note": "1",
+    "apiKey": "arg13sdfgs",
+    "secretKey": "nkjwn21973ihi",
+    "permissions": "SPOT_ACCOUNT_READ",
+    "ip": "135.181.193",
+    "creatTime": 1597026383085
+}

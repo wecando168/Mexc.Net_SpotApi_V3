@@ -1,0 +1,26 @@
+{
+    "c":"spot@public.increase.depth.v3.api@BTCUSDT",
+    "d":
+    {
+        "E":1663550873390,
+        "bids":
+        [
+            {
+                "p":"19443.30",
+                "v":"0.000000"
+            }
+        ],
+        "asks":
+        [
+            {
+                "p":"19465.05",
+                "v":"0.002637"
+            }
+        ],
+        "e":"spot@public.increase.depth.v3.api",
+        "s":"BTCUSDT",
+        "version":"4179466077"
+    },
+    "s":"BTCUSDT",
+    "t":1663550873390
+}

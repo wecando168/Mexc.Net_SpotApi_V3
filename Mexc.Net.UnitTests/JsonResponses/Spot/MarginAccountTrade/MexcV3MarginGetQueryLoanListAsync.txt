@@ -1,0 +1,14 @@
+﻿[
+  {
+     "symbol": "BTCUSDT",
+     "tranId": "746784754145300480",
+     "asset": "BTC",
+     "principal": "0.002",
+     "remainAmount": "0",
+     "remainInterest": "0",
+     "repayAmount": "0.002",
+     "repayInterest": "0.00000001",
+     "status": "REPAID",
+     "timestamp": 1658213826000
+  }
+]

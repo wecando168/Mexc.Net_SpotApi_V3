@@ -1,0 +1,12 @@
+{
+    "symbol": "USDCUSDT",
+    "origClientOrderId": "NewOrder1660987901546",
+    "orderId": "17c0cba313b540e083b3c38f803e24a5",
+    "price": "0.9",
+    "origQty": "6",
+    "type": "LIMIT",
+    "side": "BUY",
+    "executedQty": "0",
+    "cummulativeQuoteQty": "0",
+    "status": "NEW"
+}

@@ -1,0 +1,9 @@
+﻿{
+    "code": "0",
+    "message": "",
+    "data": [{
+        "subAccount": "mexc1",
+        "isFuturesEnabled": true,
+        "timestamp": "1597026383085"
+    }]
+  }

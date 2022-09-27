@@ -1,0 +1,2354 @@
+[
+    {
+        "symbol": "OP3SUSDT",
+        "netValue": "0.384",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GLMR3SUSDT",
+        "netValue": "0.695",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DASH3SUSDT",
+        "netValue": "0.174",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LUNA3SUSDT",
+        "netValue": "1.093",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "WOO3LUSDT",
+        "netValue": "0.425",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT2SUSDT",
+        "netValue": "1.062",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FLM3LUSDT",
+        "netValue": "0.481",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "REEF3LUSDT",
+        "netValue": "0.192",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CTSI3LUSDT",
+        "netValue": "1.064",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RON3LUSDT",
+        "netValue": "0.12",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "QTUM3LUSDT",
+        "netValue": "0.209",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC2LUSDT",
+        "netValue": "0.253",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATLAS3LUSDT",
+        "netValue": "0.152",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "VINU3SUSDT",
+        "netValue": "0.946",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATOM3LUSDT",
+        "netValue": "2.103",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TOMO3SUSDT",
+        "netValue": "1.125",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DAR3SUSDT",
+        "netValue": "0.947",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GTC3SUSDT",
+        "netValue": "0.661",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FTT3LUSDT",
+        "netValue": "0.548",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "QNT3SUSDT",
+        "netValue": "0.191",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RLC3LUSDT",
+        "netValue": "0.474",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH2LUSDT",
+        "netValue": "0.607",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC5LUSDT",
+        "netValue": "0.4652",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALPHA3LUSDT",
+        "netValue": "0.732",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "API33SUSDT",
+        "netValue": "0.215",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "THETA3SUSDT",
+        "netValue": "0.967",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "HNT3SUSDT",
+        "netValue": "0.873",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ROSE3SUSDT",
+        "netValue": "0.365",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IMX3LUSDT",
+        "netValue": "0.396",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAT3SUSDT",
+        "netValue": "0.257",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "C983SUSDT",
+        "netValue": "0.882",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PEOPLE3SUSDT",
+        "netValue": "1.26",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ONE3LUSDT",
+        "netValue": "0.344",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LRC3SUSDT",
+        "netValue": "1.224",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOTX3LUSDT",
+        "netValue": "0.421",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SRM3LUSDT",
+        "netValue": "0.19",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "UNI3SUSDT",
+        "netValue": "1.555",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STEPN3SUSDT",
+        "netValue": "1.237",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC3LUSDT",
+        "netValue": "0.82",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANKR3SUSDT",
+        "netValue": "2.506",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DEFI3SUSDT",
+        "netValue": "1.404",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC3SUSDT",
+        "netValue": "0.192",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZEN3SUSDT",
+        "netValue": "0.228",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CTK3SUSDT",
+        "netValue": "1.96",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MATIC3SUSDT",
+        "netValue": "0.393",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DUSK3SUSDT",
+        "netValue": "0.91",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC2LUSDT",
+        "netValue": "0.2776",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOTX3SUSDT",
+        "netValue": "1.033",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TOMO3LUSDT",
+        "netValue": "1.021",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SLP3LUSDT",
+        "netValue": "0.192",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LDO3SUSDT",
+        "netValue": "0.78",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANT3LUSDT",
+        "netValue": "0.777",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP5LUSDT",
+        "netValue": "0.888",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS4LUSDT",
+        "netValue": "1.491",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STG3LUSDT",
+        "netValue": "1.133",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CAW3SUSDT",
+        "netValue": "0.431",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ICP3SUSDT",
+        "netValue": "1.592",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC5SUSDT",
+        "netValue": "0.8708",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "REN3LUSDT",
+        "netValue": "0.139",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIT3LUSDT",
+        "netValue": "1.733",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XEM3SUSDT",
+        "netValue": "0.528",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RSR3LUSDT",
+        "netValue": "0.829",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAND3LUSDT",
+        "netValue": "0.277",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AGLD3LUSDT",
+        "netValue": "0.439",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BNX3LUSDT",
+        "netValue": "0.679",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BEL3SUSDT",
+        "netValue": "0.933",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS4SUSDT",
+        "netValue": "0.614",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LRC3LUSDT",
+        "netValue": "0.194",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KAVA3SUSDT",
+        "netValue": "0.24",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LINA3LUSDT",
+        "netValue": "1.099",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XTZ5LUSDT",
+        "netValue": "0.392",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GALA3SUSDT",
+        "netValue": "1.316",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SUSHI3SUSDT",
+        "netValue": "0.976",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "WAVES3SUSDT",
+        "netValue": "0.445",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH5LUSDT",
+        "netValue": "0.2016",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SFP3LUSDT",
+        "netValue": "0.45",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ENJ3SUSDT",
+        "netValue": "1.108",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE4LUSDT",
+        "netValue": "0.227",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LUNC3SUSDT",
+        "netValue": "0.132",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STORJ3SUSDT",
+        "netValue": "0.382",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIB5SUSDT",
+        "netValue": "1.8677",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RVN3SUSDT",
+        "netValue": "0.229",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FILECOIN3LUSDT",
+        "netValue": "0.161",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AAVE3SUSDT",
+        "netValue": "0.309",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FLM3SUSDT",
+        "netValue": "1.793",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AVAX3SUSDT",
+        "netValue": "0.246",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS3SUSDT",
+        "netValue": "0.1588",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XLM3SUSDT",
+        "netValue": "0.159",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE5LUSDT",
+        "netValue": "0.489",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XTZ3SUSDT",
+        "netValue": "0.902",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AAVE3LUSDT",
+        "netValue": "0.336",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS3LUSDT",
+        "netValue": "1.1576",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZIL3SUSDT",
+        "netValue": "0.6699",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GAL3SUSDT",
+        "netValue": "1.199",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CELR3LUSDT",
+        "netValue": "0.965",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ICX3LUSDT",
+        "netValue": "0.27",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CEL3LUSDT",
+        "netValue": "1.249",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATOM4LUSDT",
+        "netValue": "0.291",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP3SUSDT",
+        "netValue": "0.42",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OGN3LUSDT",
+        "netValue": "0.166",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OKB3LUSDT",
+        "netValue": "0.475",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC5LUSDT",
+        "netValue": "0.1901",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NKN3LUSDT",
+        "netValue": "1.655",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LUNC3LUSDT",
+        "netValue": "0.55",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AZERO3LUSDT",
+        "netValue": "1.118",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT2LUSDT",
+        "netValue": "0.391",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LAZIO3SUSDT",
+        "netValue": "0.258",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAT3LUSDT",
+        "netValue": "0.338",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "REEF3SUSDT",
+        "netValue": "0.268",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP3LUSDT",
+        "netValue": "0.203",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AXS3SUSDT",
+        "netValue": "0.643",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH5SUSDT",
+        "netValue": "0.4324",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ENS3LUSDT",
+        "netValue": "0.2698",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FITFI3LUSDT",
+        "netValue": "0.441",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CHR3LUSDT",
+        "netValue": "0.371",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CHZ3LUSDT",
+        "netValue": "6.452",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BABYDOGE3SUSDT",
+        "netValue": "0.982",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LINK3SUSDT",
+        "netValue": "0.593",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ICX3SUSDT",
+        "netValue": "0.511",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XTZ3LUSDT",
+        "netValue": "0.371",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "USTC3SUSDT",
+        "netValue": "0.106",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATOM4SUSDT",
+        "netValue": "0.2",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RLC3SUSDT",
+        "netValue": "0.22",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZRX3LUSDT",
+        "netValue": "0.731",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOST3SUSDT",
+        "netValue": "0.641",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CEL3SUSDT",
+        "netValue": "3.64",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ARPA3LUSDT",
+        "netValue": "0.175",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BRISE3SUSDT",
+        "netValue": "0.374",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP4LUSDT",
+        "netValue": "0.447",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "YFI3SUSDT",
+        "netValue": "0.392",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PIT3LUSDT",
+        "netValue": "0.381",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FITFI3SUSDT",
+        "netValue": "1.949",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RACA3SUSDT",
+        "netValue": "0.219",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SLP3SUSDT",
+        "netValue": "1.577",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIB5LUSDT",
+        "netValue": "0.1886",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RACA3LUSDT",
+        "netValue": "0.298",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BONE3SUSDT",
+        "netValue": "0.58",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "QNT3LUSDT",
+        "netValue": "0.658",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BSV4LUSDT",
+        "netValue": "0.262",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STMX3LUSDT",
+        "netValue": "0.277",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AKRO3LUSDT",
+        "netValue": "0.503",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ARPA3SUSDT",
+        "netValue": "0.255",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KSM3SUSDT",
+        "netValue": "0.983",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STG3SUSDT",
+        "netValue": "0.746",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RAY3SUSDT",
+        "netValue": "0.358",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DAR3LUSDT",
+        "netValue": "0.164",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH3LUSDT",
+        "netValue": "0.513",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LIT3LUSDT",
+        "netValue": "0.503",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MASK3SUSDT",
+        "netValue": "1.189",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAL3SUSDT",
+        "netValue": "0.464",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ENJ3LUSDT",
+        "netValue": "1.009",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KSM3LUSDT",
+        "netValue": "0.728",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SOL3LUSDT",
+        "netValue": "0.337",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "JASMY3SUSDT",
+        "netValue": "0.275",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ONE3SUSDT",
+        "netValue": "0.27",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZIL3LUSDT",
+        "netValue": "0.1556",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BLZ3SUSDT",
+        "netValue": "1.375",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH3SUSDT",
+        "netValue": "0.478",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DYDX3LUSDT",
+        "netValue": "0.154",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIT3SUSDT",
+        "netValue": "0.141",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRX3SUSDT",
+        "netValue": "0.306",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "JASMY3LUSDT",
+        "netValue": "0.631",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "QTUM3SUSDT",
+        "netValue": "0.636",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "WAVES3LUSDT",
+        "netValue": "0.331",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BLZ3LUSDT",
+        "netValue": "0.282",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATOM3SUSDT",
+        "netValue": "0.314",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XEM3LUSDT",
+        "netValue": "0.147",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOST3LUSDT",
+        "netValue": "0.169",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANC3LUSDT",
+        "netValue": "0.521",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KNC3LUSDT",
+        "netValue": "1.3153",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SXP3LUSDT",
+        "netValue": "0.26",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "UNI3LUSDT",
+        "netValue": "0.121",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AXS3LUSDT",
+        "netValue": "0.281",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RON3SUSDT",
+        "netValue": "0.238",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP4SUSDT",
+        "netValue": "0.607",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANC3SUSDT",
+        "netValue": "1.412",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PIT3SUSDT",
+        "netValue": "0.249",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RUNE3SUSDT",
+        "netValue": "1.552",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SFP3SUSDT",
+        "netValue": "0.583",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "HT3LUSDT",
+        "netValue": "0.261",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DENT3SUSDT",
+        "netValue": "0.435",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RSR3SUSDT",
+        "netValue": "1.965",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PSG3SUSDT",
+        "netValue": "0.573",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MANA3LUSDT",
+        "netValue": "0.585",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "VINU3LUSDT",
+        "netValue": "0.563",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE4SUSDT",
+        "netValue": "0.367",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FTM3SUSDT",
+        "netValue": "0.9874",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RUNE3LUSDT",
+        "netValue": "0.14",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT5LUSDT",
+        "netValue": "0.198",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MTL3LUSDT",
+        "netValue": "0.605",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IMX3SUSDT",
+        "netValue": "0.483",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ICP3LUSDT",
+        "netValue": "0.31",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BIT3SUSDT",
+        "netValue": "0.307",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RAD3SUSDT",
+        "netValue": "2.017",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PEOPLE3LUSDT",
+        "netValue": "0.18",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRB3SUSDT",
+        "netValue": "0.418",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ATLAS3SUSDT",
+        "netValue": "0.28",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DENT3LUSDT",
+        "netValue": "0.181",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALPINE3SUSDT",
+        "netValue": "0.928",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GAL3LUSDT",
+        "netValue": "0.393",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STEPN3LUSDT",
+        "netValue": "0.981",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FTM3LUSDT",
+        "netValue": "0.8558",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANT3SUSDT",
+        "netValue": "0.662",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAKE3LUSDT",
+        "netValue": "0.237",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FTT3SUSDT",
+        "netValue": "1.079",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "1INCH3SUSDT",
+        "netValue": "0.202",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "PSG3LUSDT",
+        "netValue": "1.109",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH4SUSDT",
+        "netValue": "0.286",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LAZIO3LUSDT",
+        "netValue": "3.958",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT5SUSDT",
+        "netValue": "0.221",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SANTOS3SUSDT",
+        "netValue": "0.447",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AUDIO3SUSDT",
+        "netValue": "0.193",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BNB3SUSDT",
+        "netValue": "0.561",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GLMR3LUSDT",
+        "netValue": "0.482",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BSV3SUSDT",
+        "netValue": "0.338",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LINA3SUSDT",
+        "netValue": "1.089",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NEAR3SUSDT",
+        "netValue": "0.626",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC3LUSDT",
+        "netValue": "0.2808",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OCEAN3LUSDT",
+        "netValue": "0.167",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALPINE3LUSDT",
+        "netValue": "1.056",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTS3LUSDT",
+        "netValue": "1.441",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CHZ3SUSDT",
+        "netValue": "0.862",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MASK3LUSDT",
+        "netValue": "0.495",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "VET3SUSDT",
+        "netValue": "1.459",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "COTI3LUSDT",
+        "netValue": "0.877",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "APE3LUSDT",
+        "netValue": "0.909",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KNC3SUSDT",
+        "netValue": "0.4057",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "APE3SUSDT",
+        "netValue": "0.269",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AKRO3SUSDT",
+        "netValue": "0.844",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOTA3LUSDT",
+        "netValue": "0.251",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZEN3LUSDT",
+        "netValue": "0.243",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "C983LUSDT",
+        "netValue": "0.628",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SKL3SUSDT",
+        "netValue": "1.332",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTS3SUSDT",
+        "netValue": "0.713",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SKL3LUSDT",
+        "netValue": "0.121",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DUSK3LUSDT",
+        "netValue": "0.539",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OP3LUSDT",
+        "netValue": "1.257",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GST3LUSDT",
+        "netValue": "0.413",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NEO3LUSDT",
+        "netValue": "0.927",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ADA3LUSDT",
+        "netValue": "0.5793",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH4SUSDT",
+        "netValue": "1.493",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRX3LUSDT",
+        "netValue": "0.337",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CRV3SUSDT",
+        "netValue": "0.753",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "VET3LUSDT",
+        "netValue": "0.455",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FLOW3SUSDT",
+        "netValue": "0.547",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BSV4SUSDT",
+        "netValue": "0.723",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAL3LUSDT",
+        "netValue": "0.242",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZEC3LUSDT",
+        "netValue": "0.823",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CELO3SUSDT",
+        "netValue": "1.169",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALGO3SUSDT",
+        "netValue": "1.236",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC2SUSDT",
+        "netValue": "0.3665",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RAD3LUSDT",
+        "netValue": "0.866",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "HNT3LUSDT",
+        "netValue": "0.946",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XMR3LUSDT",
+        "netValue": "0.255",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AUDIO3LUSDT",
+        "netValue": "0.268",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH5SUSDT",
+        "netValue": "0.33",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "YFII3LUSDT",
+        "netValue": "1.22",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "COMP3SUSDT",
+        "netValue": "1.776",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FLOW3LUSDT",
+        "netValue": "0.125",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AR3SUSDT",
+        "netValue": "0.288",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETC3SUSDT",
+        "netValue": "0.3476",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SRM3SUSDT",
+        "netValue": "0.184",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BSV3LUSDT",
+        "netValue": "0.534",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GTC3LUSDT",
+        "netValue": "0.492",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC4SUSDT",
+        "netValue": "0.254",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CELO3LUSDT",
+        "netValue": "0.366",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NEAR3LUSDT",
+        "netValue": "0.151",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH5LUSDT",
+        "netValue": "0.663",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BONE3LUSDT",
+        "netValue": "0.632",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT3SUSDT",
+        "netValue": "0.769",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LOOKS3LUSDT",
+        "netValue": "0.148",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XMR3SUSDT",
+        "netValue": "0.403",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC5SUSDT",
+        "netValue": "0.3535",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CTK3LUSDT",
+        "netValue": "0.153",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ADA3SUSDT",
+        "netValue": "1.0614",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DGB3SUSDT",
+        "netValue": "0.211",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XTZ5SUSDT",
+        "netValue": "1.149",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KLAY3SUSDT",
+        "netValue": "1.196",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MINA3LUSDT",
+        "netValue": "0.4",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SAND3SUSDT",
+        "netValue": "0.216",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CAW3LUSDT",
+        "netValue": "0.255",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MKR3LUSDT",
+        "netValue": "0.214",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OKB3SUSDT",
+        "netValue": "0.244",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BEL3LUSDT",
+        "netValue": "0.532",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS5LUSDT",
+        "netValue": "0.5934",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH4LUSDT",
+        "netValue": "1.636",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GALA3LUSDT",
+        "netValue": "0.326",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BRISE3LUSDT",
+        "netValue": "0.522",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "UNFI3SUSDT",
+        "netValue": "0.624",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SOL3SUSDT",
+        "netValue": "0.924",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GRT3LUSDT",
+        "netValue": "1.106",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "API33LUSDT",
+        "netValue": "0.317",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MATIC3LUSDT",
+        "netValue": "0.829",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GST3SUSDT",
+        "netValue": "0.342",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE3LUSDT",
+        "netValue": "0.1952",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MTL3SUSDT",
+        "netValue": "0.319",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ONT3LUSDT",
+        "netValue": "0.123",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AGLD3SUSDT",
+        "netValue": "1.419",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LINK3LUSDT",
+        "netValue": "0.121",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BABYDOGE3LUSDT",
+        "netValue": "0.58",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC2SUSDT",
+        "netValue": "0.716",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CEEK3SUSDT",
+        "netValue": "0.827",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EOS5SUSDT",
+        "netValue": "0.3797",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BNB3LUSDT",
+        "netValue": "1.007",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALPHA3SUSDT",
+        "netValue": "0.745",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LOVELY3SUSDT",
+        "netValue": "4.702",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CEEK3LUSDT",
+        "netValue": "0.403",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DYDX3SUSDT",
+        "netValue": "1.728",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ENS3SUSDT",
+        "netValue": "1.3387",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OCEAN3SUSDT",
+        "netValue": "0.43",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALGO3LUSDT",
+        "netValue": "0.352",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DASH3LUSDT",
+        "netValue": "0.331",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZRX3SUSDT",
+        "netValue": "1.298",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MKR3SUSDT",
+        "netValue": "0.383",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CELR3SUSDT",
+        "netValue": "1.404",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "WOO3SUSDT",
+        "netValue": "2.213",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ANKR3LUSDT",
+        "netValue": "0.632",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AZERO3SUSDT",
+        "netValue": "0.243",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ROSE3LUSDT",
+        "netValue": "0.796",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SNX3LUSDT",
+        "netValue": "1.135",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AVAX3LUSDT",
+        "netValue": "0.23",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OMG3LUSDT",
+        "netValue": "0.431",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALICE3SUSDT",
+        "netValue": "0.188",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LIT3SUSDT",
+        "netValue": "0.825",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XLM3LUSDT",
+        "netValue": "0.336",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAKE3SUSDT",
+        "netValue": "0.263",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SXP3SUSDT",
+        "netValue": "0.482",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LOOKS3SUSDT",
+        "netValue": "2.201",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NKN3SUSDT",
+        "netValue": "0.149",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "1INCH3LUSDT",
+        "netValue": "0.687",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "COMP3LUSDT",
+        "netValue": "0.301",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH4LUSDT",
+        "netValue": "0.217",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "HT3SUSDT",
+        "netValue": "0.242",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "YFI3LUSDT",
+        "netValue": "0.441",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "THETA3LUSDT",
+        "netValue": "0.188",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EGLD3SUSDT",
+        "netValue": "0.963",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SANTOS3LUSDT",
+        "netValue": "0.292",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OGN3SUSDT",
+        "netValue": "1.704",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LUNA3LUSDT",
+        "netValue": "0.914",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "EGLD3LUSDT",
+        "netValue": "0.307",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "AR3LUSDT",
+        "netValue": "0.187",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "XRP5SUSDT",
+        "netValue": "0.508",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRX5SUSDT",
+        "netValue": "0.743",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RAY3LUSDT",
+        "netValue": "0.418",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ALICE3LUSDT",
+        "netValue": "1.089",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CHR3SUSDT",
+        "netValue": "0.282",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "IOTA3SUSDT",
+        "netValue": "0.689",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KLAY3LUSDT",
+        "netValue": "0.88",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "KAVA3LUSDT",
+        "netValue": "1.081",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STORJ3LUSDT",
+        "netValue": "0.227",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BIT3LUSDT",
+        "netValue": "0.782",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "USTC3LUSDT",
+        "netValue": "0.283",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LOVELY3LUSDT",
+        "netValue": "0.304",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIB3LUSDT",
+        "netValue": "0.1936",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BNX3SUSDT",
+        "netValue": "0.491",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "NEO3SUSDT",
+        "netValue": "1.158",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC4LUSDT",
+        "netValue": "0.533",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ONT3SUSDT",
+        "netValue": "0.335",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "REN3SUSDT",
+        "netValue": "0.286",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC4SUSDT",
+        "netValue": "0.616",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SUSHI3LUSDT",
+        "netValue": "1.131",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRB3LUSDT",
+        "netValue": "0.842",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOT3LUSDT",
+        "netValue": "0.167",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "YFII3SUSDT",
+        "netValue": "0.648",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH3LUSDT",
+        "netValue": "0.869",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SAND3LUSDT",
+        "netValue": "0.134",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DEFI3LUSDT",
+        "netValue": "0.5",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "UNFI3LUSDT",
+        "netValue": "0.974",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "OMG3SUSDT",
+        "netValue": "0.62",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CTSI3SUSDT",
+        "netValue": "0.896",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "STMX3SUSDT",
+        "netValue": "0.326",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BAND3SUSDT",
+        "netValue": "1.387",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "FILECOIN3SUSDT",
+        "netValue": "0.492",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "RVN3LUSDT",
+        "netValue": "0.446",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SHIB3SUSDT",
+        "netValue": "1.9585",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE3SUSDT",
+        "netValue": "0.7084",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LDO3LUSDT",
+        "netValue": "0.167",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "COTI3SUSDT",
+        "netValue": "0.457",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DOGE5SUSDT",
+        "netValue": "1.8148",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "DGB3LUSDT",
+        "netValue": "0.487",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETC3LUSDT",
+        "netValue": "0.6403",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "TRX5LUSDT",
+        "netValue": "0.229",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "CRV3LUSDT",
+        "netValue": "0.176",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "LTC4LUSDT",
+        "netValue": "0.148",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ETH2SUSDT",
+        "netValue": "0.945",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BCH3SUSDT",
+        "netValue": "0.156",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MANA3SUSDT",
+        "netValue": "0.98",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "SNX3SUSDT",
+        "netValue": "0.215",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "MINA3SUSDT",
+        "netValue": "1.867",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "BTC3SUSDT",
+        "netValue": "0.4929",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "GRT3SUSDT",
+        "netValue": "1.584",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    },
+    {
+        "symbol": "ZEC3SUSDT",
+        "netValue": "1.596",
+        "feeRate": "0.00001",
+        "timestamp": 1661262230044
+    }
+]

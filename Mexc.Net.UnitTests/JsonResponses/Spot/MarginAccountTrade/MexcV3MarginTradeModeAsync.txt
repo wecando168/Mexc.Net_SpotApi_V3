@@ -1,0 +1,6 @@
+﻿[
+  {
+  "tradeMode": 0,
+  "symbol": "BTCUSDT"
+  }
+]

@@ -1,0 +1,20 @@
+{
+    "c":"spot@public.deals.v3.api@BTCUSDT",
+    "d":
+    {
+        "E":1663556442436,
+        "deals":
+        [
+            {
+                "S":2,
+                "p":"18767.98",
+                "t":1663556442409,
+                "v":"0.096760"
+            }
+        ],
+        "e":"spot@public.deals.v3.api",
+        "s":"BTCUSDT"
+    },
+    "s":"BTCUSDT",
+    "t":1663556442436
+}

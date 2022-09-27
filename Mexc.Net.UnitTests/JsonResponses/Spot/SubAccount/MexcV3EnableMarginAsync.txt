@@ -1,0 +1,9 @@
+﻿{
+  "code": "0",
+  "message": "",
+  "data": [{
+      "subAccount": "mexc1",
+      "isMarginEnabled": true,
+      "timestamp": "1597026383085"
+  }]
+}
