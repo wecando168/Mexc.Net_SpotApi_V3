@@ -492,5 +492,262 @@ namespace CryptoExchange.Net
         {
             return new ServerError(error.ToString());
         }
+
+        /// <summary>
+        /// Writes the parameters of the request to the request object body
+        /// </summary>
+        /// <param name="apiClient">The client making the request</param>
+        /// <param name="request">The request to set the parameters on</param>
+        /// <param name="parameters">The parameters to set</param>
+        /// <param name="contentType">The content type of the data</param>
+        protected virtual void MexcV3WriteParamBody(BaseApiClient apiClient, IRequest request, Dictionary<string, object> parameters, string contentType)
+        {
+            if (apiClient.requestBodyFormat == RequestBodyFormat.Json)
+            {
+                // Write the parameters as json in the body
+                var stringData = JsonConvert.SerializeObject(parameters);
+                request.SetContent(stringData, contentType);
+            }
+            else if (apiClient.requestBodyFormat == RequestBodyFormat.FormData)
+            {
+                // Write the parameters as form data in the body
+                var stringData = parameters.ToFormData();
+                request.SetContent(stringData, contentType);
+            }
+        }
+
+        /// <summary>
+        /// Creates a request object
+        /// </summary>
+        /// <param name="apiClient">The API client the request is for</param>
+        /// <param name="uri">The uri to send the request to</param>
+        /// <param name="method">The method of the request</param>
+        /// <param name="parameters">The parameters of the request</param>
+        /// <param name="signed">Whether or not the request should be authenticated</param>
+        /// <param name="parameterPosition">Where the parameters should be placed</param>
+        /// <param name="arraySerialization">How array parameters should be serialized</param>
+        /// <param name="requestId">Unique id of a request</param>
+        /// <param name="additionalHeaders">Additional headers to send with the request</param>
+        /// <returns></returns>
+        protected virtual IRequest MexcV3ConstructRequest(
+            RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            Dictionary<string, object>? parameters,
+            bool signed,
+            HttpMethodParameterPosition parameterPosition,
+            ArrayParametersSerialization arraySerialization,
+            int requestId,
+            Dictionary<string, string>? additionalHeaders)
+        {
+            parameters ??= new Dictionary<string, object>();
+
+            for (var i = 0; i < parameters.Count; i++)
+            {
+                var kvp = parameters.ElementAt(i);
+                if (kvp.Value is Func<object> delegateValue)
+                    parameters[kvp.Key] = delegateValue();
+            }
+
+            if (parameterPosition == HttpMethodParameterPosition.InUri)
+            {
+                foreach (var parameter in parameters)
+                    uri = uri.AddQueryParmeter(parameter.Key, parameter.Value.ToString());
+            }
+
+            var headers = new Dictionary<string, string>();
+            Dictionary<string, object>? uriParameters = parameterPosition == HttpMethodParameterPosition.InUri ? new Dictionary<string, object>(parameters) : new Dictionary<string, object>();
+            Dictionary<string, object>? bodyParameters = parameterPosition == HttpMethodParameterPosition.InBody ? new Dictionary<string, object>(parameters) : new Dictionary<string, object>();
+            if (apiClient.AuthenticationProvider != null)
+                apiClient.AuthenticationProvider.MexcV3AuthenticateRequest(
+                    apiClient,
+                    uri,
+                    method,
+                    parameters,
+                    signed,
+                    arraySerialization,
+                    parameterPosition,
+                    out uriParameters,
+                    out bodyParameters,
+                    out headers);
+
+            // Sanity check
+            foreach (var param in parameters)
+            {
+                if (!uriParameters.ContainsKey(param.Key) && !bodyParameters.ContainsKey(param.Key))
+                    throw new Exception($"Missing parameter {param.Key} after authentication processing. AuthenticationProvider implementation " +
+                        $"should return provided parameters in either the uri or body parameters output");
+            }
+
+            // Add the auth parameters to the uri, start with a new URI not sort the parameters including the auth parameters
+            // 将auth参数添加到uri中，从一个新的URI开始（不对参数进行排序）
+            uri = uri.MexcV3SetParameters(uriParameters, arraySerialization);
+
+            IRequest? request = RequestFactory.Create(method, uri, requestId);
+            request.Accept = Constants.JsonContentHeader;
+
+            foreach (var header in headers)
+                request.AddHeader(header.Key, header.Value);
+
+            if (additionalHeaders != null)
+            {
+                foreach (var header in additionalHeaders)
+                    request.AddHeader(header.Key, header.Value);
+            }
+
+            if (StandardRequestHeaders != null)
+            {
+                foreach (var header in StandardRequestHeaders)
+                    // Only add it if it isn't overwritten
+                    if (additionalHeaders?.ContainsKey(header.Key) != true)
+                        request.AddHeader(header.Key, header.Value);
+            }
+
+            if (parameterPosition == HttpMethodParameterPosition.InBody)
+            {
+                var contentType = (apiClient.requestBodyFormat == RequestBodyFormat.Json) ? Constants.JsonContentHeader : Constants.FormContentHeader;
+                if (bodyParameters.Any())
+                    MexcV3WriteParamBody(apiClient, request, bodyParameters, contentType);
+                else
+                    request.SetContent(apiClient.requestBodyEmptyContent, contentType);
+            }
+
+            return request;
+        }
+
+        /// <summary>
+        /// Prepares a request to be sent to the server
+        /// 准备发送到服务器的请求
+        /// </summary>
+        /// 请求的 API 客户端
+        /// <param name="apiClient">The API client the request is for</param>
+        /// 将请求发送到的 uri
+        /// <param name="uri">The uri to send the request to</param>
+        /// 请求的方法
+        /// <param name="method">The method of the request</param>
+        /// 取消令牌
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// 请求的参数
+        /// <param name="parameters">The parameters of the request</param>
+        /// 是否应该对请求进行身份验证
+        /// <param name="signed">Whether or not the request should be authenticated</param>
+        /// 应放置参数的位置，覆盖客户端中设置的值
+        /// <param name="parameterPosition">Where the parameters should be placed, overwrites the value set in the client</param>
+        /// 数组参数应该如何序列化，覆盖客户端中设置的值
+        /// <param name="arraySerialization">How array parameters should be serialized, overwrites the value set in the client</param>
+        /// 用于请求的积分
+        /// <param name="requestWeight">Credits used for the request</param>
+        /// 用于反序列化的 JsonSerializer
+        /// <param name="deserializer">The JsonSerializer to use for deserialization</param>
+        /// 与请求一起发送的附加标头
+        /// <param name="additionalHeaders">Additional headers to send with the request</param>
+        /// 忽略此请求的速率限制
+        /// <param name="ignoreRatelimit">Ignore rate limits for this request</param>
+        /// <returns></returns>
+        protected virtual async Task<CallResult<IRequest>> MexcV3PrepareRequestAsync(RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null,
+            bool signed = false,
+            HttpMethodParameterPosition? parameterPosition = null,
+            ArrayParametersSerialization? arraySerialization = null,
+            int requestWeight = 1,
+            JsonSerializer? deserializer = null,
+            Dictionary<string, string>? additionalHeaders = null,
+            bool ignoreRatelimit = false)
+        {
+            var requestId = NextId();
+
+            if (signed)
+            {
+                var syncTask = apiClient.SyncTimeAsync();
+                var timeSyncInfo = apiClient.GetTimeSyncInfo();
+                if (timeSyncInfo.TimeSyncState.LastSyncTime == default)
+                {
+                    // Initially with first request we'll need to wait for the time syncing, if it's not the first request we can just continue
+                    // 最初是第一个请求，我们需要等待时间同步，如果不是第一个请求，我们可以继续
+                    var syncTimeResult = await syncTask.ConfigureAwait(false);
+                    if (!syncTimeResult)
+                    {
+                        log.Write(LogLevel.Debug, $"[{requestId}] Failed to sync time, aborting request: " + syncTimeResult.Error);
+                        return syncTimeResult.As<IRequest>(default);
+                    }
+                }
+            }
+
+            if (!ignoreRatelimit)
+            {
+                foreach (var limiter in apiClient.RateLimiters)
+                {
+                    var limitResult = await limiter.LimitRequestAsync(log, uri.AbsolutePath, method, signed, apiClient.Options.ApiCredentials?.Key, apiClient.Options.RateLimitingBehaviour, requestWeight, cancellationToken).ConfigureAwait(false);
+                    if (!limitResult.Success)
+                        return new CallResult<IRequest>(limitResult.Error!);
+                }
+            }
+
+            if (signed && apiClient.AuthenticationProvider == null)
+            {
+                log.Write(LogLevel.Warning, $"[{requestId}] Request {uri.AbsolutePath} failed because no ApiCredentials were provided");
+                return new CallResult<IRequest>(new NoApiCredentialsError());
+            }
+
+            log.Write(LogLevel.Information, $"[{requestId}] Creating request for " + uri);
+            HttpMethodParameterPosition paramsPosition = parameterPosition ?? apiClient.ParameterPositions[method];
+            IRequest? request = MexcV3ConstructRequest(apiClient, uri, method, parameters, signed, paramsPosition, arraySerialization ?? apiClient.arraySerialization, requestId, additionalHeaders);
+
+            string? paramString = "";
+            if (paramsPosition == HttpMethodParameterPosition.InBody)
+                paramString = $" with request body '{request.Content}'";
+
+            var headers = request.GetHeaders();
+            if (headers.Any())
+                paramString += " with headers " + string.Join(", ", headers.Select(h => h.Key + $"=[{string.Join(",", h.Value)}]"));
+
+            apiClient.TotalRequestsMade++;
+            log.Write(LogLevel.Trace, $"[{requestId}] Sending {method}{(signed ? " signed" : "")} request to {request.Uri}{paramString ?? " "}{(ClientOptions.Proxy == null ? "" : $" via proxy {ClientOptions.Proxy.Host}")}");
+            return new CallResult<IRequest>(request);
+        }
+
+        /// <summary>
+        /// Execute a request to the uri and deserialize the response into the provided type parameter
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize into</typeparam>
+        /// <param name="apiClient">The API client the request is for</param>
+        /// <param name="uri">The uri to send the request to</param>
+        /// <param name="method">The method of the request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <param name="parameters">The parameters of the request</param>
+        /// <param name="signed">Whether or not the request should be authenticated</param>
+        /// <param name="parameterPosition">Where the parameters should be placed, overwrites the value set in the client</param>
+        /// <param name="arraySerialization">How array parameters should be serialized, overwrites the value set in the client</param>
+        /// <param name="requestWeight">Credits used for the request</param>
+        /// <param name="deserializer">The JsonSerializer to use for deserialization</param>
+        /// <param name="additionalHeaders">Additional headers to send with the request</param>
+        /// <param name="ignoreRatelimit">Ignore rate limits for this request</param>
+        /// <returns></returns>
+        [return: NotNull]
+        protected virtual async Task<WebCallResult<T>> MexcV3SendRequestAsync<T>(
+            RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null,
+            bool signed = false,
+            HttpMethodParameterPosition? parameterPosition = null,
+            ArrayParametersSerialization? arraySerialization = null,
+            int requestWeight = 1,
+            JsonSerializer? deserializer = null,
+            Dictionary<string, string>? additionalHeaders = null,
+            bool ignoreRatelimit = false
+            ) where T : class
+        {
+
+            CallResult<IRequest>? request = await MexcV3PrepareRequestAsync(apiClient, uri, method, cancellationToken, parameters, signed, parameterPosition, arraySerialization, requestWeight, deserializer, additionalHeaders, ignoreRatelimit).ConfigureAwait(false);
+            if (!request)
+                return new WebCallResult<T>(request.Error!);
+            WebCallResult<T> response = await GetResponseAsync<T>(apiClient, request.Data, deserializer, cancellationToken, false).ConfigureAwait(false);
+            return response;
+        }
     }
 }

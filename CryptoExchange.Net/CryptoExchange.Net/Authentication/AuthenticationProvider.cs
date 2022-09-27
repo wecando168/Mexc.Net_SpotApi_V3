@@ -235,5 +235,32 @@ namespace CryptoExchange.Net.Authentication
         {
             return DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient)).Value.ToString(CultureInfo.InvariantCulture);
         }
+
+        /// <summary>
+        /// Authenticate a request. Output parameters should include the providedParameters input
+        /// MexcV3 Api验证请求:输出参数应包括提供的参数输入（该方法不对参数进行字典排序）
+        /// </summary>
+        /// <param name="apiClient">The Api client sending the request</param>
+        /// <param name="uri">The uri for the request</param>
+        /// <param name="method">The method of the request</param>
+        /// <param name="providedParameters">The request parameters</param>
+        /// <param name="auth">If the requests should be authenticated</param>
+        /// <param name="arraySerialization">Array serialization type</param>
+        /// <param name="parameterPosition">The position where the providedParameters should go</param>
+        /// <param name="uriParameters">Parameters that need to be in the Uri of the request. Should include the provided parameters if they should go in the uri</param>
+        /// <param name="bodyParameters">Parameters that need to be in the body of the request. Should include the provided parameters if they should go in the body</param>
+        /// <param name="headers">The headers that should be send with the request</param>
+        public abstract void MexcV3AuthenticateRequest(
+            RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            Dictionary<string, object> providedParameters,
+            bool auth,
+            ArrayParametersSerialization arraySerialization,
+            HttpMethodParameterPosition parameterPosition,
+            out Dictionary<string, object> uriParameters,
+            out Dictionary<string, object> bodyParameters,
+            out Dictionary<string, string> headers
+            );
     }
 }

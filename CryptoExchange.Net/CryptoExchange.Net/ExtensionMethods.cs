@@ -492,6 +492,59 @@ namespace CryptoExchange.Net
 
             return ub.Uri;
         }
+
+        /// <summary>
+        /// Convert a dictionary to formdata string
+        /// 将字典转换为 formdata 字符串（无自动排序的字典）
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static string ToFormData(this Dictionary<string, object> parameters)
+        {
+            var formData = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var kvp in parameters)
+            {
+                if (kvp.Value.GetType().IsArray)
+                {
+                    var array = (Array)kvp.Value;
+                    foreach (var value in array)
+                        formData.Add(kvp.Key, value.ToString());
+                }
+                else
+                    formData.Add(kvp.Key, kvp.Value.ToString());
+            }
+            return formData.ToString();
+        }
+
+        /// <summary>
+        /// Create a new uri with the provided parameters as query
+        /// 使用提供的参数创建一个新的 uri 作为查询（Mexc Api V3参数是不做字典排序）
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="baseUri"></param>
+        /// <param name="arraySerialization"></param>
+        /// <returns></returns>
+        public static Uri MexcV3SetParameters(this Uri baseUri, Dictionary<string, object> parameters, ArrayParametersSerialization arraySerialization)
+        {
+            var uriBuilder = new UriBuilder();
+            uriBuilder.Scheme = baseUri.Scheme;
+            uriBuilder.Host = baseUri.Host;
+            uriBuilder.Port = baseUri.Port;
+            uriBuilder.Path = baseUri.AbsolutePath;
+            var httpValueCollection = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var parameter in parameters)
+            {
+                if (parameter.Value.GetType().IsArray)
+                {
+                    foreach (var item in (object[])parameter.Value)
+                        httpValueCollection.Add(arraySerialization == ArrayParametersSerialization.Array ? parameter.Key + "[]" : parameter.Key, item.ToString());
+                }
+                else
+                    httpValueCollection.Add(parameter.Key, parameter.Value.ToString());
+            }
+            uriBuilder.Query = httpValueCollection.ToString();
+            return uriBuilder.Uri;
+        }
     }
 }
 
