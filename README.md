@@ -21,6 +21,10 @@ No matter what cryptocurrency you use, you can donate through the following publ
 **Bsc/Heco/Eth**:  0x23ab66ec4c03c9305d1c5dcbb889fb0efbbb0e44 
 
 ## Release notes
+* Version 1.0.1 - 28 Sept 2022
+    * Renamed MexcV3ClientTests to MexcV3RestClientTests
+    * Renamed MexcV3NetTest to MexcV3SocketClientTests
+    * Fix UnitTests MexcV3SocketClientTests
 * Version 1.0.0 - 27 Sept 2022
     * Suppot mexc v3 rest client endpoints:
         * SpotApi.MarketData.PingAsync
