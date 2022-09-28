@@ -9,11 +9,12 @@ using Mexc.Net.Objects.Models;
 using Mexc.Net.Objects.Models.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Mexc.Net.UnitTests
 {
     [TestFixture()]
-    public class MexcV3NetTest
+    public class MexcV3SocketClientTests
     {
         /// <summary>
         /// 订阅一个交易代码的逐笔交易的测试用例
@@ -37,43 +38,40 @@ namespace Mexc.Net.UnitTests
             await client.SpotPublicStreams.SubscribeToTradeUpdatesAsync(symbol, (response) => result = response.Data);
             #endregion
 
-            #region 当接收结果不为空的时候，构造一个实际数据结构，用于与接收结果进行比较
-            Assert.NotNull(result);
             MexcV3StreamTrade data = new MexcV3StreamTrade()
             {
-                Stream = $"spot@public.deals.v3.api@{symbol}",                                      //当前订阅数据流
+                Stream = $"spot@public.deals.v3.api@BTCUSDT",                                       //当前订阅数据流
                 Data = new MexcV3StreamTradeData                                                    //数据
                 {
-                    EventTime = new DateTime(1970, 1, 1).AddMilliseconds(1663556442436),            //事件时间eventTime
+                    EventTime = new DateTime(2017, 1, 1).AddMilliseconds(1663556442436),            //事件时间eventTime
                     Deals = new MexcV3StreamTradeDeal[]
                         {
                             new MexcV3StreamTradeDeal
                             {
                                 TradeType = MexcV3SpotSocketAccountOrderTradeType.buy,                  //交易类型tradeType
                                 Price = (decimal)18767.98,                                              //成交价格price
-                                DealTime = new DateTime(1970, 1, 1).AddMilliseconds(1663556442409),     //成交时间dealTime
+                                DealTime = new DateTime(2017, 1, 1).AddMilliseconds(1663556442409),     //成交时间dealTime
                                 Quantity = (decimal)0.096760                                            //成交数量quantity
                             }
                         },
                     EventType = "spot@public.deals.v3.api",
-                    Symbol = symbol
+                    Symbol = "BTCUSDT"
                 },
-                Symbol = symbol,
+                Symbol = "BTCUSDT",
                 EventTimeStamp = "1663556442436"
             };
-             
-            //序列化构造的数据结构为Json字符串（这里不做输出，仅用于调试过程中查看中间结果）
+
+            #region 序列化构造的数据结构为Json字符串（这里不做输出，仅用于调试过程中查看中间结果）
             string temp = JsonConvert.SerializeObject(data);
             #endregion
 
             // act
-            socket.InvokeMessage<MexcV3StreamTrade>(result);
+            socket.InvokeMessage(data);
 
             // assert
             Assert.IsNotNull(result);
             //结构比较
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Symbol, result.Symbol));
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data, result.Data));
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data.Deals.ToList()[0], result.Data.Deals.ToList()[0]));
         }
 
         /// <summary>
@@ -82,8 +80,8 @@ namespace Mexc.Net.UnitTests
         /// </summary>
         /// <param name="symbol"></param>
         /// <returns></returns>
-        [TestCase("BTCUSDT","ETHUSDT")]
-        public async Task SubscribeToTradeUpdatesAsync_Should_TriggerWhenSymbolTickerStreamMessageIsReceived(string[] symbols)
+        [TestCase("BTCUSDT", "ETHUSDT")]
+        public async Task SubscribeToTradesUpdatesAsync_Should_TriggerWhenSymbolTickerStreamMessageIsReceived(string symbol1,string symbol2)
         {
             #region 建立socket连接，订阅“MexcV3StreamTrade”数据，等待接收到返回值，存入“result”
             // arrange
@@ -95,75 +93,72 @@ namespace Mexc.Net.UnitTests
 
             //Socket获取数据
             MexcV3StreamTrade result = null;
-            await client.SpotPublicStreams.SubscribeToTradeUpdatesAsync(symbols, (response) => result = response.Data);
+            await client.SpotPublicStreams.SubscribeToTradeUpdatesAsync(new string[] { symbol1, symbol2 }, (response) => result = response.Data);
             #endregion
 
-            #region 当接收结果不为空的时候，构造一个实际数据结构，用于与接收结果进行比较
-            Assert.NotNull(result);
             MexcV3StreamTrade data = new MexcV3StreamTrade()
             {
-                Stream = $"spot@public.deals.v3.api@{symbols[0]}",                                         //当前订阅数据流
+                Stream = $"spot@public.deals.v3.api@BTCUSDT",                                           //当前订阅数据流
                 Data = new MexcV3StreamTradeData                                                        //数据
                 {
-                    EventTime = new DateTime(1970, 1, 1).AddMilliseconds(1663556442436),                //事件时间eventTime
+                    EventTime = new DateTime(2017, 1, 1).AddMilliseconds(1663556442436),                //事件时间eventTime
                     Deals = new MexcV3StreamTradeDeal[]
                         {
                             new MexcV3StreamTradeDeal
                             {
                                 TradeType = MexcV3SpotSocketAccountOrderTradeType.buy,                  //交易类型tradeType
                                 Price = (decimal)18767.98,                                              //成交价格price
-                                DealTime = new DateTime(1970, 1, 1).AddMilliseconds(1663556442409),     //成交时间dealTime
+                                DealTime = new DateTime(2017, 1, 1).AddMilliseconds(1663556442409),     //成交时间dealTime
                                 Quantity = (decimal)0.096760                                            //成交数量quantity
                             }
                         },
                     EventType = "spot@public.deals.v3.api",
-                    Symbol = symbols[0]
+                    Symbol = "BTCUSDT"
                 },
-                Symbol = symbols[0],
+                Symbol = "BTCUSDT",
                 EventTimeStamp = "1663556442436"
             };
 
-            //序列化构造的数据结构为Json字符串（这里不做输出，仅用于调试过程中查看中间结果）
+            #region 序列化构造的数据结构为Json字符串（这里不做输出，仅用于调试过程中查看中间结果）
             string temp = JsonConvert.SerializeObject(data);
             #endregion
 
             // act
-            socket.InvokeMessage<MexcV3StreamTrade>(result);
+            socket.InvokeMessage(data);
 
             // assert
             Assert.IsNotNull(result);
             //结构比较
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Symbol, result.Symbol));
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data, result.Data));
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data.Deals.ToList()[0], result.Data.Deals.ToList()[0]));
         }
 
         /// <summary>
         /// 订阅K线数据流应在收到K线流消息时触发
         /// </summary>
-        [TestCase(1663036484043)]
-        public void SubscribingToKlineStream_Should_TriggerWhenKlineStreamMessageIsReceived(long eventTimestamp)
+        [TestCase("1663036484045")]
+        public void SubscribingToKlineStream_Should_TriggerWhenKlineStreamMessageIsReceived(string eventTimestamp)
         {
             // arrange
             var socket = new MexcV3TestSocket();
             var client = MexcV3TestHelpers.CreateSocketClient(socket);
 
             MexcV3StreamKline result = null;
-            client.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", MexcV3StreamsKlineInterval.OneMinute, (test) => result = (MexcV3StreamKline)test.Data);
+            client.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", MexcV3StreamsKlineInterval.FifteenMinutes, (test) => result = test.Data);
 
             MexcV3StreamKline data = new MexcV3StreamKline()
             {
                 Symbol = "BTCUSDT",
                 SymbolDisplay = "BTCUSDT",
                 Stream = "spot@public.kline.v3.api@BTCUSDT@Min15",
-                EventTimeStamp = eventTimestamp.ToString(),
+                EventTimeStamp = eventTimestamp,
                 Data = new MexcV3StreamKlineData()
                 {
-                    EventTime = new DateTime(2017, 1, 1).AddMilliseconds(eventTimestamp),
+                    EventTime = new DateTime(2017, 1, 1).AddMilliseconds(Convert.ToDouble(eventTimestamp)),
                     EventType = "spot@public.kline.v3.api",
                     Symbol = "BTCUSDT",
                     Details = new MexcV3StreamKlineDetail()
                     {
-                        CloseTime = new DateTime(2017, 1, 2),
+                        CloseTime = new DateTime(2017, 1, 1),
                         QuoteVolume = (decimal)213072.97695067,
                         ClosePrice = (decimal)22203.24,
                         HighPrice = (decimal)22203.69,
@@ -171,19 +166,19 @@ namespace Mexc.Net.UnitTests
                         LowPrice = (decimal)22172.4,
                         OpenPrice = (decimal)22174.24,
                         Symbol = "BTCUSDT",
-                        OpenTime = new DateTime(2017, 1, 2),
+                        OpenTime = new DateTime(2017, 1, 1),
                         Volume = (decimal)9.604942
                     }
                 }
             };
 
             // act
-            socket.InvokeMessage(data.Data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(data.Data);
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data, result.Data, "Data"));
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data.Details, result.Data.Details));
+            Assert.IsNotNull(result);
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data, result, "Data"));
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data, result.Data));
         }
 
         /// <summary>
@@ -214,6 +209,14 @@ namespace Mexc.Net.UnitTests
                             Price = (decimal)18767.98,                 //成交价格price
                             Quantity = (decimal)0.096760               //成交数量quantity
                         }
+                    },
+                    Bids = new MexcV3StreamDepthAskOrBidDetails[]
+                    {
+                        new MexcV3StreamDepthAskOrBidDetails
+                        {
+                            Price = (decimal)18737.98,                 //成交价格price
+                            Quantity = (decimal)0.082760               //成交数量quantity
+                        }
                     }
                 },
                 Symbol = "BTCUSDT",
@@ -226,7 +229,8 @@ namespace Mexc.Net.UnitTests
             // assert
             Assert.IsNotNull(result);
             Assert.IsTrue(MexcV3TestHelpers.AreEqual(data, result, "Data"));
-            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data, result.Data));
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data.Asks.ToList()[0], result.Data.Asks.ToList()[0]));
+            Assert.IsTrue(MexcV3TestHelpers.AreEqual(data.Data.Bids.ToList()[0], result.Data.Bids.ToList()[0]));
         }
 
         /// <summary>
@@ -248,7 +252,7 @@ namespace Mexc.Net.UnitTests
                 Stream = "spot@private.deals.v3.api",
                 Data = new MexcV3StreamPrivateDealsData()
                 {
-                    TradeType = 1,
+                    TradeType = MexcV3SpotSocketAccountOrderTradeType.buy,
                     DealTime = new DateTime(2017, 1, 1)
                 },
                 Symbol = "BTCUSDT",

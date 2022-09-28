@@ -22,7 +22,7 @@ using Mexc.Net.Clients.SpotApi;
 namespace Mexc.Net.UnitTests
 {
     [TestFixture()]
-    public class MexcV3ClientTests
+    public class MexcV3RestClientTests
     {
         [TestCase(1508837063996)]
         [TestCase(1507156891385)]
