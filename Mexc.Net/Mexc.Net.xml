@@ -2687,7 +2687,7 @@
         </member>
         <member name="P:Mexc.Net.Interfaces.MexcV3StreamPrivateDealsData.TradeType">
             <summary>
-            The trade type of the prvate deals
+            The trade type of the prvate deals（Order Side）
             交易类型 1:买 2:卖
             </summary>
         </member>

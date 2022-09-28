@@ -12,7 +12,7 @@ namespace Mexc.Net.Interfaces
         /// The trade type of the prvate deals
         /// 交易类型 1:买 2:卖
         /// </summary>
-        int TradeType { get; set; }
+        MexcV3SpotSocketAccountOrderTradeType TradeType { get; set; }
 
         /// <summary>
         /// The time of the deal

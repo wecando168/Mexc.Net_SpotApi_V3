@@ -13,11 +13,12 @@ namespace Mexc.Net.Interfaces
     public class MexcV3StreamPrivateDealsData : IMexcV3StreamPrivateDealsData
     {
         /// <summary>
-        /// The trade type of the prvate deals
+        /// The trade type of the prvate deals（Order Side）
         /// 交易类型 1:买 2:卖
         /// </summary>
         [JsonProperty("S")]
-        public int TradeType { get; set; }
+        [JsonConverter(typeof(MexcV3SpotSocketAccountOrderTradeTypeConverter))]
+        public MexcV3SpotSocketAccountOrderTradeType TradeType { get; set; }
 
         /// <summary>
         /// The time of the deal
