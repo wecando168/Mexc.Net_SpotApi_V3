@@ -1472,121 +1472,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Mexc.Net.Interfaces.IMexc24HPrice">
-            <summary>
-            24 hour price stats
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.PriceChange">
-            <summary>
-            The actual price change in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.PriceChangePercent">
-            <summary>
-            The price change in percentage in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.WeightedAveragePrice">
-            <summary>
-            The weighted average price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.LastQuantity">
-            <summary>
-            The most recent trade quantity
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.OpenTime">
-            <summary>
-            Time at which this 24 hours opened
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.CloseTime">
-            <summary>
-            Time at which this 24 hours closed
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.FirstTradeId">
-            <summary>
-            The first trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.LastTradeId">
-            <summary>
-            The last trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexc24HPrice.TotalTrades">
-            <summary>
-            The amount of trades made in the last 24 hours
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Interfaces.IMexcBalance">
-            <summary>
-            Balance data
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcBalance.Asset">
-            <summary>
-            The asset this balance is for
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcBalance.Available">
-            <summary>
-            The quantity that isn't locked in a trade
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcBalance.Locked">
-            <summary>
-            The quantity that is currently locked in a trade
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcBalance.Total">
-            <summary>
-            The total balance of this asset (Free + Locked)
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Interfaces.IMexcMiniTick">
-            <summary>
-            MiniTick info
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.Symbol">
-            <summary>
-            Symbol
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.LastPrice">
-            <summary>
-            Close Price
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.OpenPrice">
-            <summary>
-            Open Price
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.HighPrice">
-            <summary>
-            High
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.LowPrice">
-            <summary>
-            Low
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.Volume">
-            <summary>
-            Total traded volume
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcMiniTick.QuoteVolume">
-            <summary>
-            Total traded alternate asset volume
-            </summary>
-        </member>
         <member name="T:Mexc.Net.Interfaces.IMexcV324HPrice">
             <summary>
             24 hour price stats
@@ -2679,6 +2564,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Mexc.Net.Interfaces.MexcV3StreamKlineDetail.GetEnumberator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Mexc.Net.Interfaces.MexcV3StreamPrivateDealsData">
             <summary>
             Stream deal data
@@ -3056,51 +2947,6 @@
         <member name="F:Mexc.Net.Enums.BSwapStatus.Failure">
             <summary>
             Failure
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Enums.C2COrderStatus">
-            <summary>
-            C2C order status
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.Pending">
-            <summary>
-            Pending
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.Trading">
-            <summary>
-            Trading
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.BuyerPayed">
-            <summary>
-            Buyer has paid
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.Distributing">
-            <summary>
-            Distributing
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.Completed">
-            <summary>
-            Completed
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.InAppeal">
-            <summary>
-            In appeal
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.Canceled">
-            <summary>
-            Canceled
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.C2COrderStatus.CanceledBySystem">
-            <summary>
-            CanceledBySystem
             </summary>
         </member>
         <member name="T:Mexc.Net.Enums.CancelReplaceMode">
@@ -3853,29 +3699,29 @@
             V3 Spot Socket Account Order Type
             </summary>
         </member>
-        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.LIMIT_ORDER">
+        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.LIMIT">
             <summary>
             限价单 LIMIT_ORDER(1)
             </summary>
         </member>
-        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.POST_ONLY">
+        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.LIMIT_MAKER">
             <summary>
-            仅发送 POST_ONLY(2)
+            仅发送 POST_ONLY(2) LIMIT_MAKER?
             </summary>
         </member>
         <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.IMMEDIATE_OR_CANCEL">
             <summary>
             Immediate or cancel
-            无法立即成交部分直接撤销的订单 (无法立即成交的部分就撤销,订单在失效前会尽量多的成交。)
+            IOC无法立即成交部分直接撤销的订单 (无法立即成交的部分就撤销,订单在失效前会尽量多的成交。)
             IMMEDIATE_OR_CANCEL(3)
             </summary>
         </member>
         <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.FILL_OR_KILL">
             <summary>
-            无法完全成交则整个订单撤销的订单 FILL_OR_KILL(4)
+            FOK无法完全成交则整个订单撤销的订单 FILL_OR_KILL(4)
             </summary>
         </member>
-        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.MARKET_ORDER">
+        <member name="F:Mexc.Net.Enums.MexcV3SpotSocketAccountOrderType.MARKET">
             <summary>
             市价订单 MARKET_ORDER(5)
             </summary>
@@ -3939,31 +3785,6 @@
         <member name="F:Mexc.Net.Enums.MexcV3StreamsKlineInterval.OneMonth">
             <summary>
             Month1
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Enums.MinerStatus">
-            <summary>
-            Miner status
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.MinerStatus.All">
-            <summary>
-            All miners
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.MinerStatus.Valid">
-            <summary>
-            Valid
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.MinerStatus.Invalid">
-            <summary>
-            Invalid
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.MinerStatus.Failure">
-            <summary>
-            Failure
             </summary>
         </member>
         <member name="T:Mexc.Net.Enums.OrderOperationResult">
@@ -4144,51 +3965,6 @@
         <member name="F:Mexc.Net.Enums.OrderUrgency.High">
             <summary>
             High urgency
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Enums.PayOrderType">
-            <summary>
-            Pay order type
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.Pay">
-            <summary>
-            C2B Merchant Acquiring Payment
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.PayRefund">
-            <summary>
-            C2B Merchant Acquiring Payment, refund
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.C2C">
-            <summary>
-            C2C Transfer Payment
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.CryptoBox">
-            <summary>
-            Crypto box
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.CryptoBoxRefund">
-            <summary>
-            Crypto box, refund
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.C2CHolding">
-            <summary>
-            Transfer to new Mexc user
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.C2CHoldingRefund">
-            <summary>
-            Transfer to new Mexc user, refund
-            </summary>
-        </member>
-        <member name="F:Mexc.Net.Enums.PayOrderType.Payout">
-            <summary>
-            B2C Disbursement Payment
             </summary>
         </member>
         <member name="T:Mexc.Net.Enums.PeriodInterval">
@@ -5430,109 +5206,6 @@
             The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
             </summary>
         </member>
-        <member name="T:Mexc.Net.Objects.Models.Mexc24HPriceBase">
-            <summary>
-            24 hour rolling window price data
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.Symbol">
-            <summary>
-            The symbol the price is for
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.PriceChange">
-            <summary>
-            The actual price change in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.PriceChangePercent">
-            <summary>
-            The price change in percentage in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.WeightedAveragePrice">
-            <summary>
-            The weighted average price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.LastPrice">
-            <summary>
-            The most recent trade price
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.LastQuantity">
-            <summary>
-            The most recent trade quantity
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.OpenPrice">
-            <summary>
-            The open price 24 hours ago
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.HighPrice">
-            <summary>
-            The highest price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.LowPrice">
-            <summary>
-            The lowest price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.Volume">
-            <summary>
-            The base volume traded in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.QuoteVolume">
-            <summary>
-            The quote asset volume traded in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.OpenTime">
-            <summary>
-            Time at which this 24 hours opened
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.CloseTime">
-            <summary>
-            Time at which this 24 hours closed
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.FirstTradeId">
-            <summary>
-            The first trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.LastTradeId">
-            <summary>
-            The last trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Mexc24HPriceBase.TotalTrades">
-            <summary>
-            The amount of trades made in the last 24 hours
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcCombinedStream`1">
-            <summary>
-            Represents the mexc result for combined data on a single socket connection
-            See on https://github.com/mxcdevelop/APIDoc
-            Combined streams
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcCombinedStream`1.Stream">
-            <summary>
-            The stream combined
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcCombinedStream`1.Data">
-            <summary>
-            The data of stream
-            </summary>
-        </member>
         <member name="T:Mexc.Net.Objects.Models.MexcOrderBase">
             <summary>
             Order info
@@ -5651,23 +5324,6 @@
         <member name="P:Mexc.Net.Objects.Models.MexcOrderBase.AverageFillPrice">
             <summary>
             The average price the order was filled
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcOrderBookEntry">
-            <summary>
-            An entry in the order book
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcOrderBookEntry.Price">
-            <summary>
-            The price of this order book entry
-            价格
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcOrderBookEntry.Quantity">
-            <summary>
-            The quantity of this price in the order book
-            数量
             </summary>
         </member>
         <member name="T:Mexc.Net.Objects.Models.MexcQueryRecords`1">

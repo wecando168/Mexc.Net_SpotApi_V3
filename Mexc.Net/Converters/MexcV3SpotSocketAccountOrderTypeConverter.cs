@@ -21,11 +21,11 @@ namespace Mexc.Net.Converters
 
         private readonly Dictionary<MexcV3SpotSocketAccountOrderType, int> values = new Dictionary<MexcV3SpotSocketAccountOrderType, int>
         {
-            { MexcV3SpotSocketAccountOrderType.LIMIT_ORDER, 1 },
-            { MexcV3SpotSocketAccountOrderType.POST_ONLY, 2 },
+            { MexcV3SpotSocketAccountOrderType.LIMIT, 1 },
+            { MexcV3SpotSocketAccountOrderType.LIMIT_MAKER, 2 },
             { MexcV3SpotSocketAccountOrderType.IMMEDIATE_OR_CANCEL, 3 },
             { MexcV3SpotSocketAccountOrderType.FILL_OR_KILL, 4 },
-            { MexcV3SpotSocketAccountOrderType.MARKET_ORDER, 5 },
+            { MexcV3SpotSocketAccountOrderType.MARKET, 5 },
             { MexcV3SpotSocketAccountOrderType.STOP_LIMIT, 100 }
 
         };
@@ -41,15 +41,15 @@ namespace Mexc.Net.Converters
             switch (Value)
             {
                 case 1:
-                    return MexcV3SpotSocketAccountOrderType.LIMIT_ORDER;
+                    return MexcV3SpotSocketAccountOrderType.LIMIT;
                 case 2:
-                    return MexcV3SpotSocketAccountOrderType.POST_ONLY;
+                    return MexcV3SpotSocketAccountOrderType.LIMIT_MAKER;
                 case 3:
                     return MexcV3SpotSocketAccountOrderType.IMMEDIATE_OR_CANCEL;
                 case 4:
                     return MexcV3SpotSocketAccountOrderType.FILL_OR_KILL;
                 case 5:
-                    return MexcV3SpotSocketAccountOrderType.MARKET_ORDER;
+                    return MexcV3SpotSocketAccountOrderType.MARKET;
                 case 100:
                     return MexcV3SpotSocketAccountOrderType.STOP_LIMIT;
                 default:

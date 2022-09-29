@@ -22,7 +22,7 @@ MexcV3RestClient.SetDefaultOptions(new MexcV3ClientOptions()
     ApiCredentials = new ApiCredentials(accessKey, secretKey),
     //LogLevel = LogLevel.Debug
     LogLevel = LogLevel.Trace,
-    OutputOriginalData = true
+    //OutputOriginalData = true
     
 });
 
@@ -32,7 +32,7 @@ MexcV3SocketClient.SetDefaultOptions(new MexcV3SocketClientOptions()
     ApiCredentials = new ApiCredentials(accessKey, secretKey),
     //LogLevel = LogLevel.Debug
     LogLevel = LogLevel.Trace,
-    OutputOriginalData = true
+    //OutputOriginalData = true
 });
 
 string? read = "";
@@ -48,22 +48,22 @@ if (read == "R" || read == "r")
     await TestMarketDataEndpoints();
 
     //二、母子账户接口-未开发
-    await TestSubAccountEndpoints();
+    //await TestSubAccountEndpoints();
 
     //三、现货账户和交易接口测试-已完成（批量下单除外）
-    await TestSpotAccountTradeEndpoints();
+    //await TestSpotAccountTradeEndpoints();
 
     //四、钱包接口测试-开发中...
-    await TestWalletEndpoints();
+    //await TestWalletEndpoints();
 
     //五、ETF接口测试-开发中...
-    await TestETFEndpoints();
+    //await TestETFEndpoints();
 
     //六、杠杆账户和交易接口-未开发
-    await TestMarginAccountTradeEndpoints();
+    //await TestMarginAccountTradeEndpoints();
 
     //七、现货账户WebSocket账户Listen Key维护接口测试-已完成
-    await TestSpotWebSocketAccountEndpoints();
+    //await TestSpotWebSocketAccountEndpoints();
 }
 else if(read == "P" || read == "p")
 {
@@ -453,7 +453,7 @@ static async Task TestMarketDataEndpoints()
 
         #region 24小时价格滚动情况（所有交易代码）
         Console.WriteLine("所有交易代码24小时价格滚动情况");
-        await HandleRequest("24hr Ticker Price Change Statistics", () => mexcV3RestClient.SpotApi.MarketData.GetTickersAsync(),
+        await HandleRequest("24hr All Tickers Price Change Statistics", () => mexcV3RestClient.SpotApi.MarketData.GetTickersAsync(),
             result => string.Join(", ", result.Select(s => $"\r\nSymbol:{s.Symbol.PadRight(15, ' ')}Last Price:{s.LastPrice.ToString().PadRight(15, ' ')}Last Quantity:{s.LastQuantity.ToString().PadRight(15, ' ')}").Take(10)) + "\r\netc......"
             );
         #endregion

@@ -388,46 +388,46 @@ namespace Mexc.Net.Clients.SpotApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<MexcTradeRuleResult> CheckTestTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, SpotOrderType? type, CancellationToken ct)
+        internal async Task<MexcV3TradeRuleResult> CheckTestTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, SpotOrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
 
             if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return MexcTradeRuleResult.CreateTestPassed(outputQuantity, outputQuoteQuantity, outputPrice);
+                return MexcV3TradeRuleResult.CreateTestPassed(outputQuantity, outputQuoteQuantity, outputPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
                 await MarketData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
-                return MexcTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
+                return MexcV3TradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
 
             var symbolData = ExchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.SymbolName, symbol, StringComparison.CurrentCultureIgnoreCase));
             if (symbolData == null)
-                return MexcTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
+                return MexcV3TradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
             if (type != null)
             {
                 if (!symbolData.OrderTypes.Contains(type.Value))
-                    return MexcTradeRuleResult.CreateFailed(
+                    return MexcV3TradeRuleResult.CreateFailed(
                         $"Trade rules check failed: {type} order type not allowed for {symbol}");
             }
 
             var currentQuantity = outputQuantity ?? quantity.Value;
             var notional = currentQuantity * outputPrice.Value;
             
-            return MexcTradeRuleResult.CreateTestPassed(outputQuantity, outputQuoteQuantity, outputPrice);
+            return MexcV3TradeRuleResult.CreateTestPassed(outputQuantity, outputQuoteQuantity, outputPrice);
         }
 
-        internal async Task<MexcTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, SpotOrderType? type, CancellationToken ct)
+        internal async Task<MexcV3TradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, SpotOrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
 
             if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return MexcTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice);
+                return MexcV3TradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice);
 
             if (!object.Equals(ct, null))
             {
@@ -439,26 +439,26 @@ namespace Mexc.Net.Clients.SpotApi
                 await MarketData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
-                return MexcTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
+                return MexcV3TradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
 
             var symbolData = ExchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.SymbolName, symbol, StringComparison.CurrentCultureIgnoreCase));
             if (symbolData == null)
-                return MexcTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
+                return MexcV3TradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
             if (type != null)
             {
                 if (!symbolData.OrderTypes.Contains(type.Value))
-                    return MexcTradeRuleResult.CreateFailed(
+                    return MexcV3TradeRuleResult.CreateFailed(
                         $"Trade rules check failed: {type} order type not allowed for {symbol}");
             }
 
             if (price == null)
-                return MexcTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, null);            
+                return MexcV3TradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, null);            
 
             var currentQuantity = outputQuantity ?? quantity.Value;
             var notional = currentQuantity * outputPrice.Value;
             
-            return MexcTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice);
+            return MexcV3TradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice);
         }
 
         /// <summary>

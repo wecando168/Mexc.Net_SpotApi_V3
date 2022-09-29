@@ -4,6 +4,7 @@ using Mexc.Net.Enums;
 using Mexc.Net.Objects.Models.Spot;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Mexc.Net.Interfaces
 {
@@ -99,6 +100,31 @@ namespace Mexc.Net.Interfaces
                 OpenTime = OpenTime,
                 QuoteVolume = QuoteVolume,
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<MexcV3StreamKlineDetail> GetEnumberator()
+        {
+            IEnumerable<MexcV3StreamKlineDetail> result = new List<MexcV3StreamKlineDetail>()
+            {
+                new MexcV3StreamKlineDetail()
+                {
+                    CloseTime = CloseTime,
+                    QuoteVolume = QuoteVolume,
+                    ClosePrice = ClosePrice,
+                    HighPrice  = HighPrice,
+                    Interval = Interval,
+                    LowPrice = LowPrice,
+                    OpenPrice = OpenPrice,
+                    Symbol = Symbol,
+                    OpenTime = OpenTime,
+                    Volume = Volume
+                }
+            };
+            return result;
         }
     }
 }
