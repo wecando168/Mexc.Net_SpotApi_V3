@@ -297,7 +297,7 @@ namespace Mexc.Net.UnitTests
                     ClientOrderId = "",
                     OrderId = "835014be43e8426998e00eb98e449ae5",
                     MakerOrTaker = MexcV3SpotSocketAccountOrderMakerOrTaker.isTaker,
-                    OrderType = MexcV3SpotSocketAccountOrderType.LIMIT_ORDER,
+                    OrderType = MexcV3SpotSocketAccountOrderType.LIMIT,
                     Price = (decimal)0.9,
                     OrderStatus = MexcV3SpotSocketAccountOrderStatus.NewOrder,
                     Quantity = (decimal)6

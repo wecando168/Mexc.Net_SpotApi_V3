@@ -447,14 +447,14 @@ static async Task TestMarketDataEndpoints()
         Console.WriteLine("指定单一交易代码24小时价格滚动情况");
         await HandleRequest("24hr Ticker Price Change Statistics", () => mexcV3RestClient.SpotApi.MarketData.GetTickerAsync(
             symbol: "SHIBDOGE"),
-            result => $"\r\nSymbol:{result.Symbol.PadRight(15, ' ')}Last Price:{result.LastPrice.ToString().PadRight(15, ' ')}Last Quantity:{result.LastQuantity.ToString().PadRight(15, ' ')}"
+            result => $"\r\nSymbol:{result.Symbol.PadRight(15, ' ')}Open Price:{result.OpenPrice.ToString().PadRight(15, ' ')}Last Price:{result.LastPrice.ToString().PadRight(15, ' ')}Price Change Percent:{result.PriceChangePercent.ToString().PadRight(15, ' ')}"
             );
         #endregion
 
         #region 24小时价格滚动情况（所有交易代码）
         Console.WriteLine("所有交易代码24小时价格滚动情况");
         await HandleRequest("24hr All Tickers Price Change Statistics", () => mexcV3RestClient.SpotApi.MarketData.GetTickersAsync(),
-            result => string.Join(", ", result.Select(s => $"\r\nSymbol:{s.Symbol.PadRight(15, ' ')}Last Price:{s.LastPrice.ToString().PadRight(15, ' ')}Last Quantity:{s.LastQuantity.ToString().PadRight(15, ' ')}").Take(10)) + "\r\netc......"
+            result => string.Join(", ", result.Select(s => $"\r\nSymbol:{s.Symbol.PadRight(15, ' ')}Open Price:{s.OpenPrice.ToString().PadRight(15, ' ')}Last Price:{s.LastPrice.ToString().PadRight(15, ' ')}Price Change Percent:{s.PriceChangePercent.ToString().PadRight(15, ' ')}").Take(10)) + "\r\netc......"
             );
         #endregion
 

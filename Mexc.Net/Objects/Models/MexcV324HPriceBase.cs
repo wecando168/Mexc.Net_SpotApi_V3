@@ -32,25 +32,11 @@ namespace Mexc.Net.Objects.Models
         public decimal PriceChangePercent { get; set; }
 
         /// <summary>
-        /// The weighted average price in the last 24 hours
-        /// MEXC 没有这个参数
-        /// </summary>
-        [JsonProperty("weightedAvgPrice")]
-        public decimal WeightedAveragePrice { get; set; }
-
-        /// <summary>
         /// The most recent trade price
         /// 最新价
         /// </summary>
         [JsonProperty("lastPrice")] 
         public decimal LastPrice { get; set; }
-
-        /// <summary>
-        /// The most recent trade quantity
-        /// 最新量
-        /// </summary>
-        [JsonProperty("lastQty")]
-        public decimal LastQuantity { get; set; }
 
         /// <summary>
         /// The open price 24 hours ago
@@ -77,18 +63,21 @@ namespace Mexc.Net.Objects.Models
         /// The base volume traded in the last 24 hours
         /// 成交量
         /// </summary>
-        public abstract decimal Volume { get; set; }
+        [JsonProperty("volume")]
+        public decimal Volume { get; set; }
 
         /// <summary>
         /// The quote asset volume traded in the last 24 hours
         /// 成交额
         /// </summary>
-        public abstract decimal QuoteVolume { get; set; }
+        [JsonProperty("quoteVolume")]
+        public decimal QuoteVolume { get; set; }
 
         /// <summary>
         /// Time at which this 24 hours opened
         /// 开始时间
         /// </summary>
+        [JsonProperty("openTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
 
@@ -96,25 +85,14 @@ namespace Mexc.Net.Objects.Models
         /// Time at which this 24 hours closed
         /// 结束时间
         /// </summary>
+        [JsonProperty("closeTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CloseTime { get; set; }
-
-        /// <summary>
-        /// The first trade ID in the last 24 hours
-        /// </summary>
-        [JsonProperty("firstId")]
-        public long FirstTradeId { get; set; }
-
-        /// <summary>
-        /// The last trade ID in the last 24 hours
-        /// </summary>
-        [JsonProperty("lastId")]
-        public long LastTradeId { get; set; }
 
         /// <summary>
         /// The amount of trades made in the last 24 hours
         /// </summary>
         [JsonProperty("count")]
-        public long? TotalTrades { get; set; }
+        public long? Count { get; set; } = null;
     }
 }

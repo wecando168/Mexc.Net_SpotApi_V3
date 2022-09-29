@@ -3,7 +3,7 @@
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
-    public interface IMexcV3Tick : IMexcV324HPrice
+    public interface IMexcV3Tick : IMexcV324HPrice 
     {
         /// <summary>
         /// The close price 24 hours ago

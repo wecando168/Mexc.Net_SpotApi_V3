@@ -9,47 +9,26 @@ namespace Mexc.Net.Interfaces
     {
         /// <summary>
         /// The actual price change in the last 24 hours
+        /// 价格变化
         /// </summary>
         decimal PriceChange { get; set; }
 
         /// <summary>
         /// The price change in percentage in the last 24 hours
+        /// 价格变化比
         /// </summary>
         decimal PriceChangePercent { get; set; }
 
         /// <summary>
-        /// The weighted average price in the last 24 hours
-        /// </summary>
-        decimal WeightedAveragePrice { get; set; }
-        
-        /// <summary>
-        /// The most recent trade quantity
-        /// </summary>
-        decimal LastQuantity { get; set; }
-        
-        /// <summary>
         /// Time at which this 24 hours opened
+        /// 开始时间
         /// </summary>
         DateTime OpenTime { get; set; }
 
         /// <summary>
         /// Time at which this 24 hours closed
+        /// 结束时间
         /// </summary>
         DateTime CloseTime { get; set; }
-
-        /// <summary>
-        /// The first trade ID in the last 24 hours
-        /// </summary>
-        long FirstTradeId { get; set; }
-
-        /// <summary>
-        /// The last trade ID in the last 24 hours
-        /// </summary>
-        long LastTradeId { get; set; }
-
-        /// <summary>
-        /// The amount of trades made in the last 24 hours
-        /// </summary>
-        long? TotalTrades { get; set; }
     }
 }

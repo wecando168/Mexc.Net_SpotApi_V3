@@ -1480,46 +1480,25 @@
         <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.PriceChange">
             <summary>
             The actual price change in the last 24 hours
+            价格变化
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.PriceChangePercent">
             <summary>
             The price change in percentage in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.WeightedAveragePrice">
-            <summary>
-            The weighted average price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.LastQuantity">
-            <summary>
-            The most recent trade quantity
+            价格变化比
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.OpenTime">
             <summary>
             Time at which this 24 hours opened
+            开始时间
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.CloseTime">
             <summary>
             Time at which this 24 hours closed
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.FirstTradeId">
-            <summary>
-            The first trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.LastTradeId">
-            <summary>
-            The last trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.IMexcV324HPrice.TotalTrades">
-            <summary>
-            The amount of trades made in the last 24 hours
+            结束时间
             </summary>
         </member>
         <member name="T:Mexc.Net.Interfaces.IMexcV3AggregatedTrade">
@@ -1873,36 +1852,43 @@
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.Symbol">
             <summary>
             Symbol
+            交易代码
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.LastPrice">
             <summary>
             Close Price
+            最新价（收盘价）
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.OpenPrice">
             <summary>
             Open Price
+            开盘价
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.HighPrice">
             <summary>
             High
+            最高价
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.LowPrice">
             <summary>
             Low
+            最低价
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.Volume">
             <summary>
             Total traded volume
+            成交量
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.IMexcV3MiniTick.QuoteVolume">
             <summary>
             Total traded alternate asset volume
+            成交额
             </summary>
         </member>
         <member name="T:Mexc.Net.Interfaces.IMexcV3OrderBook">
@@ -5326,22 +5312,6 @@
             The average price the order was filled
             </summary>
         </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcQueryRecords`1">
-            <summary>
-            Query results
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcQueryRecords`1.Rows">
-            <summary>
-            The list records
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcQueryRecords`1.Total">
-            <summary>
-            The total count of the records
-            </summary>
-        </member>
         <member name="T:Mexc.Net.Objects.Models.MexcRateLimit">
             <summary>
             Rate limit info
@@ -5365,47 +5335,6 @@
         <member name="P:Mexc.Net.Objects.Models.MexcRateLimit.Limit">
             <summary>
             The amount of calls the limit is
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcResult">
-            <summary>
-            Query result
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcResult.Code">
-            <summary>
-            Result code
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcResult.Message">
-            <summary>
-            Message
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcResult`1">
-            <summary>
-            Query result
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcResult`1.Data">
-            <summary>
-            The data
-            </summary>
-        </member>
-        <member name="T:Mexc.Net.Objects.Models.MexcStreamEvent">
-            <summary>
-            A event received by a Mexc websocket
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcStreamEvent.Event">
-            <summary>
-            The type of the event
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcStreamEvent.EventTime">
-            <summary>
-            The time the event happened
             </summary>
         </member>
         <member name="T:Mexc.Net.Objects.Models.MexcTestOrderBase">
@@ -5477,22 +5406,10 @@
             价格变化比
             </summary>
         </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.WeightedAveragePrice">
-            <summary>
-            The weighted average price in the last 24 hours
-            MEXC 没有这个参数
-            </summary>
-        </member>
         <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.LastPrice">
             <summary>
             The most recent trade price
             最新价
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.LastQuantity">
-            <summary>
-            The most recent trade quantity
-            最新量
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.OpenPrice">
@@ -5537,17 +5454,7 @@
             结束时间
             </summary>
         </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.FirstTradeId">
-            <summary>
-            The first trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.LastTradeId">
-            <summary>
-            The last trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.TotalTrades">
+        <member name="P:Mexc.Net.Objects.Models.MexcV324HPriceBase.Count">
             <summary>
             The amount of trades made in the last 24 hours
             </summary>
@@ -5650,6 +5557,48 @@
             <summary>
             The quantity of this price in the order book
             数量
+            </summary>
+        </member>
+        <member name="T:Mexc.Net.Objects.Models.MexcV3QueryRecords`1">
+            <summary>
+            Query results
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Mexc.Net.Objects.Models.MexcV3QueryRecords`1.Rows">
+            <summary>
+            The list records
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.Models.MexcV3QueryRecords`1.Total">
+            <summary>
+            The total count of the records
+            </summary>
+        </member>
+        <member name="T:Mexc.Net.Objects.Models.MexcV3Result">
+            <summary>
+            Query result
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.Models.MexcV3Result.Code">
+            <summary>
+            Result code
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.Models.MexcV3Result.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="T:Mexc.Net.Objects.Models.MexcV3Result`1">
+            <summary>
+            Query result
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Mexc.Net.Objects.Models.MexcV3Result`1.Data">
+            <summary>
+            The data
             </summary>
         </member>
         <member name="T:Mexc.Net.Objects.Models.MexcV3StreamEvent">
@@ -6009,12 +5958,6 @@
             The quantity of the best ask price in the order book
             卖盘数量
             </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Spot.MexcV324HPrice.Volume">
-            <inheritdoc />
-        </member>
-        <member name="P:Mexc.Net.Objects.Models.Spot.MexcV324HPrice.QuoteVolume">
-            <inheritdoc />
         </member>
         <member name="T:Mexc.Net.Objects.Models.Spot.MexcV3AccountInfo">
             <summary>
