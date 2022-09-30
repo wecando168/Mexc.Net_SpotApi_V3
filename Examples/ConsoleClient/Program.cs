@@ -11,8 +11,10 @@ using Mexc.Net.Objects.Models.Spot.Socket;
 using Mexc.Net.Interfaces;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
-const string accessKey = "Use Your Exchange Access Key";
-const string secretKey = "Use Your Exchange SecretKey Key";
+//const string accessKey = "Use Your Exchange Access Key";
+//const string secretKey = "Use Your Exchange SecretKey Key";
+const string accessKey = "mx0dC9rHklFuN8cYGU";
+const string secretKey = "7eb6b0f56d7f4d9cb00b8517729cc172";
 #endregion
 
 //目前现货Rest Api使用最新的V3版本,配置一个默认的V3版的Rest Api 客户端
@@ -45,189 +47,246 @@ while (read != "R" && read != "r" && read != "P" && read != "p" && read != "U" &
 if (read == "R" || read == "r")
 {
     //一、行情接口测试-已完成
-    await TestMarketDataEndpoints();
+    Console.WriteLine($"Press enter to test market data endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestMarketDataEndpoints();
+    }
 
     //二、母子账户接口-未开发
-    //await TestSubAccountEndpoints();
+    Console.WriteLine($"Press enter to test subAccount endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        //await TestSubAccountEndpoints();
+    }
 
     //三、现货账户和交易接口测试-已完成（批量下单除外）
-    //await TestSpotAccountTradeEndpoints();
+    Console.WriteLine($"Press enter to test spot account trade endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestSpotAccountTradeEndpoints();
+    }
 
     //四、钱包接口测试-开发中...
-    //await TestWalletEndpoints();
+    Console.WriteLine($"Press enter to test wallet endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestWalletEndpoints();
+    }
 
     //五、ETF接口测试-开发中...
-    //await TestETFEndpoints();
+    Console.WriteLine($"Press enter to test ETF endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestETFEndpoints();
+    }
 
     //六、杠杆账户和交易接口-未开发
-    //await TestMarginAccountTradeEndpoints();
+    Console.WriteLine($"Press enter to test margin account trade endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestMarginAccountTradeEndpoints();
+    }
 
     //七、现货账户WebSocket账户Listen Key维护接口测试-已完成
-    //await TestSpotWebSocketAccountEndpoints();
-}
-else if(read == "P" || read == "p")
+    Console.WriteLine($"Press enter to test market data endpoints, Press [S] to skip current test!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        await TestSpotWebSocketAccountEndpoints();
+    }
+    }
+else if (read == "P" || read == "p")
 {
     MexcV3SocketClient? mexcV3SocketClient = new MexcV3SocketClient();
     CallResult<UpdateSubscription>? publicSubV3scription = null;
 
     #region 订阅逐笔交易
-    Console.WriteLine("Press enter to subscribe trade stream");
-    Console.ReadLine();
-
     //订阅一个交易代码逐笔交易
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync("BTCUSDT", data =>
+    Console.WriteLine($"Press enter to subscribe one symbol trade stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        foreach (var item in data.Data.Data.Deals)
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync("BTCUSDT", data =>
         {
-            Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            foreach (var item in data.Data.Data.Deals)
+            {
+                Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
+            }
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
+
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
         }
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
 
     //订阅多交易代码逐笔交易
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
+    Console.WriteLine($"Press enter to subscribe symbols trade stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        foreach (var item in data.Data.Data.Deals)
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
         {
-            Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            foreach (var item in data.Data.Data.Deals)
+            {
+                Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
+            }
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
+
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
         }
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     #endregion
 
     #region 订阅K线
-    Console.WriteLine("Press enter to subscribe candlestick stream");
-    Console.ReadLine();
     //订阅一个交易代码，单时间区间
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", MexcV3StreamsKlineInterval.FiveMinutes, data =>
+    Console.WriteLine($"Press enter to subscribe one symbol candlestick stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", MexcV3StreamsKlineInterval.FiveMinutes, data =>
+        {
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
+        }
+
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
 
     //订阅多交易代码，多时间区间
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, new MexcV3StreamsKlineInterval[] { MexcV3StreamsKlineInterval.OneMinute, MexcV3StreamsKlineInterval.FiveMinutes }, data =>
+    Console.WriteLine($"Press enter to subscribe symbols candlestick stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, new MexcV3StreamsKlineInterval[] { MexcV3StreamsKlineInterval.OneMinute, MexcV3StreamsKlineInterval.FiveMinutes }, data =>
+        {
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
+        }
+
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     #endregion
 
     #region 订阅增量深度信息
-    Console.WriteLine("Press enter to subscribe to BTCUSDT trade stream");
-    Console.ReadLine();
-
     //订阅一个交易代码增量深度信息
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync("BTCUSDT", data =>
+    Console.WriteLine($"Press enter to subscribe \"BTCUSDT\" diff depth stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        if (!Object.Equals(data.Data.Data.Asks, null))
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync("BTCUSDT", data =>
         {
-            foreach (var item in data.Data.Data.Asks)
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            if (!Object.Equals(data.Data.Data.Asks, null))
             {
-                Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
+                foreach (var item in data.Data.Data.Asks)
+                {
+                    Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
+                }
             }
-        }
-        if (!Object.Equals(data.Data.Data.Bids, null))
-        {
-            foreach (var item in data.Data.Data.Bids)
+            if (!Object.Equals(data.Data.Data.Bids, null))
             {
-                Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
+                foreach (var item in data.Data.Data.Bids)
+                {
+                    Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
+                }
             }
-        }
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
+        }
+
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
 
     //订阅多个交易代码增量深度信息
-    publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
+    Console.WriteLine($"Press enter to subscribe \"ETHUSDT\" and \"MXUSDT\" diff depth stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-        if (!Object.Equals(data.Data.Data.Asks, null))
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
         {
-            foreach (var item in data.Data.Data.Asks)
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            if (!Object.Equals(data.Data.Data.Asks, null))
             {
-                Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
+                foreach (var item in data.Data.Data.Asks)
+                {
+                    Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
+                }
             }
-        }
-        if (!Object.Equals(data.Data.Data.Bids, null))
-        {
-            foreach (var item in data.Data.Data.Bids)
+            if (!Object.Equals(data.Data.Data.Bids, null))
             {
-                Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
+                foreach (var item in data.Data.Data.Bids)
+                {
+                    Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
+                }
             }
-        }
-        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    });
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
 
-    if (!publicSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
+        }
+
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     #endregion
 }
 else if (read == "U" || read == "u")
@@ -245,6 +304,7 @@ else if (read == "U" || read == "u")
     }
     if (string.IsNullOrWhiteSpace(listenKey))
     {
+        Console.WriteLine($"Please check \"AccessKey\" and \"SecretKey\" are valid");
         return;
     }
     #endregion
@@ -258,64 +318,70 @@ else if (read == "U" || read == "u")
     #endregion
 
     #region 订阅账户成交（实时）
-    Console.WriteLine("Press enter to subscribe to account deals stream");
-    Console.ReadLine();
-    #region 方法一(功能已实现，保留请勿删除）：
-    //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
-    //{
-    //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //    Console.WriteLine($"AccountDealsClientOrderId:{data.Data.Data.ClientOrderId} AccountDealsOrderId:{data.Data.Data.OrderId} AccountDealsPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
-    //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //});
-    #endregion
-
-    #region 方法二：
-    privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
+    Console.WriteLine($"Press enter to subscribe account deals stream");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
     {
-        MexcV3StreamPrivateDeals? result = data.Data;
-        if (result != null)
+        #region 方法一(功能已实现，保留请勿删除）：
+        //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
+        //{
+        //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+        //    Console.WriteLine($"AccountDealsClientOrderId:{data.Data.Data.ClientOrderId} AccountDealsOrderId:{data.Data.Data.OrderId} AccountDealsPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
+        //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        //});
+        #endregion
+
+        #region 方法二：
+        privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
         {
-            result.ListenKey = listenKey;
-            Console.WriteLine(
-                $"Stream:{result.Stream}\t" +
-                $"ListenKey:{result.ListenKey}\r\n" +
-                $"Symbol:{result.Symbol} " +
-                $"TradeType {result.Data.TradeType} " +
-                $"Price {result.Data.Price} " +
-                $"Quantity {result.Data.Quantity} " +
-                $"ClientOrderId {result.Data.ClientOrderId} " +
-                $"OrderId {result.Data.OrderId} " +
-                $"TradeId {result.Data.TradeId} " +
-                $"@ {result.Data.DealTime}");
+            MexcV3StreamPrivateDeals? result = data.Data;
+            if (result != null)
+            {
+                result.ListenKey = listenKey;
+                Console.WriteLine(
+                    $"Stream:{result.Stream}\t" +
+                    $"ListenKey:{result.ListenKey}\r\n" +
+                    $"Symbol:{result.Symbol} " +
+                    $"TradeType {result.Data.TradeType} " +
+                    $"Price {result.Data.Price} " +
+                    $"Quantity {result.Data.Quantity} " +
+                    $"ClientOrderId {result.Data.ClientOrderId} " +
+                    $"OrderId {result.Data.OrderId} " +
+                    $"TradeId {result.Data.TradeId} " +
+                    $"@ {result.Data.DealTime}");
+            }
+        });
+        #endregion
+
+        if (!privateSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
+            Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
+            Console.ReadLine();
+            return;
         }
-    });
-    #endregion
 
-    if (!privateSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     #endregion
 
     #region 订阅账户订单（实时）
-    Console.WriteLine("Press enter to subscribe to account orders stream");
-    Console.ReadLine();
-    #region 方法一(功能已实现，保留请勿删除）：
-    //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
-    //{
-    //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //    Console.WriteLine($"AccountOrdersClientOrderId:{data.Data.Data.ClientOrderId} AccountOrdersOrderId:{data.Data.Data.OrderId} AccountOrdersPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
-    //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //});
-    #endregion
+    Console.WriteLine($"Press enter to subscribe account orders stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        #region 方法一(功能已实现，保留请勿删除）：
+        //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
+        //{
+        //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+        //    Console.WriteLine($"AccountOrdersClientOrderId:{data.Data.Data.ClientOrderId} AccountOrdersOrderId:{data.Data.Data.OrderId} AccountOrdersPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
+        //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        //});
+        #endregion
 
-    #region 方法二：
-    privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
+        #region 方法二：
+        privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
     {
         MexcV3StreamPrivateOrders? result = data.Data;
         if (result != null)
@@ -333,17 +399,19 @@ else if (read == "U" || read == "u")
                 );
         }
     });
-    #endregion
+        #endregion
 
-    if (!privateSubV3scription.Success)
-    {
-        Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
-        Console.ReadLine();
-        return;
+        if (!privateSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
+            Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
+            Console.ReadLine();
+            return;
+        }
+
+        privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
-
-    privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     #endregion
 }
 
