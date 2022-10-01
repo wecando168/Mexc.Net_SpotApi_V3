@@ -18,6 +18,7 @@ using System.Diagnostics;
 using CryptoExchange.Net.Sockets;
 using Mexc.Net.Objects.Models.Spot;
 using Mexc.Net.Clients.SpotApi;
+using Mexc.Net.Interfaces.Clients;
 
 namespace Mexc.Net.UnitTests
 {
@@ -30,11 +31,11 @@ namespace Mexc.Net.UnitTests
         {
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
-            var time = new MexcV3CheckServerTime() { ServerTime = expected };
-            var client = MexcV3TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
+            MexcV3CheckServerTime time = new MexcV3CheckServerTime() { ServerTime = expected };
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
 
             // act
-            var result = await client.SpotApi.MarketData.GetServerTimeAsync();
+            WebCallResult<DateTime> result = await client.SpotApi.MarketData.GetServerTimeAsync();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -47,11 +48,11 @@ namespace Mexc.Net.UnitTests
         {
             // arrange
             long expected = milisecondsTime;
-            var time = new MexcV3CheckServerTimeStamp() { ServerTime = expected };
-            var client = MexcV3TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
+            MexcV3CheckServerTimeStamp time = new MexcV3CheckServerTimeStamp() { ServerTime = expected };
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
 
             // act
-            var result = await client.SpotApi.MarketData.GetServerTimeStampAsync();
+            WebCallResult<long> result = await client.SpotApi.MarketData.GetServerTimeStampAsync();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -62,12 +63,12 @@ namespace Mexc.Net.UnitTests
         public async Task StartUserStream_Should_RespondWithListenKey()
         {
             // arrange
-            var key = new MexcV3ListenKey()
+            MexcV3ListenKey key = new MexcV3ListenKey()
             {
                 ListenKey = "123"
             };
 
-            var client = MexcV3TestHelpers.CreateResponseClient(key, new MexcV3ClientOptions()
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient(key, new MexcV3ClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 SpotApiOptions = new MexcV3ApiClientOptions
@@ -77,7 +78,7 @@ namespace Mexc.Net.UnitTests
             });
 
             // act
-            var result = await client.SpotApi.WebsocketAccount.StartUserStreamAsync();
+            WebCallResult<string> result = await client.SpotApi.WebsocketAccount.StartUserStreamAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -88,7 +89,7 @@ namespace Mexc.Net.UnitTests
         public async Task KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 SpotApiOptions = new MexcV3ApiClientOptions
@@ -98,7 +99,7 @@ namespace Mexc.Net.UnitTests
             });
 
             // act
-            var result = await client.SpotApi.WebsocketAccount.KeepAliveUserStreamAsync("test");
+            WebCallResult<string> result = await client.SpotApi.WebsocketAccount.KeepAliveUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -108,7 +109,7 @@ namespace Mexc.Net.UnitTests
         public async Task StopUserStream_Should_Respond()
         {
             // arrange
-            var client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 SpotApiOptions = new MexcV3ApiClientOptions
@@ -118,7 +119,7 @@ namespace Mexc.Net.UnitTests
             });
 
             // act
-            var result = await client.SpotApi.WebsocketAccount.StopUserStreamAsync("test");
+            WebCallResult<string> result = await client.SpotApi.WebsocketAccount.StopUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -131,7 +132,7 @@ namespace Mexc.Net.UnitTests
         public async Task EnablingAutoTimestamp_Should_CallServerTime(string symbol)
         {
             // arrange
-            var client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateResponseClient("{}", new MexcV3ClientOptions()
             {
                 ApiCredentials = new ApiCredentials("TestKey", "TestSecret"),
                 SpotApiOptions = new MexcV3ApiClientOptions
@@ -159,11 +160,11 @@ namespace Mexc.Net.UnitTests
         public async Task ReceivingMexcError_Should_ReturnMexcErrorAndNotSuccess()
         {
             // arrange
-            var client = MexcV3TestHelpers.CreateClient();
+            IMexcV3RestClient client = MexcV3TestHelpers.CreateClient();
             MexcV3TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = await client.SpotApi.MarketData.GetServerTimeAsync();
+            WebCallResult<DateTime> result = await client.SpotApi.MarketData.GetServerTimeAsync();
 
             // assert
             Assert.IsFalse(result.Success);
@@ -177,7 +178,7 @@ namespace Mexc.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new MexcV3AuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            MexcV3AuthenticationProvider authProvider = new MexcV3AuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
             Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
@@ -188,14 +189,14 @@ namespace Mexc.Net.UnitTests
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new MexcV3AuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
-            var client = new HttpClient();
-            var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://api.mexc.com"), client, 1);
+            MexcV3AuthenticationProvider authProvider = new MexcV3AuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            HttpClient client = new HttpClient();
+            Request request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://api.mexc.com"), client, 1);
 
             // act
-            var headers = new Dictionary<string, string>();
+            Dictionary<string, string> headers = new Dictionary<string, string>();
             authProvider.AuthenticateRequest(null, request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
-                HttpMethodParameterPosition.InUri, out var uriParameters, out var bodyParameters, out headers);
+                HttpMethodParameterPosition.InUri, out SortedDictionary<string, object> uriParameters, out SortedDictionary<string, object> bodyParameters, out headers);
 
             // assert
             Assert.IsTrue(headers.First().Key == "x-mexc-apikey" && headers.First().Value == "TestKey");
@@ -222,16 +223,16 @@ namespace Mexc.Net.UnitTests
         [Test]
         public void CheckSocketInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(MexcV3SocketClientSpotStreams));
-            var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IMexcSocketClient"));
+            Assembly assembly = Assembly.GetAssembly(typeof(MexcV3SocketClientSpotStreams));
+            IEnumerable<Type> clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IMexcSocketClient"));
 
-            foreach (var clientInterface in clientInterfaces)
+            foreach (Type clientInterface in clientInterfaces)
             {
-                var implementation = assembly.GetTypes().Single(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
+                Type implementation = assembly.GetTypes().Single(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
                 int methods = 0;
-                foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
+                foreach (MethodInfo method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
-                    var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
+                    MethodInfo interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
                     Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.GetType().Name}");
                     methods++;
                 }

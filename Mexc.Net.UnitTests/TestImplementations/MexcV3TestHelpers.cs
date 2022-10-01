@@ -28,17 +28,17 @@ namespace Mexc.Net.UnitTests.TestImplementations
         {
             if (self != null && to != null)
             {
-                var type = self.GetType();
-                var ignoreList = new List<string>(ignore);
-                foreach (var pi in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                Type type = self.GetType();
+                List<string> ignoreList = new List<string>(ignore);
+                foreach (PropertyInfo pi in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 {
                     if (ignoreList.Contains(pi.Name))
                     {
                         continue;
                     }
 
-                    var selfValue = type.GetProperty(pi.Name).GetValue(self, null);
-                    var toValue = type.GetProperty(pi.Name).GetValue(to, null);
+                    object selfValue = type.GetProperty(pi.Name).GetValue(self, null);
+                    object toValue = type.GetProperty(pi.Name).GetValue(to, null);
 
                     if (pi.PropertyType.IsClass && !pi.PropertyType.Module.ScopeName.Equals("System.Private.CoreLib.dll"))
                     {
@@ -82,56 +82,56 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
         public static IMexcV3RestClient CreateResponseClient(string response, MexcV3ClientOptions options = null)
         {
-            var client = (MexcV3RestClient)CreateClient(options);
+            MexcV3RestClient client = (MexcV3RestClient)CreateClient(options);
             SetResponse(client, response);
             return client;
         }
 
         public static IMexcV3RestClient CreateResponseClient<T>(T response, MexcV3ClientOptions options = null)
         {
-            var client = (MexcV3RestClient)CreateClient(options);
+            MexcV3RestClient client = (MexcV3RestClient)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));
             return client;
         }
 
         public static void SetResponse(BaseRestClient client, string responseData)
         {
-            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
-            var responseStream = new MemoryStream();
+            byte[] expectedBytes = Encoding.UTF8.GetBytes(responseData);
+            MemoryStream responseStream = new MemoryStream();
             responseStream.Write(expectedBytes, 0, expectedBytes.Length);
             responseStream.Seek(0, SeekOrigin.Begin);
 
-            var response = new Mock<IResponse>();
+            Mock<IResponse> response = new Mock<IResponse>();
             response.Setup(c => c.IsSuccessStatusCode).Returns(true);
             response.Setup(c => c.GetResponseStreamAsync()).Returns(Task.FromResult((Stream)responseStream));
 
-            var request = new Mock<IRequest>();
+            Mock<IRequest> request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
-            var factory = Mock.Get(client.RequestFactory);
+            Mock<IRequestFactory> factory = Mock.Get(client.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
 
         public static void SetErrorWithResponse(IMexcV3RestClient client, string responseData, HttpStatusCode code)
         {
-            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
-            var responseStream = new MemoryStream();
+            byte[] expectedBytes = Encoding.UTF8.GetBytes(responseData);
+            MemoryStream responseStream = new MemoryStream();
             responseStream.Write(expectedBytes, 0, expectedBytes.Length);
             responseStream.Seek(0, SeekOrigin.Begin);
 
-            var response = new Mock<IResponse>();
+            Mock<IResponse> response = new Mock<IResponse>();
             response.Setup(c => c.IsSuccessStatusCode).Returns(false);
             response.Setup(c => c.GetResponseStreamAsync()).Returns(Task.FromResult((Stream)responseStream));
 
-            var request = new Mock<IRequest>();
+            Mock<IRequest> request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
-            var factory = Mock.Get(client.RequestFactory);
+            Mock<IRequestFactory> factory = Mock.Get(client.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
@@ -181,8 +181,8 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
             if (type.IsArray)
             {
-                var elementType = type.GetElementType()!;
-                var result = Array.CreateInstance(elementType, 2);
+                Type elementType = type.GetElementType()!;
+                Array result = Array.CreateInstance(elementType, 2);
                 result.SetValue(GetTestValue(elementType, 0), 0);
                 result.SetValue(GetTestValue(elementType, 1), 1);
                 return result;
@@ -190,7 +190,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
             if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(List<>)))
             {
-                var result = (IList)Activator.CreateInstance(type)!;
+                IList result = (IList)Activator.CreateInstance(type)!;
                 result.Add(GetTestValue(type.GetGenericArguments()[0], 0));
                 result.Add(GetTestValue(type.GetGenericArguments()[0], 1));
                 return result;
@@ -198,7 +198,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>))
             {
-                var result = (IDictionary)Activator.CreateInstance(type)!;
+                IDictionary result = (IDictionary)Activator.CreateInstance(type)!;
                 result.Add(GetTestValue(type.GetGenericArguments()[0], 0)!, GetTestValue(type.GetGenericArguments()[1], 0));
                 result.Add(GetTestValue(type.GetGenericArguments()[0], 1)!, GetTestValue(type.GetGenericArguments()[1], 1));
                 return Convert.ChangeType(result, type);
@@ -209,9 +209,9 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
         public static async Task<object> InvokeAsync(MethodInfo @this, object obj, params object[] parameters)
         {
-            var task = (Task)@this.Invoke(obj, parameters);
+            Task task = (Task)@this.Invoke(obj, parameters);
             await task.ConfigureAwait(false);
-            var resultProperty = task.GetType().GetProperty("Result");
+            PropertyInfo resultProperty = task.GetType().GetProperty("Result");
             return resultProperty.GetValue(task);
         }
     }

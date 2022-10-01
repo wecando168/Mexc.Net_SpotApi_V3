@@ -11,10 +11,9 @@ using Mexc.Net.Objects.Models.Spot.Socket;
 using Mexc.Net.Interfaces;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
-//const string accessKey = "Use Your Exchange Access Key";
-//const string secretKey = "Use Your Exchange SecretKey Key";
-const string accessKey = "mx0dC9rHklFuN8cYGU";
-const string secretKey = "7eb6b0f56d7f4d9cb00b8517729cc172";
+const string accessKey = "Use Your Exchange Access Key";
+const string secretKey = "Use Your Exchange SecretKey Key";
+string listenKey = string.Empty;
 #endregion
 
 //目前现货Rest Api使用最新的V3版本,配置一个默认的V3版的Rest Api 客户端
@@ -292,7 +291,6 @@ else if (read == "P" || read == "p")
 else if (read == "U" || read == "u")
 {
     #region 生成订阅私有数据的监听密钥（Listen Key)
-    string listenKey = string.Empty;
     using (var client = new MexcV3RestClient())
     {
         #region 创建现货WebSocket 连接 Listen Key

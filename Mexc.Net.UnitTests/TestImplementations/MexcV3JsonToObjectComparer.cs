@@ -31,18 +31,18 @@ namespace Mexc.Net.UnitTests.TestImplementations
            Dictionary<string, string> useNestedJsonPropertyForCompare = null,
            Dictionary<string, List<string>> ignoreProperties = null)
         {
-            var listener = new EnumValueTraceListener();
+            EnumValueTraceListener listener = new EnumValueTraceListener();
             Trace.Listeners.Add(listener);
 
-            var methods = typeof(K).GetMethods();
-            var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
-            var skippedMethods = new List<string>();
+            MethodInfo[] methods = typeof(K).GetMethods();
+            List<MethodInfo> callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
+            List<string> skippedMethods = new List<string>();
 
-            foreach (var method in callResultMethods)
+            foreach (MethodInfo method in callResultMethods)
             {
-                for (var i = 0; i < 10; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                    string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
                     FileStream file = null;
                     try
                     {
@@ -55,16 +55,16 @@ namespace Mexc.Net.UnitTests.TestImplementations
                         break;
                     }
 
-                    var buffer = new byte[file.Length];
+                    byte[] buffer = new byte[file.Length];
                     await file.ReadAsync(buffer, 0, buffer.Length);
                     file.Close();
 
-                    var json = Encoding.UTF8.GetString(buffer);
-                    var client = _clientFunc(json);
+                    string json = Encoding.UTF8.GetString(buffer);
+                    T client = _clientFunc(json);
 
-                    var parameters = method.GetParameters();
-                    var input = new List<object>();
-                    foreach (var parameter in parameters)
+                    ParameterInfo[] parameters = method.GetParameters();
+                    List<object> input = new List<object>();
+                    foreach (ParameterInfo parameter in parameters)
                     {
                         if (parametersToSetNull?.Contains(parameter.Name) == true)
                             input.Add(null);
@@ -78,14 +78,14 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     // asset
                     Assert.Null(result.Error, method.Name);
 
-                    var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
+                    object resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
                     ProcessData(method.Name + (i == 0 ? "" : i.ToString()), resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
                 }
             }
 
             if (skippedMethods.Any())
                 Debug.WriteLine("Skipped methods:");
-            foreach(var method in skippedMethods)
+            foreach(string method in skippedMethods)
                 Debug.WriteLine(method);
 
             Trace.Listeners.Remove(listener);
@@ -95,8 +95,8 @@ namespace Mexc.Net.UnitTests.TestImplementations
            Dictionary<string, string> useNestedJsonPropertyForCompare = null,
            Dictionary<string, List<string>> ignoreProperties = null)
         {
-            var resultProperties = resultData.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
-            var jsonObject = JToken.Parse(json);
+            IEnumerable<(PropertyInfo p, JsonPropertyAttribute)> resultProperties = resultData.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
+            JToken jsonObject = JToken.Parse(json);
             if (useNestedJsonPropertyForCompare?.ContainsKey(method) == true)
             {
                 jsonObject = jsonObject[useNestedJsonPropertyForCompare[method]];
@@ -104,10 +104,10 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
             if (resultData.GetType().GetInterfaces().Contains(typeof(IDictionary)))
             {
-                var dict = (IDictionary)resultData;
-                var jObj = (JObject)jsonObject;
-                var properties = jObj.Properties();
-                foreach (var dictProp in properties)
+                IDictionary dict = (IDictionary)resultData;
+                JObject jObj = (JObject)jsonObject;
+                IEnumerable<JProperty> properties = jObj.Properties();
+                foreach (JProperty dictProp in properties)
                 {
                     if (!dict.Contains(dictProp.Name))
                         throw new Exception($"{method}: Dictionary has no value for {dictProp.Name} while input json `{dictProp.Name}` has value {dictProp.Value}");
@@ -115,7 +115,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     if (dictProp.Value.Type == JTokenType.Object)
                     {
                         // TODO Some additional checking for objects
-                        foreach (var prop in ((JObject)dictProp.Value).Properties())
+                        foreach (JProperty prop in ((JObject)dictProp.Value).Properties())
                             CheckObject(method, prop, dict[dictProp.Name], ignoreProperties);
                     }
                     else
@@ -130,15 +130,15 @@ namespace Mexc.Net.UnitTests.TestImplementations
             }
             else if (jsonObject.Type == JTokenType.Array)
             {
-                var jObjs = (JArray)jsonObject;
-                var list = (IEnumerable)resultData;
-                var enumerator = list.GetEnumerator();
-                foreach (var jObj in jObjs)
+                JArray jObjs = (JArray)jsonObject;
+                IEnumerable list = (IEnumerable)resultData;
+                IEnumerator enumerator = list.GetEnumerator();
+                foreach (JToken jObj in jObjs)
                 {
                     enumerator.MoveNext();
                     if (jObj.Type == JTokenType.Object)
                     {
-                        foreach (var subProp in ((JObject)jObj).Properties())
+                        foreach (JProperty subProp in ((JObject)jObj).Properties())
                         {
                             if (ignoreProperties?.ContainsKey(method) == true && ignoreProperties[method].Contains(subProp.Name))
                                 continue;
@@ -147,18 +147,18 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     }
                     else if (jObj.Type == JTokenType.Array)
                     {
-                        var resultObj = enumerator.Current;
-                        var resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
-                        var arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
-                        var jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
+                        object resultObj = enumerator.Current;
+                        IEnumerable<(PropertyInfo p, ArrayPropertyAttribute)> resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
+                        object arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
+                        Type jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
                         if (jsonConverter != typeof(ArrayConverter))
                             // Not array converter?
                             continue;
 
                         int i = 0;
-                        foreach (var item in jObj.Values())
+                        foreach (JToken item in jObj.Values())
                         {
-                            var arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
+                            PropertyInfo arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
                             if (arrayProp != null)
                             {
                                 CheckPropertyValue(method, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
@@ -168,7 +168,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     }
                     else
                     {
-                        var value = enumerator.Current;
+                        object value = enumerator.Current;
                         if (value == default && ((JValue)jObj).Type != JTokenType.Null)
                         {
                             throw new Exception($"{method}: Array has no value while input json array has value {jObj}");
@@ -178,7 +178,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
             }
             else
             {
-                foreach (var item in jsonObject)
+                foreach (JToken item in jsonObject)
                 {
                     if (item is JProperty prop)
                     {
@@ -195,10 +195,10 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
         private static void CheckObject(string method, JProperty prop, object obj, Dictionary<string, List<string>> ignoreProperties)
         {
-            var resultProperties = obj.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
+            IEnumerable<(PropertyInfo p, JsonPropertyAttribute)> resultProperties = obj.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
 
             // Property has a value
-            var property = resultProperties.SingleOrDefault(p => p.Item2?.PropertyName == prop.Name).p;
+            PropertyInfo property = resultProperties.SingleOrDefault(p => p.Item2?.PropertyName == prop.Name).p;
             if (property is null)
                 property = resultProperties.SingleOrDefault(p => p.p.Name == prop.Name).p;
             if (property is null)
@@ -210,7 +210,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
                 throw new Exception($"{method}: Missing property `{prop.Name}` on `{obj.GetType().Name}`");
             }
 
-            var propertyValue = property.GetValue(obj);
+            object propertyValue = property.GetValue(obj);
             if(property.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
@@ -229,10 +229,10 @@ namespace Mexc.Net.UnitTests.TestImplementations
 
             if (propertyValue.GetType().GetInterfaces().Contains(typeof(IDictionary)))
             {
-                var dict = (IDictionary)propertyValue;
-                var jObj = (JObject)propValue;
-                var properties = jObj.Properties();
-                foreach (var dictProp in properties)
+                IDictionary dict = (IDictionary)propertyValue;
+                JObject jObj = (JObject)propValue;
+                IEnumerable<JProperty> properties = jObj.Properties();
+                foreach (JProperty dictProp in properties)
                 {
                     if (!dict.Contains(dictProp.Name))
                         throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {propValue}");
@@ -254,20 +254,20 @@ namespace Mexc.Net.UnitTests.TestImplementations
             else if (propertyValue.GetType().GetInterfaces().Contains(typeof(IEnumerable))
                 && propertyValue.GetType() != typeof(string))
             {
-                var jObjs = (JArray)propValue;
-                var list = (IEnumerable)propertyValue;
-                var enumerator = list.GetEnumerator();
+                JArray jObjs = (JArray)propValue;
+                IEnumerable list = (IEnumerable)propertyValue;
+                IEnumerator enumerator = list.GetEnumerator();
                 foreach (JToken jtoken in jObjs)
                 {
                     enumerator.MoveNext();
-                    var typeConverter = enumerator.Current.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true);
+                    object[] typeConverter = enumerator.Current.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true);
                     if (typeConverter.Any() && ((JsonConverterAttribute)typeConverter.First()).ConverterType != typeof(ArrayConverter))
                         // Custom converter for the type, skip
                         continue;
 
                     if (jtoken.Type == JTokenType.Object)
                     {
-                        foreach (var subProp in ((JObject)jtoken).Properties())
+                        foreach (JProperty subProp in ((JObject)jtoken).Properties())
                         {
                             if (ignoreProperties?.ContainsKey(method) == true && ignoreProperties[method].Contains(subProp.Name))
                                 continue;
@@ -277,18 +277,18 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     }
                     else if (jtoken.Type == JTokenType.Array)
                     {
-                        var resultObj = enumerator.Current;
-                        var resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
-                        var arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
-                        var jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
+                        object resultObj = enumerator.Current;
+                        IEnumerable<(PropertyInfo p, ArrayPropertyAttribute)> resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
+                        object arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
+                        Type jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
                         if (jsonConverter != typeof(ArrayConverter))
                             // Not array converter?
                             continue;
 
                         int i = 0;
-                        foreach (var item in jtoken.Values())
+                        foreach (JToken item in jtoken.Values())
                         {
-                            var arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
+                            PropertyInfo arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
                             if (arrayProp != null)
                                 CheckPropertyValue(method, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
 
@@ -297,7 +297,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
                     }
                     else
                     {
-                        var value = enumerator.Current;
+                        object value = enumerator.Current;
                         if (value == default && ((JValue)jtoken).Type != JTokenType.Null)
                         {
                             throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {jtoken}");
@@ -311,7 +311,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
             {
                 if (propValue.Type == JTokenType.Object)
                 {
-                    foreach (var item in propValue)
+                    foreach (JToken item in propValue)
                     {
                         if (item is JProperty prop)
                         {

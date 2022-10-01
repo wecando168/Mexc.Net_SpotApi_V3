@@ -50,14 +50,14 @@ namespace Mexc.Net.UnitTests
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)
         {
-            var listener = new EnumValueTraceListener();
+            EnumValueTraceListener listener = new EnumValueTraceListener();
             Trace.Listeners.Add(listener);
-            var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             string json;
             try
             {
-                var file = File.OpenRead(Path.Combine(path, filePath));
-                using var reader = new StreamReader(file);
+                FileStream file = File.OpenRead(Path.Combine(path, filePath));
+                using StreamReader reader = new StreamReader(file);
                 json = await reader.ReadToEndAsync();
             }
             catch (FileNotFoundException)
@@ -65,7 +65,7 @@ namespace Mexc.Net.UnitTests
                 throw;
             }
 
-            var result = JsonConvert.DeserializeObject<T>(json);
+            T result = JsonConvert.DeserializeObject<T>(json);
             MexcV3JsonToObjectComparer<IMexcV3SocketClient>.ProcessData("", result, json, ignoreProperties: new Dictionary<string, List<string>>
             {
                 { "", ignoreProperties ?? new List<string>() }

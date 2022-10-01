@@ -10,6 +10,7 @@ using Mexc.Net.Objects.Models.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Linq;
+using Mexc.Net.Interfaces.Clients;
 
 namespace Mexc.Net.UnitTests
 {
@@ -27,8 +28,8 @@ namespace Mexc.Net.UnitTests
         {
             #region 建立socket连接，订阅“MexcV3StreamTrade”数据，等待接收到返回值，存入“result”
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket, new MexcV3SocketClientOptions()
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket, new MexcV3SocketClientOptions()
             {
                 LogLevel = LogLevel.Debug
             });
@@ -85,8 +86,8 @@ namespace Mexc.Net.UnitTests
         {
             #region 建立socket连接，订阅“MexcV3StreamTrade”数据，等待接收到返回值，存入“result”
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket, new MexcV3SocketClientOptions()
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket, new MexcV3SocketClientOptions()
             {
                 LogLevel = LogLevel.Debug
             });
@@ -139,8 +140,8 @@ namespace Mexc.Net.UnitTests
         public void SubscribingToKlineStream_Should_TriggerWhenKlineStreamMessageIsReceived(string eventTimestamp)
         {
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket);
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket);
 
             MexcV3StreamKline result = null;
             client.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", MexcV3StreamsKlineInterval.FifteenMinutes, (test) => result = test.Data);
@@ -188,8 +189,8 @@ namespace Mexc.Net.UnitTests
         public void SubscribeToDiffDeptStream_Should_TriggerWhenKlineStreamMessageIsReceived(string symbol)
         {
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket);
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket);
 
             MexcV3StreamDepth result = null;
             client.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync(symbol, (test) => result = test.Data);
@@ -240,8 +241,8 @@ namespace Mexc.Net.UnitTests
         public void SubscribeToPrivateDealsStream_Should_TriggerWhenKlineStreamMessageIsReceived(string listenKey)
         {
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket);
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket);
 
             MexcV3StreamPrivateDeals result = null;
             client.SpotPublicStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, (test) => result = test.Data);
@@ -276,8 +277,8 @@ namespace Mexc.Net.UnitTests
         public void SubscribeToPrivateOrdersStream_Should_TriggerWhenKlineStreamMessageIsReceived(string listenKey)
         {
             // arrange
-            var socket = new MexcV3TestSocket();
-            var client = MexcV3TestHelpers.CreateSocketClient(socket);
+            MexcV3TestSocket socket = new MexcV3TestSocket();
+            IMexcV3SocketClient client = MexcV3TestHelpers.CreateSocketClient(socket);
 
             MexcV3StreamPrivateOrders result = null;
             client.SpotPublicStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, (test) => result = test.Data);
