@@ -52,10 +52,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Clients\GeneralApi\" />
     <Folder Include="Interfaces\Clients\GeneralApi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CryptoExchange.Net-5.2.4\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 </Project>

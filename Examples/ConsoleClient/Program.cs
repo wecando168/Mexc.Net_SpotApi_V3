@@ -187,12 +187,72 @@ else if (read == "P" || read == "p")
         publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
 
-    //订阅多交易代码，多时间区间
-    Console.WriteLine($"Press enter to subscribe symbols candlestick stream, Press [S] to skip current subscription");
+    //订阅多交易代码，多时间区间（如果需要订阅的比较多，建议分多组申请，每组20个即可）
+    Console.WriteLine($"Press enter to subscribe symbols candlestick stream by string array, Press [S] to skip current subscription" +
+        $"\r\nThe maximum number of combinations of symbol and Interval is 24, if it exceeds, no data will be received");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
         publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, new MexcV3StreamsKlineInterval[] { MexcV3StreamsKlineInterval.OneMinute, MexcV3StreamsKlineInterval.FiveMinutes }, data =>
+        {
+            Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
+            Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
+            Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
+            Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
+        });
+
+        if (!publicSubV3scription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubV3scription.Error);
+            Console.ReadLine();
+            return;
+        }
+
+        publicSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+
+    //订阅多交易代码，多时间区间（如果需要订阅的比较多，建议分多组申请，每组20个即可）
+    Console.WriteLine($"Press enter to subscribe symbols candlestick stream by IEnumerable<T>, Press [S] to skip current subscription" +
+        $"\r\nThe maximum number of combinations of symbol and Interval is 24, if it exceeds, no data will be received!");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        List<string> symbolList = new List<string>();
+        //symbolList.Add("AKITAUSDT");
+        //symbolList.Add("API3USDT");
+        symbolList.Add("ASSUSDT");
+        symbolList.Add("BABYDOGEUSDT");
+        symbolList.Add("BNBUSDT");
+        symbolList.Add("BTCUSDT");
+        symbolList.Add("BUNNYUSDT");
+        symbolList.Add("CFXUSDT");
+        symbolList.Add("COOKUSDT");
+        symbolList.Add("DAIUSDT");
+        symbolList.Add("DOGEUSDT");
+        symbolList.Add("ETHUSDT");
+        symbolList.Add("ETHWUSDT");
+        symbolList.Add("FIL36USDT");
+        symbolList.Add("FILUSDT");
+        symbolList.Add("GLOUSDT");
+        symbolList.Add("GNXUSDT");
+        symbolList.Add("HOTUSDT");
+        symbolList.Add("KISHUUSDT");
+        symbolList.Add("LUNAUSDT");
+        symbolList.Add("MXUSDT");
+        symbolList.Add("PAINTUSDT");
+        symbolList.Add("PETUSDT");
+        symbolList.Add("PIGUSDT");
+        symbolList.Add("RACAUSDT");
+        symbolList.Add("SAFEMOONUSDT");
+        IEnumerable<string> symbols = symbolList;
+
+        List<MexcV3StreamsKlineInterval> mexcV3StreamsKlineIntervalList = new List<MexcV3StreamsKlineInterval>();
+        mexcV3StreamsKlineIntervalList.Add(MexcV3StreamsKlineInterval.OneMinute);
+        //mexcV3StreamsKlineIntervalList.Add(MexcV3StreamsKlineInterval.FiveMinutes);
+        IEnumerable<MexcV3StreamsKlineInterval> mexcV3StreamsKlineIntervals = mexcV3StreamsKlineIntervalList;
+
+        publicSubV3scription = await mexcV3SocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(symbols, mexcV3StreamsKlineIntervals, data =>
         {
             Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
             Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
