@@ -13,12 +13,16 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using CryptoExchange.Net.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Mexc.Net.Clients
 {
     /// <inheritdoc cref="IMexcV3SocketClient" />
     public class MexcV3SocketClient : BaseSocketClient, IMexcV3SocketClient
     {
+        private Log _log = new Log("MexcV3SocketClient");
+
         #region fields
         #endregion
 
@@ -80,7 +84,7 @@ namespace Mexc.Net.Clients
             Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath("ws"), request, null, false, onData, ct);
             if(response.Status != TaskStatus.WaitingForActivation)
             {
-                Console.WriteLine(response.Status.ToString());
+                _log.Write(LogLevel.Trace, response.Status.ToString());
             }
             return response;
         }
@@ -96,7 +100,7 @@ namespace Mexc.Net.Clients
             Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath($"ws?listenKey={listenKey}"), request, null, false, onData, ct);
             if (response.Status != TaskStatus.WaitingForActivation)
             {
-                Console.WriteLine(response.Status.ToString());
+                _log.Write(LogLevel.Trace, response.Status.ToString());
             }
             return response;
         }
@@ -129,7 +133,7 @@ namespace Mexc.Net.Clients
             MexcV3SocketRequest bRequest = (MexcV3SocketRequest)request;
             if (msg.ToString().IndexOf("no subscription success", StringComparison.OrdinalIgnoreCase) != -1)
             {
-                Console.Write($"Socket Subscription error : {msg}\r\n");
+                _log.Write(LogLevel.Error, $"Socket Subscription error : {msg}\r\n");
                 return false;
             }
 
@@ -142,7 +146,7 @@ namespace Mexc.Net.Clients
                 {
                     if (requestStream == responceItem)
                     {
-                        Console.Write($"Socket Subscription {requestStream} completed\r\n");
+                        _log.Write(LogLevel.Trace, $"Socket Subscription {requestStream} completed\r\n");
                         successedSubscrip = true;                                             
                     }
                 }

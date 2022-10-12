@@ -25,10 +25,11 @@ namespace Mexc.Net.Clients.SpotApi
     /// <inheritdoc />
     public class MexcV3SocketClientSpotStreams : SocketApiClient, IMexcV3SocketClientSpotStreams
     {
+        private Log _log = new Log("MexcV3SocketClientSpotStreams");
+
         #region fields
         private readonly MexcV3SocketClient _baseClient;
         private readonly MexcV3SocketClientOptions _options;
-        private readonly Log _log;
 
         private const string tradesStreamEndpoint = "spot@public.deals.v3.api";             //逐笔交易(实时)
         private const string klineStreamEndpoint = "spot@public.kline.v3.api";              //K线 Streams
@@ -211,8 +212,7 @@ namespace Mexc.Net.Clients.SpotApi
             //        onMessage?.Invoke(data);
             //    }
             //    else
-            //        _log.Write(LogLevel.Warning,
-            //            "Couldn't deserialize data received from private deals stream: " + result.Error);
+            //        _log.Write(LogLevel.Warning, "Couldn't deserialize data received from private deals stream: " + result.Error);
             //});
             //return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { privateDealsUpdateEvent }, listenKey, handler, ct).ConfigureAwait(false);
             #endregion
@@ -255,8 +255,7 @@ namespace Mexc.Net.Clients.SpotApi
             //        onMessage?.Invoke(data);
             //    }
             //    else
-            //        _log.Write(LogLevel.Warning,
-            //            "Couldn't deserialize data received from private orders stream: " + result.Error);
+            //        _log.Write(LogLevel.Warning, "Couldn't deserialize data received from private orders stream: " + result.Error);
             //});
             //return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { privateOrdersUpdateEvent }, listenKey, handler, ct).ConfigureAwait(false);
             #endregion

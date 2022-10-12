@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 
 namespace Mexc.Net
 {
@@ -12,6 +14,8 @@ namespace Mexc.Net
     /// </summary>
     public class MexcV3AuthenticationProvider : AuthenticationProvider
     {
+        private Log _log = new Log("MexcV3AuthenticationProvider");
+
         /// <summary>
         /// 抹茶请求增加签名验证的方法
         /// </summary>
@@ -63,14 +67,14 @@ namespace Mexc.Net
             
             //7、提取签名字符串
             string? prepareSignData = (parameterPosition == HttpMethodParameterPosition.InUri) ? uri.Query.Replace("?", "") : parameters.ToFormData();
-            Console.WriteLine($"Prepare sign data:\r\n{prepareSignData}");
+            _log.Write(LogLevel.Debug, $"Prepare sign data:\r\n{prepareSignData}");
 
             //8、签名操作
             //签名使用HMAC SHA256算法.
             //API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥
             //其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
             string? signHMACSHA256 = SignHMACSHA256(prepareSignData);
-            Console.WriteLine($"Sign:\r\n{prepareSignData}");
+            _log.Write(LogLevel.Debug, $"Sign:\r\n{prepareSignData}");
 
             //9、签名转小写
             signHMACSHA256 = signHMACSHA256.ToLower();
@@ -126,10 +130,10 @@ namespace Mexc.Net
             //其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
             //7.1 提取签名字符串
             string? prepareSignData = (parameterPosition == HttpMethodParameterPosition.InUri) ? uri.Query.Replace("?", "") : parameters.ToFormData();
-            Console.WriteLine($"Prepare sign data:\r\n{prepareSignData}");
+            _log.Write(LogLevel.Debug, $"Prepare sign data:\r\n{prepareSignData}");
             //7.2 签名操作
             string? signHMACSHA256 = SignHMACSHA256(prepareSignData);
-            Console.WriteLine($"Sign:\r\n{prepareSignData}");
+            _log.Write(LogLevel.Debug, $"Sign:\r\n{prepareSignData}");
 
             //8、签名转小写
             signHMACSHA256 = signHMACSHA256.ToLower();
