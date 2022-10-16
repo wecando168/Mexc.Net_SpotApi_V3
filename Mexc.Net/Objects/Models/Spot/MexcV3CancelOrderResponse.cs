@@ -46,7 +46,7 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 订单编号
         /// </summary>
         [JsonProperty("orderId")]
-        public string OrderId { get; set; }
+        public string OrderId { get; set; } = string.Empty;
 
         private decimal _price;
 

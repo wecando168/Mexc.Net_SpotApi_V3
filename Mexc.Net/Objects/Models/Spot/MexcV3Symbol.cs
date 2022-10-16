@@ -104,13 +104,13 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 最小下单金额（报价金额精度）
         /// </summary>
         [JsonProperty("quoteAmountPrecision")]
-        public string QuoteAmountPrecision { get; set; }
+        public string QuoteAmountPrecision { get; set; } = string.Empty;
 
         /// <summary>
         /// 最小委托数量（基本尺寸精度）
         /// </summary>
         [JsonProperty("baseSizePrecision")]
-        public string BaseSizePrecision { get; set; }
+        public string BaseSizePrecision { get; set; } = string.Empty;
 
         /// <summary>
         /// Permissions types
@@ -129,18 +129,18 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 最大委托数量
         /// </summary>
         [JsonProperty("maxQuoteAmount")]
-        public string MaxQuoteAmount { get; set; }
+        public string MaxQuoteAmount { get; set; } = string.Empty;
 
         /// <summary>
         /// marker手续费
         /// </summary>
         [JsonProperty("makerCommission")]
-        public string MakerCommission { get; set; }
+        public string MakerCommission { get; set; } = string.Empty;
 
         /// <summary>
         /// taker手续费
         /// </summary>
         [JsonProperty("takerCommission")]
-        public string TakerCommission { get; set; }
+        public string TakerCommission { get; set; } = string.Empty;
     }
 }

@@ -93,6 +93,9 @@ namespace Mexc.Net.Objects.Models.Spot
         public DateTime? CreateTime { get; set; }
     }
 
+    /// <summary>
+    /// 错误的下单金额
+    /// </summary>
     public class _Extend
     {
         /// <summary>

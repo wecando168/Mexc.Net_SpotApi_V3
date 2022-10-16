@@ -14,7 +14,7 @@ namespace Mexc.Net.Objects.Models.Spot
         /// The id of the trade
         /// </summary>
         [JsonProperty("id")]
-        public string? OrderId { get; set; } = string.Empty;
+        public string? OrderId { get; set; }
 
         /// <summary>
         /// The price of the trade

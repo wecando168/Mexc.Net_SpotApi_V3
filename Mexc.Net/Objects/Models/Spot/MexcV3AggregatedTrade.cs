@@ -15,7 +15,7 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 归集成交ID
         /// </summary>
         [JsonProperty("a")]
-        public string OrderId { get; set; }
+        public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// The price of trades in this aggregation
         /// 成交价
@@ -33,13 +33,13 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 被归集的首个成交ID
         /// </summary>
         [JsonProperty("f")]
-        public string FirstTradeId { get; set; }
+        public string FirstTradeId { get; set; } = string.Empty;
         /// <summary>
         /// The last trade id in this aggregation
         /// 被归集的末个成交ID
         /// </summary>
         [JsonProperty("l")]
-        public string LastTradeId { get; set; }
+        public string LastTradeId { get; set; } = string.Empty;
         /// <summary>
         /// The timestamp of the trades
         /// 成交时间

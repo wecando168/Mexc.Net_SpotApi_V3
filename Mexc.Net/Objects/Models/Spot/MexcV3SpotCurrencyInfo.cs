@@ -15,14 +15,14 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 币种名称
         /// </summary>
         [JsonProperty("coin")]
-        public string Asset { get; set; }
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Currency Full Name
         /// 币种全名
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Network List
@@ -30,16 +30,19 @@ namespace Mexc.Net.Objects.Models.Spot
         public IEnumerable<MexcV3Network> NetworkList { get; set; } = Array.Empty<MexcV3Network>();
     }
 
+    /// <summary>
+    /// Chain network info
+    /// </summary>
     public class MexcV3Network
     {
         /// <summary>
         /// Currency Name
         /// </summary>
         [JsonProperty("coin")]
-        public string CurrencyName { get; set; }
+        public string CurrencyName { get; set; } = string.Empty;
 
         /// <summary>
-        /// 
+        /// 充值说明
         /// </summary>
         [JsonProperty("depositDesc")]
         public string? DepositDesc { get; set; } = string.Empty;
@@ -62,14 +65,14 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 底层链名称
         /// </summary>
         [JsonProperty("name")]
-        public string BaseChain { get; set; }
+        public string BaseChain { get; set; } = string.Empty;
 
         /// <summary>
         /// Chain
         /// 币种所支持的网络
         /// </summary>
         [JsonProperty("network")]
-        public string Chain { get; set; }
+        public string Chain { get; set; } = string.Empty;
 
         /// <summary>
         /// Withdraw Enable
@@ -83,28 +86,28 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 提币手续费
         /// </summary>
         [JsonProperty("withdrawFee")]
-        public string WithdrawFee { get; set; }
+        public string WithdrawFee { get; set; } = string.Empty;
 
         /// <summary>
         /// Withdraw Integer Multiple
         /// 提币整数倍数
         /// </summary>
         [JsonProperty("withdrawIntegerMultiple")]
-        public string? WithdrawIntegerMultiple { get; set; } = String.Empty;
+        public string? WithdrawIntegerMultiple { get; set; } = string.Empty;
 
         /// <summary>
         /// Withdraw Max
         /// 最大提币限额
         /// </summary>
         [JsonProperty("withdrawMax")]
-        public string WithdrawMax { get; set; }
+        public string WithdrawMax { get; set; } = string.Empty;
 
         /// <summary>
         /// Withdraw Min
         /// 最小提币限额
         /// </summary>
         [JsonProperty("withdrawMin")]
-        public string WithdrawMin { get; set; }
+        public string WithdrawMin { get; set; } = string.Empty;
 
         /// <summary>
         /// Same Address
@@ -117,6 +120,6 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 币种智能合约地址
         /// </summary>
         [JsonProperty("contract")]
-        public string Contract { get; set; }
+        public string Contract { get; set; } = string.Empty;
     }
 }

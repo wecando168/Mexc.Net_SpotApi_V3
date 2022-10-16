@@ -20,14 +20,14 @@ namespace Mexc.Net.Objects.Models.Spot
         /// 成交id
         /// </summary>
         [JsonProperty("id")]
-        public string TradeId { get; set; }
+        public string TradeId { get; set; } = string.Empty;
 
         /// <summary>
         /// The order id the trade belongs to
         /// 订单编号
         /// </summary>
         [JsonProperty("orderId")]
-        public string OrderId { get; set; }
+        public string OrderId { get; set; } = string.Empty;
 
         /// <summary>
         /// Id of the order list this order belongs to
