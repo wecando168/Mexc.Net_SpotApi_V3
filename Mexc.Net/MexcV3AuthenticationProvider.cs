@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Web;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
@@ -67,20 +68,29 @@ namespace Mexc.Net
             
             //7、提取签名字符串
             string? prepareSignData = (parameterPosition == HttpMethodParameterPosition.InUri) ? uri.Query.Replace("?", "") : parameters.ToFormData();
+            
+            //8、签名字符串中的转义字符改为大写（抹茶用小写出来的签名是不对的）
+            prepareSignData = prepareSignData.Replace("%5b", "%5B");    //[
+            prepareSignData = prepareSignData.Replace("%7b", "%7B");    //{
+            prepareSignData = prepareSignData.Replace("%22", "%22");    //"
+            prepareSignData = prepareSignData.Replace("%3a", "%3A");    //:
+            prepareSignData = prepareSignData.Replace("%2c", "%2C");    //,
+            prepareSignData = prepareSignData.Replace("%7d", "%7D");    //}
+            prepareSignData = prepareSignData.Replace("%5d", "%5D");    //]
             _log.Write(LogLevel.Debug, $"Prepare sign data:\r\n{prepareSignData}");
 
-            //8、签名操作
+            //9、签名操作
             //签名使用HMAC SHA256算法.
             //API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥
             //其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
             string? signHMACSHA256 = SignHMACSHA256(prepareSignData);
             _log.Write(LogLevel.Debug, $"Sign:\r\n{prepareSignData}");
 
-            //9、签名转小写
+            //10、签名转小写
             signHMACSHA256 = signHMACSHA256.ToLower();
 
             //调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
-            //10、参数增加签名
+            //11、参数增加签名
             parameters.Add("signature", signHMACSHA256);
         }
 
