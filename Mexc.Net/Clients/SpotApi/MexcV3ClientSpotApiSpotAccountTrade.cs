@@ -13,6 +13,8 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.CommonObjects;
 using Mexc.Net.Interfaces;
 using CryptoExchange.Net.Logging;
+using System.Linq;
+using System.Web;
 
 namespace Mexc.Net.Clients.SpotApi
 {
@@ -107,38 +109,20 @@ namespace Mexc.Net.Clients.SpotApi
         #endregion
 
         #region 3.Batch Orders
-
         /// <inheritdoc />
-        public async Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderAsync(
-            MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest,
+        public async Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderAsync(
+            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestTestList,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            WebCallResult<MexcV3PlacedOrderResponse>? result = await _baseClient.BatchPlaceOrderInternal(
+            WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>? result = await _baseClient.BatchPlaceOrderInternal(
                 uri: _baseClient.GetUrl(batchOrdersEndpoint, api, signedVersion),
-                mexcV3BatchPlacedOrderRequest,
+                mexcV3BatchPlacedOrderRequestTestList,
                 receiveWindow: receiveWindow,
                 weight: 1,
                 ct: ct).ConfigureAwait(false);
-            if (result)
-                _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.OrderId.ToString(CultureInfo.InvariantCulture) });
-            return result;
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderTestAsync(
-            string mexcV3BatchPlacedOrderTestRequest,
-            int? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            WebCallResult<MexcV3PlacedOrderResponse>? result = await _baseClient.BatchPlaceOrderTestInternal(
-                uri: _baseClient.GetUrl(batchOrdersEndpoint, api, signedVersion),
-                mexcV3BatchPlacedOrderTestRequest,
-                receiveWindow: receiveWindow,
-                weight: 1,
-                ct: ct).ConfigureAwait(false);
-            if (result)
-                _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.OrderId.ToString(CultureInfo.InvariantCulture) });
+            //if (result)
+                //_baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.OrderId.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -185,7 +169,7 @@ namespace Mexc.Net.Clients.SpotApi
             {
                 { "symbol", symbol }
             };
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<IEnumerable<MexcV3CancelOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3CancelOrderResponse>>(
                 uri: _baseClient.GetUrl(cancelAllOpenOrderEndpoint, api, signedVersion),
@@ -214,7 +198,7 @@ namespace Mexc.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<MexcV3GetOrderResponse>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3GetOrderResponse>(
                 uri: _baseClient.GetUrl(queryOrderEndpoint, api, signedVersion),
@@ -233,23 +217,30 @@ namespace Mexc.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IMexcV3GetOrderResponse>>> GetOpenOrdersAsync(
-            string? symbol = null, 
+            IEnumerable<string> symbolList, 
             int? receiveWindow = null, 
             CancellationToken ct = default)
         {
-            if (string.IsNullOrWhiteSpace(symbol))
+            string symbolString = string.Empty;
+            if (object.Equals(symbolList,null))
                 throw new ArgumentException("Either symbol must be sent");
-            if (!string.IsNullOrWhiteSpace(symbol) && symbol.Split(',').Length > 5)
+            if (!object.Equals(symbolList, null) && Enumerable.Count<string>(symbolList) > 5)
                 throw new ArgumentException("The number of transaction symbols cannot be greater than 5");
-            foreach (var item in symbol.Split(','))
+            
+            int i = Enumerable.Count<string>(symbolList);
+            foreach (var item in symbolList)
             {
+                i--;
                 item?.ValidateMexcSymbol();
+                symbolString += item;
+                if (i != 0)
+                    symbolString += ",";
             }
 
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("symbol", symbol);
-
+            parameters.AddOptionalParameter("symbol", symbolString);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            
             WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(openOrdersEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
@@ -257,7 +248,7 @@ namespace Mexc.Net.Clients.SpotApi
                 parameters: parameters,
                 signed: true,
                 postPosition: HttpMethodParameterPosition.InUri,
-                weight: symbol == null ? 40 : 3).ConfigureAwait(false);
+                weight: Enumerable.Count<string>(symbolList) > 5 ? 40 : 3).ConfigureAwait(false);
             return response.As<IEnumerable<IMexcV3GetOrderResponse>>(response.Data);
         }
 
@@ -278,7 +269,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(allOrdersEndpoint, api, signedVersion),
@@ -299,7 +290,7 @@ namespace Mexc.Net.Clients.SpotApi
         public async Task<WebCallResult<MexcV3AccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             Dictionary<string, object>? parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<MexcV3AccountInfo>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3AccountInfo>(
                 uri: _baseClient.GetUrl(accountInfoEndpoint, "api", "3"),
@@ -337,7 +328,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<IEnumerable<MexcV3Trade>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3Trade>>(
                 uri: _baseClient.GetUrl(myTradesEndpoint, api, signedVersion),

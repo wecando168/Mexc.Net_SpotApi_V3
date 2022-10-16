@@ -144,7 +144,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);            
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3PlacedTestOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
@@ -191,69 +191,35 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3PlacedOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, weight: weight).ConfigureAwait(false);
         }
 
-        internal async Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderInternal(
-            Uri uri, 
-            MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest,
-            int? receiveWindow = null,
-            int weight = 1,
-            CancellationToken ct = default
-            )
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            List<PlacedOrder> placedOrderList = new List<PlacedOrder>();
-            foreach (PlacedOrder? item in mexcV3BatchPlacedOrderRequest.placedOrderList)
-            {
-                item.Symbol.ValidateMexcSymbol();
-                if (item.QuoteQuantity != null && item.Type != SpotOrderType.Market)
-                    throw new ArgumentException("quoteQuantity is only valid for market orders");
-                if (item.Quantity == null && item.QuoteQuantity == null || item.Quantity != null && item.QuoteQuantity != null)
-                    throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
-
-                var rulesCheck = await CheckTradeRules(item.Symbol, item.Quantity, item.QuoteQuantity, item.Price, item.Type, CancellationToken.None).ConfigureAwait(false);
-                if (!rulesCheck.Passed)
-                {
-                    _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                    return new WebCallResult<MexcV3PlacedOrderResponse>(new ArgumentError(rulesCheck.ErrorMessage!));
-                }
-                item.Quantity = rulesCheck.Quantity;
-                item.Price = rulesCheck.Price;
-                item.QuoteQuantity = rulesCheck.QuoteQuantity;
-
-                Dictionary<string, object>? parameter = new Dictionary<string, object>
-                {
-                    { "symbol", item.Symbol },
-                    { "side", JsonConvert.SerializeObject(item.Side, new OrderSideConverter(false)) },
-                    { "type", JsonConvert.SerializeObject(item.Type, new SpotOrderTypeConverter(false)) }
-                };
-                parameter.AddOptionalParameter("quantity", item.Quantity?.ToString(CultureInfo.InvariantCulture));
-                parameter.AddOptionalParameter("quoteOrderQty", item.QuoteQuantity?.ToString(CultureInfo.InvariantCulture));
-                parameter.AddOptionalParameter("newClientOrderId", item.ClientOrderId);
-                parameter.AddOptionalParameter("price", item.Price?.ToString(CultureInfo.InvariantCulture));
-                parameter.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-                placedOrderList.Add((PlacedOrder)item);
-                //placedOrderList.Append((PlacedOrder)item);
-                //placedOrderList.Append(parameter);                
-            }
-            parameters.AddOptionalParameter("batchOrders", placedOrderList);
-            return await MexcV3SendRequestInternal<MexcV3PlacedOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri,ArrayParametersSerialization.Array, weight: weight).ConfigureAwait(false);
-        }
-
-        internal async Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderTestInternal(
+        internal async Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderInternal(
             Uri uri,
-            string mexcV3BatchPlacedOrderRequestTestList,
+            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestList,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default
             )
         {
+            string mexcV3BatchPlacedOrderRequests = string.Empty;
+            int i = Enumerable.Count<MexcV3BatchPlacedOrderRequest>(mexcV3BatchPlacedOrderRequestList);
+            foreach (var item in mexcV3BatchPlacedOrderRequestList)
+            {
+                i--;
+                mexcV3BatchPlacedOrderRequests += $"{JsonConvert.SerializeObject(item)}";
+                if (i != 0)
+                {
+                    mexcV3BatchPlacedOrderRequests += ",";
+                }
+            }
+            mexcV3BatchPlacedOrderRequests = $"[{mexcV3BatchPlacedOrderRequests}]";
+
             Dictionary<string, object> parameters = new Dictionary<string, object>();            
-            parameters.AddOptionalParameter("batchOrders", mexcV3BatchPlacedOrderRequestTestList);
-            var response = await MexcV3SendRequestInternal<MexcV3PlacedOrderResponse>(
+            parameters.AddOptionalParameter("batchOrders", mexcV3BatchPlacedOrderRequests);
+            var response = await MexcV3SendRequestInternal<IEnumerable<MexcV3BatchPlacedOrderResponse>>(
                 uri: uri, 
                 method: HttpMethod.Post, 
                 cancellationToken: ct, 
@@ -287,7 +253,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3CancelOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
@@ -312,7 +278,7 @@ namespace Mexc.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3GetOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
@@ -333,7 +299,7 @@ namespace Mexc.Net.Clients.SpotApi
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("tradeMode", tradeMode);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3MarginTradeModeResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
@@ -366,7 +332,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quoteOrderQty", quoteOrderQty);
             parameters.AddOptionalParameter("price", price);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await MexcV3SendRequestInternal<MexcV3MarginPlacedOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
@@ -479,6 +445,7 @@ namespace Mexc.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
+            
             WebCallResult<T> result = await _baseClient.MexcV3SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == 700003 && Options.SpotApiOptions.AutoTimestamp)
             {

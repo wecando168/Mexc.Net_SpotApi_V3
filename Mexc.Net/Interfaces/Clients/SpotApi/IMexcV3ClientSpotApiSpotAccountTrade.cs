@@ -76,28 +76,12 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#batch-orders" /></para>
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b" /></para>
         /// </summary>
-        /// <param name="mexcV3BatchPlacedOrderRequest">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</param>
+        /// <param name="mexcV3BatchPlacedOrderRequestList">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</param>
         /// <param name="receiveWindow">时间窗</param>
         /// <param name="ct">CancellationToken</param>
         /// <returns></returns>
-        Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderAsync(
-            MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest,
-            int? receiveWindow = null,
-            CancellationToken ct = default);
-
-        /// <summary>
-        /// Batch Orders Test
-        /// 批量下单测试 (TRADE)
-        /// <para><a href="POST https://api.mexc.com/api/v3/batchOrders" /></para>
-        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#batch-orders" /></para>
-        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b" /></para>
-        /// </summary>
-        /// <param name="mexcV3BatchPlacedOrderTestRequest">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</param>
-        /// <param name="receiveWindow">时间窗</param>
-        /// <param name="ct">CancellationToken</param>
-        /// <returns></returns>
-        Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderTestAsync(
-            string mexcV3BatchPlacedOrderTestRequest,
+        Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderAsync(
+            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestList,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -167,11 +151,11 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#current-open-orders" /></para>
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#066ca582c9" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="symbols">The symbolList to get open orders for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
-        Task<WebCallResult<IEnumerable<IMexcV3GetOrderResponse>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<IMexcV3GetOrderResponse>>> GetOpenOrdersAsync(IEnumerable<string> symbols, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// All Orders

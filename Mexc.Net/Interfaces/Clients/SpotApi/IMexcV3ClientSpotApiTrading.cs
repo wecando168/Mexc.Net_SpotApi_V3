@@ -70,21 +70,6 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Places Batch Orders
-        /// 批量下单 (TRADE)
-        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#batch-orders" /></para>
-        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b" /></para>
-        /// </summary>
-        /// <param name="mexcV3BatchPlacedOrderRequest">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</param>
-        /// <param name="receiveWindow">时间窗</param>
-        /// <param name="ct">CancellationToken</param>
-        /// <returns></returns>
-        Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderAsync(
-            MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest,
-            int? receiveWindow = null,
-            CancellationToken ct = default);
-
-        /// <summary>
-        /// Places Batch Orders
         /// 批量下单测试 (TRADE)
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#batch-orders" /></para>
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b" /></para>
@@ -93,7 +78,7 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">时间窗</param>
         /// <param name="ct">CancellationToken</param>
         /// <returns></returns>
-        Task<WebCallResult<MexcV3PlacedOrderResponse>> BatchPlaceOrderTestAsync(
+        Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderTestAsync(
             string mexcV3BatchPlacedOrderTestRequest,
             int? receiveWindow = null,
             CancellationToken ct = default);
@@ -208,7 +193,6 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
-        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The quantity of the symbol</param>
         /// <param name="quoteQuantity">The quantity of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
