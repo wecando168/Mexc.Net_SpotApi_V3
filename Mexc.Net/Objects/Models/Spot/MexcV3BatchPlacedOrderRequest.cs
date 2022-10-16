@@ -11,17 +11,6 @@ namespace Mexc.Net.Objects.Models.Spot
     public class MexcV3BatchPlacedOrderRequest
     {
         /// <summary>
-        /// 批量下单的列表
-        /// </summary>
-        public IEnumerable<PlacedOrder>? placedOrderList { get; set; }
-    }
-
-    /// <summary>
-    /// 下单的订单参数
-    /// </summary>
-    public class PlacedOrder
-    {
-        /// <summary>
         /// 交易代码
         /// </summary>
         [JsonProperty("symbol")]
