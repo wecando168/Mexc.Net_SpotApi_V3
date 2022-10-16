@@ -144,7 +144,7 @@ namespace Mexc.Net.UnitTests
             // act
             try
             {
-                await client.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(symbol);
+                await client.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(new string[] { symbol });
             }
             catch (Exception)
             {

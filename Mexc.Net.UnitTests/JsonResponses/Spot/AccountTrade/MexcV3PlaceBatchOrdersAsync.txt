@@ -1,1 +1,16 @@
-{}
+[
+    {
+        "symbol": "USDCUSDT",
+        "orderId": "730e3d77f75e45159ca32a7036536628",
+        "orderListId": -1,
+        "clientOrderId": "BatchOrderA1665943112770",
+        "transactTime": 1665943682002
+    },
+    {
+        "symbol": "USDCUSDT",
+        "orderId": "95a697e4338d46bd9c21bcaaf8c45c1f",
+        "orderListId": -1,
+        "clientOrderId": "BatchOrderB1665943112771",
+        "transactTime": 1665943682006
+    }
+]

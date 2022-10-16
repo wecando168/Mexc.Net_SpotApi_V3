@@ -79,7 +79,6 @@ namespace Mexc.Net.UnitTests
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
                     { "MexcV3PlaceTestOrderAsync", "data" },
                     { "MexcV3PlaceOrderAsync", "data" },
-                    { "MexcV3PlaceBatchOrdersAsync", "data" },
                     { "MexcV3CancelOrderAsync", "data" },
                     { "MexcV3CancelOpenOrdersAsync", "data" },
                     { "MexcV3GetOrderAsync", "data" },
@@ -87,6 +86,7 @@ namespace Mexc.Net.UnitTests
                     { "MexcV3GetOrdersAsync", "data" },
                     { "MexcV3GetAccountInfoAsync", "data" },
                     { "MexcV3GetUserTradesAsync", "data" },
+                    { "MexcV3PlaceBatchOrdersAsync", "data" },
                     { "MexcV3GetCurrentAvgPriceAsync", "data" }
                 },
                 parametersToSetNull: new[] { "limit" });
