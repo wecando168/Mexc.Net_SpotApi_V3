@@ -35,7 +35,7 @@ namespace Mexc.Net.Clients.SpotApi
         public async Task<WebCallResult<IEnumerable<MexcV3UserAsset>>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3UserAsset>>(
                 uri: _baseClient.GetUrl(userCoinsEndpoint, "api", "3"), 

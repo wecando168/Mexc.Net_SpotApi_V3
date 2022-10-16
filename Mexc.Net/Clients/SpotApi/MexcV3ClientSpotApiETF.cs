@@ -48,7 +48,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(allOrdersEndpoint, api, signedVersion),
@@ -76,7 +76,7 @@ namespace Mexc.Net.Clients.SpotApi
 
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("receiveWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             WebCallResult<MexcV3EtfInfoResponse> ? response = await _baseClient.MexcV3SendRequestInternal<MexcV3EtfInfoResponse>(
                 uri: _baseClient.GetUrl(etfInfoEndpoint, api, signedVersion),

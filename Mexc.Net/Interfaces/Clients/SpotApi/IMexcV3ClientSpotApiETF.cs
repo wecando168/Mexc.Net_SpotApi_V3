@@ -43,10 +43,11 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2" /></para>
         /// </summary>
         /// <param name="symbol">ETF symbol</param>
+        /// <param name="receiveWindow">Receive window</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
         Task<WebCallResult<MexcV3EtfInfoResponse>> GetETFInfoAsync( 
-            string symbol = null,
+            string? symbol = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
     }
