@@ -9,8 +9,6 @@ using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
 using Mexc.Net.Objects.Models.Spot.Socket;
 using Mexc.Net.Interfaces;
-using CryptoExchange.Net.Logging;
-using Mexc.Net.Objects.Models.Spot;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string accessKey = "Use Your Exchange Access Key";
@@ -56,14 +54,14 @@ if (read == "R" || read == "r")
     }
 
     //二、母子账户接口-未开发
-    Console.WriteLine($"Press enter to test sub account endpoints, Press [S] to skip current test!");
+    Console.WriteLine($"Press enter to test subAccount endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
         //await TestSubAccountEndpoints();
     }
 
-    //三、现货账户和交易接口测试-已完成
+    //三、现货账户和交易接口测试-已完成（批量下单除外）
     Console.WriteLine($"Press enter to test spot account trade endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
@@ -632,7 +630,7 @@ static async Task TestSubAccountEndpoints()
     }
 }
 
-//现货账户和交易接口测试-已完成
+//现货账户和交易接口测试-已完成（批量下单除外）
 static async Task TestSpotAccountTradeEndpoints()
 {
     using (var mexcV3RestClient = new MexcV3RestClient())
@@ -680,7 +678,7 @@ static async Task TestSpotAccountTradeEndpoints()
             orderId: string.Empty,                              //被撤销订单编号
             origClientOrderId: $"{testClientOrderId}",          //被撤销订单的用户自定义单号
             newClientOrderId: string.Empty,                     //撤销操作的用户自定义单号
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}"
             );
         #endregion
@@ -689,7 +687,7 @@ static async Task TestSpotAccountTradeEndpoints()
         Console.WriteLine("撤销单一交易对所有订单");
         await HandleRequest("Cancel a single symbol all pending orders", () => mexcV3RestClient.SpotApi.SpotAccountTrade.CancelOpenOrdersAsync(
             symbol: "USDCUSDT",                                   //交易代码
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => string.Join("", result.Select(s => $"\r\n{s.OrderId.ToString().PadRight(14, ' ')} 状态:{s.Status.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
@@ -700,31 +698,16 @@ static async Task TestSpotAccountTradeEndpoints()
             symbol: "USDCUSDT",                                 //交易代码
             orderId: string.Empty,                              //要查询的订单编号
             origClientOrderId: $"{testClientOrderId}",          //要查询的订单的用户自定义单号
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}"
             );
         #endregion
-
+        
         #region 查询当前挂单
-        Console.WriteLine("查询指定交易代码当前挂单");
-        await HandleRequest("Get one symbol open orders on a symbol", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(
-            symbols: new string[] { "FIL36USDT" },
-            receiveWindow: 60000),
-            result => string.Join("", result.Select(s => $"\r\n{s.OrderId.ToString().PadRight(14, ' ')} 状态:{s.Status.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
-            );
-
-        Console.WriteLine("查询多个交易代码当前挂单（最多5个）");
-        List<string> symbolList = new List<string>();
-        symbolList.Add("FILUSDT");
-        symbolList.Add("FIL36USDT");
-        symbolList.Add("ETHWUSDT");
-        symbolList.Add("BTCUSDT");
-        symbolList.Add("USDCUSDT");
-        IEnumerable<string> symbols = symbolList;
-
-        await HandleRequest("Get symbols orders on a symbol", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(
-            symbols: symbols,
-            receiveWindow: 60000),
+        Console.WriteLine("查询当前挂单");
+        await HandleRequest("Get all open orders on a symbol", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(
+            symbol: "PIGUSDT",
+            receiveWindow: 60000), 
             result => string.Join("", result.Select(s => $"\r\n{s.OrderId.ToString().PadRight(14, ' ')} 状态:{s.Status.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
@@ -736,10 +719,10 @@ static async Task TestSpotAccountTradeEndpoints()
             startTime: DateTime.UtcNow.AddDays(-6),
             endTime: DateTime.UtcNow,
             limit: 500,
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => string.Join("", result.Select(s => $"\r\n" +
             $"OrderId:{s.OrderId.ToString().PadRight(14, ' ')}" +
-            $"Status:{(s.Status != null ? s.Status.ToString().PadRight(10, ' ') : string.Empty)}").Take(50)) +
+            $"Status:{(s.Status != null ? s.Status.ToString().PadRight(10, ' ') : string.Empty)}").Take(50)) + 
             "\r\n......"
             );
         #endregion
@@ -747,11 +730,11 @@ static async Task TestSpotAccountTradeEndpoints()
         #region 账户信息
         Console.WriteLine("账户信息");
         await HandleRequest("Account Information", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetAccountInfoAsync(
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => $"{(object.Equals(result.ErrorCode, null) ? $"\r\nAccount Type:{result.AccountType} Can Trade:{result.CanTrade} Can Withdraw:{result.CanWithdraw} Can Deposit:{result.CanDeposit} Update Time{result.UpdateTime}" : $"{result.Permissions.Select(s => (",", s.ToString()))}")}"
             );
         #endregion
-
+        
         #region 获取账户指定交易对的成交历史
         Console.WriteLine("获取账户指定交易对的成交历史");
         await HandleRequest("Account Trade List", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetUserTradesAsync(
@@ -760,43 +743,87 @@ static async Task TestSpotAccountTradeEndpoints()
             startTime: DateTime.UtcNow.AddDays(-6),
             endTime: DateTime.UtcNow,
             limit: 500,
-            receiveWindow: 60000),
+            receiveWindow: 60000), 
             result => string.Join("", result.Select(s => $"\r\nSymbol:{s.Symbol.ToString().PadRight(12, ' ')}{s.OrderId.ToString().PadRight(33, ' ')}Price:{s.Price.ToString().PadRight(14, ' ')}Quantity:{s.Quantity.ToString().PadRight(11, ' ')}QuoteQuantity:{s.QuoteQuantity.ToString().PadRight(14, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
 
+        #region 未实现功能
         #region 现货批量下单（支持单次批量下20单,限频2次/秒）
-        Console.WriteLine("支持单次批量下20单,限频2次/秒");
-        MexcV3BatchPlacedOrderRequest testA = new MexcV3BatchPlacedOrderRequest
-        {
-            Symbol = "USDCUSDT",
-            Side = OrderSide.Buy,
-            Type = SpotOrderType.Limit,
-            Quantity = 6,
-            QuoteQuantity = null,
-            Price = (decimal)0.9,
-            ClientOrderId = $"BatchOrderA{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        };
-        MexcV3BatchPlacedOrderRequest testB = new MexcV3BatchPlacedOrderRequest
-        {
-            Symbol = "USDCUSDT",
-            Side = OrderSide.Buy,
-            Type = SpotOrderType.Limit,
-            Quantity = 7,
-            QuoteQuantity = null,
-            Price = (decimal)0.8,
-            ClientOrderId = $"BatchOrderB{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        };
-        List<MexcV3BatchPlacedOrderRequest> list = new List<MexcV3BatchPlacedOrderRequest>();
-        list.Add(testA);
-        list.Add(testB);
-        IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestTestList= (IEnumerable<MexcV3BatchPlacedOrderRequest>)list;
+        //测试结构1
+        //PlacedOrder placedOrderA = new PlacedOrder
+        //{
+        //    Symbol = "USDCUSDT",
+        //    Side = OrderSide.Buy,
+        //    Type = SpotOrderType.Limit,
+        //    Quantity = 12,
+        //    QuoteQuantity = null,
+        //    Price = (decimal)0.9,
+        //    ClientOrderId = $"BatchOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        //};
+        //PlacedOrder placedOrderB = new PlacedOrder
+        //{
+        //    Symbol = "USDCUSDT",
+        //    Side = OrderSide.Buy,
+        //    Type = SpotOrderType.Limit,
+        //    Quantity = 10,
+        //    QuoteQuantity = null,
+        //    Price = (decimal)0.8,
+        //    ClientOrderId = $"BatchOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        //};
 
-        await HandleRequest("Batch Orders Test", () => mexcV3RestClient.SpotApi.SpotAccountTrade.BatchPlaceOrderAsync(
-            mexcV3BatchPlacedOrderRequestTestList,
-            receiveWindow: 60000),
-            result => string.Join("", result.Select(s => $"\r\n用户自定义单号:{s.ClientOrderId.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
-            );
+
+        //MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest = new MexcV3BatchPlacedOrderRequest();
+        //mexcV3BatchPlacedOrderRequest.placedOrderList = new List<PlacedOrder>() { placedOrderA, placedOrderB };
+
+        //await HandleRequest("Batch Orders", () => client.SpotApi.SpotAccountTrade.BatchPlaceOrderAsync(
+        //    mexcV3BatchPlacedOrderRequest,
+        //    receiveWindow: 60000), result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}");
+
+        //测试结构2
+        //MexcV3BatchPlacedOrderRequestTest testA = new MexcV3BatchPlacedOrderRequestTest
+        //{
+        //    Symbol = "USDCUSDT",
+        //    Side = OrderSide.Buy,
+        //    Type = SpotOrderType.Limit,
+        //    Quantity = 12,
+        //    QuoteQuantity = null,
+        //    Price = (decimal)0.9,
+        //    ClientOrderId = $"BatchOrderA{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        //};
+        //MexcV3BatchPlacedOrderRequestTest testB = new MexcV3BatchPlacedOrderRequestTest
+        //{
+        //    Symbol = "USDCUSDT",
+        //    Side = OrderSide.Buy,
+        //    Type = SpotOrderType.Limit,
+        //    Quantity = 10,
+        //    QuoteQuantity = null,
+        //    Price = (decimal)0.8,
+        //    ClientOrderId = $"BatchOrderB{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        //};
+        //IEnumerable<MexcV3BatchPlacedOrderRequestTest> items = new List<MexcV3BatchPlacedOrderRequestTest>();
+        //List<MexcV3BatchPlacedOrderRequestTest> list = items.ToList();
+        //list.Add(testA);
+        //list.Add(testB);
+        //items = (IEnumerable<MexcV3BatchPlacedOrderRequestTest>)list;
+
+        //string? jsontestA = JsonConvert.SerializeObject(testA);
+        //string? jsontestB = JsonConvert.SerializeObject(testB);
+        //List<string> strings = new List<string>();
+        //strings.Add(jsontestA);
+        //strings.Add(jsontestB);
+        //string stringTemp = $"[{jsontestA},{jsontestB}]";
+        //Dictionary<string, string>? values = JsonConvert.DeserializeObject<Dictionary<string, string>>(stringTemp);
+
+        //mexcV3BatchPlacedOrderRequestTestList.Concat(new[] { testA, testB });
+        //mexcV3BatchPlacedOrderRequestTestList.Append(testA);
+        //mexcV3BatchPlacedOrderRequestTestList.Append(testB);
+
+        //await HandleRequest("Batch Orders Test", () => client.SpotApi.SpotAccountTrade.BatchPlaceOrderTestAsync(
+        //    stringTemp,
+        //    receiveWindow: 60000),
+        //    result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}");
+        #endregion
         #endregion
     }
 }
@@ -963,8 +990,7 @@ static async Task HandleRequest<T>(string action, Func<Task<WebCallResult<T>>> r
         }
         else
         {
-            Log _log = new("HandleRequest");
-            _log.Write(LogLevel.Error, $"Failed to retrieve data: {result.Error}");            
+            Console.WriteLine($"Failed to retrieve data: {result.Error}");            
         }
         Console.WriteLine();
     }
