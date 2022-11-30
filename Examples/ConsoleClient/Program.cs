@@ -95,7 +95,7 @@ if (read == "R" || read == "r")
         await TestMarginAccountTradeEndpoints();
     }
 
-    //七、现货账户WebSocket账户Listen Key维护接口测试-已完成
+    //七、现货账户WebSocket账户Listen Key维护接口测试-已完成(测试通过）
     Console.WriteLine($"Press enter to test market data endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
