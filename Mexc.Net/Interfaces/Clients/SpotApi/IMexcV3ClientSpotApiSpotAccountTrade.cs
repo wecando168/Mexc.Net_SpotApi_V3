@@ -81,7 +81,7 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">CancellationToken</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderAsync(
-            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestList,
+            IEnumerable<MexcV3SubmitOrder> mexcV3BatchPlacedOrderRequestList,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
