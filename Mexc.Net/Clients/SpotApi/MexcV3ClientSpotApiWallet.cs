@@ -37,7 +37,7 @@ namespace Mexc.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3UserAsset>>(
+            var response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3UserAsset>>(
                 uri: _baseClient.GetUrl(userCoinsEndpoint, "api", "3"), 
                 method: HttpMethod.Get, 
                 cancellationToken: ct, 

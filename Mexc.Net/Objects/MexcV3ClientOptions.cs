@@ -9,53 +9,73 @@ using CryptoExchange.Net.Objects;
 namespace Mexc.Net.Objects
 {
     /// <summary>
-    /// Options for the Mexc client
+    /// MexcV3 client options
     /// </summary>
-    public class MexcV3ClientOptions : BaseRestClientOptions
+    public class MexcV3ClientOptions : ClientOptions
     {
         /// <summary>
-        /// Default options for the spot client
+        /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
+        /// </summary>
+        public TradeRulesBehaviour TradeRulesBehaviour { get; set; } = TradeRulesBehaviour.None;
+
+        /// <summary>
+        /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+        /// 交易规则应多久更新一次（仅在 TradeRulesBehaviour != None 时使用)
+        /// </summary>
+        public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
+
+        /// <summary>
+        /// Default options for the client
         /// </summary>
         public static MexcV3ClientOptions Default { get; set; } = new MexcV3ClientOptions();
+
+        /// <summary>
+        /// Whether public requests should be signed if ApiCredentials are provided. Needed for accurate rate limiting.
+        /// </summary>
+        public bool SignPublicRequests { get; set; } = false;
 
         /// <summary>
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
-        private MexcV3ApiClientOptions _spotApiOptions = new MexcV3ApiClientOptions(MexcV3ApiAddresses.Default.RestClientAddress)
+        /// <summary>
+        /// 现货Api设置
+        /// </summary>
+        private RestApiClientOptions _spotApiOptions = new RestApiClientOptions(MexcV3ApiAddresses.Default.SpotRestClientAddress)
         {
-            AutoTimestamp = true,
             RateLimiters = new List<IRateLimiter>
-                {
-                    new RateLimiter()
-                        .AddPartialEndpointLimit("/api/", 1200, TimeSpan.FromMinutes(1))
-                        .AddPartialEndpointLimit("/sapi/", 12000, TimeSpan.FromMinutes(1))
-                        .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
-                }
+            {
+                new RateLimiter()
+                .AddPartialEndpointLimit("/api/", 1200, TimeSpan.FromMinutes(1))
+                .AddPartialEndpointLimit("/sapi/", 12000, TimeSpan.FromMinutes(1))
+                .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
+            }
+        };
+
+        /// <summary>
+        /// 合约Api设置
+        /// </summary>
+        private RestApiClientOptions _futuresApiOptions = new RestApiClientOptions(MexcV3ApiAddresses.Default.FuturesRestClientAddress)
+        {
         };
 
         /// <summary>
         /// Spot API options
         /// </summary>
-        public MexcV3ApiClientOptions SpotApiOptions
+        public RestApiClientOptions SpotApiOptions
         {
             get => _spotApiOptions;
-            set => _spotApiOptions = new MexcV3ApiClientOptions(_spotApiOptions, value);
+            set => _spotApiOptions = new RestApiClientOptions(_spotApiOptions, value);
         }
-
-        private MexcV3ApiClientOptions _futuresApiOptions = new MexcV3ApiClientOptions(MexcV3ApiAddresses.Default.FuturesRestClientAddress!)
-        {
-            AutoTimestamp = true
-        };
 
         /// <summary>
         /// Usd futures API options
         /// </summary>
-        public MexcV3ApiClientOptions FuturesApiOptions
+        public RestApiClientOptions FuturesApiOptions
         {
             get => _futuresApiOptions;
-            set => _futuresApiOptions = new MexcV3ApiClientOptions(_futuresApiOptions, value);
+            set => _futuresApiOptions = new RestApiClientOptions(_futuresApiOptions, value);
         }
 
         /// <summary>
@@ -74,54 +94,51 @@ namespace Mexc.Net.Objects
             if (baseOn == null)
                 return;
 
-            ReceiveWindow = baseOn.ReceiveWindow;
-
-            _spotApiOptions = new MexcV3ApiClientOptions(baseOn.SpotApiOptions, null);
-            _futuresApiOptions = new MexcV3ApiClientOptions(baseOn.FuturesApiOptions, null);
+            SignPublicRequests = baseOn.SignPublicRequests;
+            _spotApiOptions = new RestApiClientOptions(baseOn.SpotApiOptions, null);
+            _futuresApiOptions = new RestApiClientOptions(baseOn.FuturesApiOptions, null);
         }
     }
 
     /// <summary>
-    /// Mexc socket client options
+    /// MexcV3 socket client options
     /// </summary>
-    public class MexcV3SocketClientOptions : BaseSocketClientOptions
+    public class MexcV3SocketClientOptions : ClientOptions
     {
         /// <summary>
         /// Default options for the spot client
         /// </summary>
-        public static MexcV3SocketClientOptions Default { get; set; } = new MexcV3SocketClientOptions()
+        public static MexcV3SocketClientOptions Default { get; set; } = new MexcV3SocketClientOptions();
+
+
+        private MexcV3SocketApiClientOptions _spotStreamsOptions = new MexcV3SocketApiClientOptions
+            (MexcV3ApiAddresses.Default.SpotPublicSocketClientAddress, MexcV3ApiAddresses.Default.SpotPrivaeSocketClientAddress)
         {
             SocketSubscriptionsCombineTarget = 10
         };
 
-        private ApiClientOptions _spotStreamsOptions = new ApiClientOptions(MexcV3ApiAddresses.Default.SpotPublicSocketClientAddress);
         /// <summary>
         /// Spot public streams options
         /// </summary>
-        public ApiClientOptions SpotStreamsOptions
+        public MexcV3SocketApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
-            set => _spotStreamsOptions = new ApiClientOptions(_spotStreamsOptions, value);
-        }
+            set => _spotStreamsOptions = new MexcV3SocketApiClientOptions(_spotStreamsOptions, value);
+        }        
 
-        private ApiClientOptions _spotUserStreamsOptions = new ApiClientOptions(MexcV3ApiAddresses.Default.SpotUserSocketClientAddress);
-        /// <summary>
-        /// Spot private streams options
-        /// </summary>
-        public ApiClientOptions SpotUserStreamsOptions
+        private MexcV3SocketApiClientOptions _futuresStreamsOptions = new MexcV3SocketApiClientOptions
+            (MexcV3ApiAddresses.Default.FuturesPublicSocketClientAddress!, MexcV3ApiAddresses.Default.FuturesPrivateSocketClientAddress!)
         {
-            get => _spotUserStreamsOptions;
-            set => _spotUserStreamsOptions = new ApiClientOptions(_spotUserStreamsOptions, value);
-        }
+            SocketSubscriptionsCombineTarget = 10
+        };
 
-        private ApiClientOptions _futuresStreamsOptions = new ApiClientOptions(MexcV3ApiAddresses.Default.FuturesSocketClientAddress!);
         /// <summary>
         /// Usd futures streams options
         /// </summary>
-        public ApiClientOptions FuturesStreamsOptions
+        public MexcV3SocketApiClientOptions FuturesStreamsOptions
         {
             get => _futuresStreamsOptions;
-            set => _futuresStreamsOptions = new ApiClientOptions(_futuresStreamsOptions, value);
+            set => _futuresStreamsOptions = new MexcV3SocketApiClientOptions(_futuresStreamsOptions, value);
         }
 
         /// <summary>
@@ -140,13 +157,13 @@ namespace Mexc.Net.Objects
             if (baseOn == null)
                 return;
 
-            _spotStreamsOptions = new ApiClientOptions(baseOn.SpotStreamsOptions, null);
-            _futuresStreamsOptions = new ApiClientOptions(baseOn.FuturesStreamsOptions, null);
+            _spotStreamsOptions = new MexcV3SocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            _futuresStreamsOptions = new MexcV3SocketApiClientOptions(baseOn.FuturesStreamsOptions, null);
         }
     }
 
     /// <summary>
-    /// Mexc API client options
+    /// MexcV3 api client options
     /// </summary>
     public class MexcV3ApiClientOptions : RestApiClientOptions
     {
@@ -159,8 +176,10 @@ namespace Mexc.Net.Objects
         /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
         /// </summary>
         public TradeRulesBehaviour TradeRulesBehaviour { get; set; } = TradeRulesBehaviour.None;
+
         /// <summary>
         /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+        /// 交易规则应多久更新一次（仅在 TradeRulesBehaviour != None 时使用)
         /// </summary>
         public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
 
@@ -189,6 +208,112 @@ namespace Mexc.Net.Objects
             TimestampOffset = newValues?.TimestampOffset ?? baseOn.TimestampOffset;
             TradeRulesBehaviour = newValues?.TradeRulesBehaviour ?? baseOn.TradeRulesBehaviour;
             TradeRulesUpdateInterval = newValues?.TradeRulesUpdateInterval ?? baseOn.TradeRulesUpdateInterval;
+        }
+    }
+
+    /// <summary>
+    /// MexcV3 socket api client options
+    /// </summary>
+    public class MexcV3SocketApiClientOptions : SocketApiClientOptions
+    {
+        /// <summary>
+        /// The base address for the authenticated websocket
+        /// </summary>
+        public string BaseAddressAuthenticated { get; set; }
+
+        /// <summary>
+        /// The base address for the market by price websocket
+        /// </summary>
+        public string BaseAddressInrementalOrderBook { get; set; }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public MexcV3SocketApiClientOptions()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        {
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        /// <param name="baseAddressAuthenticated"></param>
+        internal MexcV3SocketApiClientOptions(string baseAddress, string baseAddressAuthenticated) : base(baseAddress)
+        {
+            BaseAddressAuthenticated = baseAddressAuthenticated;
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        /// <param name="baseAddressAuthenticated"></param>
+        /// <param name="baseAddressIncrementalOrderBook"></param>
+        internal MexcV3SocketApiClientOptions(string baseAddress, string baseAddressAuthenticated, string baseAddressIncrementalOrderBook) : base(baseAddress)
+        {
+            BaseAddressAuthenticated = baseAddressAuthenticated;
+            BaseAddressInrementalOrderBook = baseAddressIncrementalOrderBook;
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn"></param>
+        /// <param name="newValues"></param>
+        internal MexcV3SocketApiClientOptions(MexcV3SocketApiClientOptions baseOn, MexcV3SocketApiClientOptions? newValues) : base(baseOn, newValues)
+        {
+            BaseAddressAuthenticated = newValues?.BaseAddressAuthenticated ?? baseOn.BaseAddressAuthenticated;
+            BaseAddressInrementalOrderBook = newValues?.BaseAddressInrementalOrderBook ?? baseOn.BaseAddressInrementalOrderBook;
+        }
+    }
+
+    /// <summary>
+    /// Socket API client options
+    /// </summary>
+    public class MexcV3SocketFuturesApiClientOptions : SocketApiClientOptions
+    {
+        /// <summary>
+        /// The base address for the authenticated websocket
+        /// </summary>
+        public string BaseAddressAuthenticated { get; set; }
+
+        /// <summary>
+        /// The base address for the index api
+        /// </summary>
+        public string BaseAddressIndex { get; set; }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public MexcV3SocketFuturesApiClientOptions()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        {
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        /// <param name="baseAddressAuthenticated"></param>
+        /// <param name="baseAddressIndex"></param>
+        internal MexcV3SocketFuturesApiClientOptions(string baseAddress, string baseAddressAuthenticated, string baseAddressIndex) : base(baseAddress)
+        {
+            BaseAddressAuthenticated = baseAddressAuthenticated;
+            BaseAddressIndex = baseAddressIndex;
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn"></param>
+        /// <param name="newValues"></param>
+        internal MexcV3SocketFuturesApiClientOptions(MexcV3SocketFuturesApiClientOptions baseOn, MexcV3SocketFuturesApiClientOptions? newValues) : base(baseOn, newValues)
+        {
+            BaseAddressAuthenticated = newValues?.BaseAddressAuthenticated ?? baseOn.BaseAddressAuthenticated;
+            BaseAddressIndex = newValues?.BaseAddressIndex ?? baseOn.BaseAddressIndex;
         }
     }
 

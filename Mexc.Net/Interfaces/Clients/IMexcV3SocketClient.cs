@@ -1,5 +1,6 @@
 ﻿using Mexc.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Interfaces;
+using Mexc.Net.Interfaces.Clients.Futures;
 
 namespace Mexc.Net.Interfaces.Clients
 {
@@ -11,6 +12,21 @@ namespace Mexc.Net.Interfaces.Clients
         /// <summary>
         /// Spot streams
         /// </summary>
-        IMexcV3SocketClientSpotStreams SpotPublicStreams { get; }
+        public IMexcV3SocketClientSpotStreams SpotPublicStreams { get; }
+
+        /// <summary>
+        /// Spot streams
+        /// </summary>
+        public IMexcV3SocketClientSpotStreams SpotPrivateStreams { get; }
+
+        /// <summary>
+        /// Futures streams
+        /// </summary>
+        public IMexcV3SocketClientFuturesStreams FuturesPublicStreams { get; }
+
+        /// <summary>
+        /// Futures streams
+        /// </summary>
+        public IMexcV3SocketClientFuturesStreams FuturesPrivateStreams { get; }
     }
 }

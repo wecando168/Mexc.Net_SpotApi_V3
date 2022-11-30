@@ -63,20 +63,11 @@ namespace Mexc.Net.UnitTests.TestImplementations
             return self == to;
         }
 
-        public static IMexcV3SocketClient CreateSocketClient(IWebsocket socket, MexcV3SocketClientOptions options = null)
-        {
-            MexcV3SocketClient client;
-            client = options != null ? new MexcV3SocketClient(options) : new MexcV3SocketClient();
-            client.SocketFactory = Mock.Of<IWebsocketFactory>();
-            Mock.Get(client.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
-            return client;
-        }
-
         public static IMexcV3RestClient CreateClient(MexcV3ClientOptions options = null)
         {
             IMexcV3RestClient client;
             client = options != null ? new MexcV3RestClient(options) : new MexcV3RestClient();
-            client.RequestFactory = Mock.Of<IRequestFactory>();
+            client.SpotApi.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
@@ -94,7 +85,16 @@ namespace Mexc.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static void SetResponse(BaseRestClient client, string responseData)
+        public static IMexcV3SocketClient CreateSocketClient(IWebsocket socket, MexcV3SocketClientOptions options = null)
+        {
+            IMexcV3SocketClient client;
+            client = options != null ? new MexcV3SocketClient(options) : new MexcV3SocketClient();
+            client.SpotPublicStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
+            Mock.Get(client.SpotPublicStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
+            return client;
+        }
+
+        public static void SetResponse(IMexcV3RestClient client, string responseData)
         {
             byte[] expectedBytes = Encoding.UTF8.GetBytes(responseData);
             MemoryStream responseStream = new MemoryStream();
@@ -110,7 +110,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
-            Mock<IRequestFactory> factory = Mock.Get(client.RequestFactory);
+            Mock<IRequestFactory> factory = Mock.Get(client.SpotApi.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
@@ -131,7 +131,7 @@ namespace Mexc.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
-            Mock<IRequestFactory> factory = Mock.Get(client.RequestFactory);
+            Mock<IRequestFactory> factory = Mock.Get(client.SpotApi.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }

@@ -32,7 +32,7 @@ namespace Mexc.Net.Clients.GeneralApi
 
         #region constructor/destructor
 
-        internal MexcV3ClientGeneralApi(Log log, MexcV3RestClient baseClient, MexcV3ClientOptions options) : base(options, options.SpotApiOptions)
+        internal MexcV3ClientGeneralApi(Log log, MexcV3RestClient baseClient, MexcV3ClientOptions options) : base(log, options, options.SpotApiOptions)
         {
             Options = options;
             _baseClient = baseClient;
@@ -61,11 +61,23 @@ namespace Mexc.Net.Clients.GeneralApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<WebCallResult<T>> MexcV3SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+        internal async Task<WebCallResult<T>> MexcV3SendRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await _baseClient.MexcV3SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(
+                uri: uri,
+                method: method,
+                cancellationToken: cancellationToken,
+                parameters: parameters,
+                signed: signed,
+                parameterPosition: postPosition,
+                arraySerialization: arraySerialization,
+                requestWeight: weight,
+                deserializer: null,
+                additionalHeaders: null,
+                ignoreRatelimit: ignoreRateLimit
+                ).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -73,6 +85,7 @@ namespace Mexc.Net.Clients.GeneralApi
             }
             return result;
         }
+
 
 
         /// <inheritdoc />

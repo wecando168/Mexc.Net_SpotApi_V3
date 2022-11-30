@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using CryptoExchange.Net.Logging;
 using Microsoft.Extensions.Logging;
+using Mexc.Net.Interfaces.Clients.Futures;
 
 namespace Mexc.Net.Clients
 {
@@ -34,6 +35,13 @@ namespace Mexc.Net.Clients
         /// <inheritdoc />
         public IMexcV3SocketClientSpotStreams SpotPrivateStreams { get; set; }
 
+        /// <inheritdoc />
+        public IMexcV3SocketClientFuturesStreams FuturesPublicStreams { get; set; }
+
+        /// <inheritdoc />
+        /// <inheritdoc />
+        public IMexcV3SocketClientFuturesStreams FuturesPrivateStreams { get; set; }
+
         #endregion
 
         #region constructor/destructor
@@ -51,11 +59,10 @@ namespace Mexc.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public MexcV3SocketClient(MexcV3SocketClientOptions options) : base("Mexc", options)
         {
-            SetDataInterpreter((data) => string.Empty, null);
-            RateLimitPerSocketPerSecond = 4;
-
-            SpotPublicStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, this, options));
-            SpotPrivateStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, this, options));
+            SpotPublicStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, options));
+            SpotPrivateStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, options));
+            FuturesPublicStreams = AddApiClient(new MexcV3SocketClientFuturesStreams (log, options));
+            FuturesPrivateStreams = AddApiClient(new MexcV3SocketClientFuturesStreams(log, options));
         }
         #endregion 
 
@@ -70,171 +77,40 @@ namespace Mexc.Net.Clients
             MexcV3SocketClientOptions.Default = options;
         }
 
-        internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
-            => Deserialize<T>(obj, serializer, requestId);
+        //internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
+        //    => Deserialize<T>(obj, serializer, requestId);
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketApiClient apiClient, string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
-        {
-            MexcV3SocketRequest? request = new MexcV3SocketRequest
-            {
-                Method = "SUBSCRIPTION",
-                Params = topics.ToArray(),
-            };
+        //internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketApiClient apiClient, string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
+        //{
+        //    MexcV3SocketRequest? request = new MexcV3SocketRequest
+        //    {
+        //        Method = "SUBSCRIPTION",
+        //        Params = topics.ToArray(),
+        //    };
 
-            Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath("ws"), request, null, false, onData, ct);
-            if(response.Status != TaskStatus.WaitingForActivation)
-            {
-                _log.Write(LogLevel.Trace, response.Status.ToString());
-            }
-            return response;
-        }
+        //    Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath("ws"), request, null, false, onData, ct);
+        //    if(response.Status != TaskStatus.WaitingForActivation)
+        //    {
+        //        _log.Write(LogLevel.Trace, response.Status.ToString());
+        //    }
+        //    return response;
+        //}
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketApiClient apiClient, string url, IEnumerable<string> topics, string listenKey, Action<DataEvent<T>> onData, CancellationToken ct)
-        {
-            MexcV3SocketRequest? request = new MexcV3SocketRequest
-            {
-                Method = "SUBSCRIPTION",
-                Params = topics.ToArray(),
-            };
+        //internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketApiClient apiClient, string url, IEnumerable<string> topics, string listenKey, Action<DataEvent<T>> onData, CancellationToken ct)
+        //{
+        //    MexcV3SocketRequest? request = new MexcV3SocketRequest
+        //    {
+        //        Method = "SUBSCRIPTION",
+        //        Params = topics.ToArray(),
+        //    };
 
-            Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath($"ws?listenKey={listenKey}"), request, null, false, onData, ct);
-            if (response.Status != TaskStatus.WaitingForActivation)
-            {
-                _log.Write(LogLevel.Trace, response.Status.ToString());
-            }
-            return response;
-        }
-
-        /// <inheritdoc />
-        protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
-        {
-            callResult = null;
-            if (message.Type != JTokenType.Object)
-                return false;
-
-            JToken? id = message["id"];
-            if (id == null)
-                return false;
-
-            JToken? code = message["code"];
-            if (code == null)
-                return false;
-
-            JToken? msg = message["msg"];
-            if (msg == null)
-                return false;
-
-            MexcV3SocketRequest bRequest = (MexcV3SocketRequest)request;
-            if (msg.ToString().IndexOf("no subscription success", StringComparison.OrdinalIgnoreCase) != -1)
-            {
-                _log.Write(LogLevel.Error, $"Socket Subscription error : {msg}\r\n");
-                return false;
-            }
-
-            JToken? result = message["msg"];
-            string[] resultItemArray = result.ToString().Split(',');
-            bool successedSubscrip = false;
-            foreach (string? requestStream in bRequest.Params)
-            {
-                foreach (string? responceItem in resultItemArray)
-                {
-                    if (requestStream == responceItem)
-                    {
-                        _log.Write(LogLevel.Trace, $"Socket Subscription {requestStream} completed\r\n");
-                        successedSubscrip = true;                                             
-                    }
-                }
-            }
-            if (successedSubscrip)
-            {
-                callResult = new CallResult<object>(new object());
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            var error = message["error"];
-            if (error == null)
-            {
-                callResult = new CallResult<object>(new ServerError("Unknown error: " + message));
-                return true;
-            }
-
-            callResult = new CallResult<object>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
-            return true;
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
-        {
-            if (message.Type != JTokenType.Object)
-                return false;
-
-            MexcV3SocketRequest? bRequest = (MexcV3SocketRequest)request;
-            var stream = message["c"];
-            if (stream == null)
-                return false;
-
-            return bRequest.Params.Contains(stream.ToString());
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
-        {
-            return true;
-        }
-
-        /// <inheritdoc />
-        protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection s)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscription)
-        {
-            var topics = ((MexcV3SocketRequest)subscription.Request!).Params;
-            var unsub = new MexcV3SocketRequest
-            {
-                Method = "UNSUBSCRIPTION",
-                Params = topics
-            };
-            var result = false;
-
-            if (!connection.Connected)
-                return true;
-
-            await connection.SendAndWaitAsync(unsub, ClientOptions.SocketResponseTimeout, data =>
-            {
-                if (data.Type != JTokenType.Object)
-                    return false;
-
-                var id = data["id"];
-                if (id == null)
-                    return false;
-
-                //if ((int)id != unsub.Id)
-                //    return false;
-
-                var result = data["result"];
-                if (result?.Type == JTokenType.Null)
-                {
-                    result = true;
-                    return true;
-                }
-
-                return true;
-            }).ConfigureAwait(false);
-            return result;
-        }
+        //    Task<CallResult<UpdateSubscription>>? response = SubscribeAsync(apiClient, url.AppendPath($"ws?listenKey={listenKey}"), request, null, false, onData, ct);
+        //    if (response.Status != TaskStatus.WaitingForActivation)
+        //    {
+        //        _log.Write(LogLevel.Trace, response.Status.ToString());
+        //    }
+        //    return response;
+        //}
         #endregion
     }
 }
