@@ -21,6 +21,7 @@ using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Mexc.Net.Objects.Models.Spot.Margin;
 using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace Mexc.Net.Clients.SpotApi
 {
@@ -216,27 +217,28 @@ namespace Mexc.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderInternal(
             Uri uri,
-            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestList,
+            IEnumerable<MexcV3SubmitOrder> MexcV3SubmitOrderList,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default
             )
         {
-            string mexcV3BatchPlacedOrderRequests = string.Empty;
-            int i = Enumerable.Count<MexcV3BatchPlacedOrderRequest>(mexcV3BatchPlacedOrderRequestList);
-            foreach (var item in mexcV3BatchPlacedOrderRequestList)
+            //将要批量提交的每一个订单转换成Json的序列化对象，存入列表
+            List<string> mexcV3SubmitOrderJsonList = new List<string>();
+            foreach (var item in MexcV3SubmitOrderList)
             {
-                i--;
-                mexcV3BatchPlacedOrderRequests += $"{JsonConvert.SerializeObject(item)}";
-                if (i != 0)
-                {
-                    mexcV3BatchPlacedOrderRequests += ",";
-                }
+                mexcV3SubmitOrderJsonList.Add($"{JsonConvert.SerializeObject(item)}");
             }
-            mexcV3BatchPlacedOrderRequests = $"[{mexcV3BatchPlacedOrderRequests}]";
+            //批量下单请求的字符串由Json序列化的订单字符串以“,”分隔拼接而成(注意最外层加入“[]”）
+            string mexcV3BatchPlacedOrderRequest = $"[{string.Join(",", mexcV3SubmitOrderJsonList)}]";
+
+            //提交参数转换为Url编码
+            //使用 System.Net.WebUtility.UrlEncode 方法可以得到大写的 %2F（抹茶要求使用大写）
+            //使用 System.Web.HttpUtility.UrlEncode 方法得到的是小写的 %2f
+            //mexcV3BatchPlacedOrderRequest = WebUtility.UrlEncode(mexcV3BatchPlacedOrderRequest);
 
             Dictionary<string, object> parameters = new Dictionary<string, object>();            
-            parameters.AddOptionalParameter("batchOrders", mexcV3BatchPlacedOrderRequests);
+            parameters.AddOptionalParameter("batchOrders", mexcV3BatchPlacedOrderRequest);
             var response = await MexcV3SendRequest<IEnumerable<MexcV3BatchPlacedOrderResponse>>(
                 uri: uri, 
                 method: HttpMethod.Post, 
@@ -473,7 +475,7 @@ namespace Mexc.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {            
-            WebCallResult<T> result = await SendRequestAsync<T>(
+            WebCallResult<T> result = await MexcV3SendRequestAsync<T>(
                 uri:uri,
                 method:method,
                 cancellationToken: cancellationToken,
@@ -511,7 +513,7 @@ namespace Mexc.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await SendRequestAsync<T>(
+            var result = await MexcV3SendRequestAsync<T>(
                 uri: uri,
                 method: method,
                 cancellationToken: cancellationToken,

@@ -36,7 +36,7 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get ETF info
-        /// 获取杠杆ETF基础信息
+        /// 获取指定杠杆币种ETF基础信息
         /// Get information on ETFs, such as symbol, netValue and fund fee.
         /// 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
         /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#get-etf-info" /></para>
@@ -48,6 +48,21 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
         /// <returns>True if successful ping, false if no response</returns>
         Task<WebCallResult<MexcV3EtfInfoResponse>> GetETFInfoAsync( 
             string? symbol = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get ETF info
+        /// 获取所有杠杆币种ETF基础信息
+        /// Get information on ETFs, such as symbol, netValue and fund fee.
+        /// 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
+        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#get-etf-info" /></para>
+        /// <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">Receive window</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>True if successful ping, false if no response</returns>
+        Task<WebCallResult<IEnumerable<MexcV3EtfInfoResponse>>> GetAllETFInfoAsync(
             int? receiveWindow = null,
             CancellationToken ct = default);
     }

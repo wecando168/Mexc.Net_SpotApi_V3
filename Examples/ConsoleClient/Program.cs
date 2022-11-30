@@ -9,10 +9,12 @@ using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
 using Mexc.Net.Objects.Models.Spot.Socket;
 using Mexc.Net.Interfaces;
+using Mexc.Net.Objects.Models.Spot;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string accessKey = "Use Your Exchange Access Key";
 const string secretKey = "Use Your Exchange SecretKey Key";
+
 string listenKey = string.Empty;
 #endregion
 
@@ -61,7 +63,7 @@ if (read == "R" || read == "r")
         //await TestSubAccountEndpoints();
     }
 
-    //三、现货账户和交易接口测试-已完成（批量下单除外）
+    //三、现货账户和交易接口测试-已完成(测试通过）
     Console.WriteLine($"Press enter to test spot account trade endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
@@ -77,7 +79,7 @@ if (read == "R" || read == "r")
         await TestWalletEndpoints();
     }
 
-    //五、ETF接口测试-开发中...
+    //五、ETF接口测试-已完成(测试通过）
     Console.WriteLine($"Press enter to test ETF endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
@@ -630,7 +632,7 @@ static async Task TestSubAccountEndpoints()
     }
 }
 
-//现货账户和交易接口测试-已完成（批量下单除外）
+//现货账户和交易接口测试-已完成
 static async Task TestSpotAccountTradeEndpoints()
 {
     using (var mexcV3RestClient = new MexcV3RestClient())
@@ -678,7 +680,7 @@ static async Task TestSpotAccountTradeEndpoints()
             orderId: string.Empty,                              //被撤销订单编号
             origClientOrderId: $"{testClientOrderId}",          //被撤销订单的用户自定义单号
             newClientOrderId: string.Empty,                     //撤销操作的用户自定义单号
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}"
             );
         #endregion
@@ -687,7 +689,7 @@ static async Task TestSpotAccountTradeEndpoints()
         Console.WriteLine("撤销单一交易对所有订单");
         await HandleRequest("Cancel a single symbol all pending orders", () => mexcV3RestClient.SpotApi.SpotAccountTrade.CancelOpenOrdersAsync(
             symbol: "USDCUSDT",                                   //交易代码
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => string.Join("", result.Select(s => $"\r\n{s.OrderId.ToString().PadRight(14, ' ')} 状态:{s.Status.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
@@ -698,16 +700,17 @@ static async Task TestSpotAccountTradeEndpoints()
             symbol: "USDCUSDT",                                 //交易代码
             orderId: string.Empty,                              //要查询的订单编号
             origClientOrderId: $"{testClientOrderId}",          //要查询的订单的用户自定义单号
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}"
             );
         #endregion
-        
+
         #region 查询当前挂单
         Console.WriteLine("查询当前挂单");
+        IEnumerable<string> symbols = new List<string> { "PIGUSDT" };
         await HandleRequest("Get all open orders on a symbol", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetOpenOrdersAsync(
-            symbol: "PIGUSDT",
-            receiveWindow: 60000), 
+            symbols: symbols,
+            receiveWindow: 60000),
             result => string.Join("", result.Select(s => $"\r\n{s.OrderId.ToString().PadRight(14, ' ')} 状态:{s.Status.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
@@ -719,10 +722,10 @@ static async Task TestSpotAccountTradeEndpoints()
             startTime: DateTime.UtcNow.AddDays(-6),
             endTime: DateTime.UtcNow,
             limit: 500,
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => string.Join("", result.Select(s => $"\r\n" +
             $"OrderId:{s.OrderId.ToString().PadRight(14, ' ')}" +
-            $"Status:{(s.Status != null ? s.Status.ToString().PadRight(10, ' ') : string.Empty)}").Take(50)) + 
+            $"Status:{(s.Status != null ? s.Status.ToString().PadRight(10, ' ') : string.Empty)}").Take(50)) +
             "\r\n......"
             );
         #endregion
@@ -730,11 +733,11 @@ static async Task TestSpotAccountTradeEndpoints()
         #region 账户信息
         Console.WriteLine("账户信息");
         await HandleRequest("Account Information", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetAccountInfoAsync(
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => $"{(object.Equals(result.ErrorCode, null) ? $"\r\nAccount Type:{result.AccountType} Can Trade:{result.CanTrade} Can Withdraw:{result.CanWithdraw} Can Deposit:{result.CanDeposit} Update Time{result.UpdateTime}" : $"{result.Permissions.Select(s => (",", s.ToString()))}")}"
             );
         #endregion
-        
+
         #region 获取账户指定交易对的成交历史
         Console.WriteLine("获取账户指定交易对的成交历史");
         await HandleRequest("Account Trade List", () => mexcV3RestClient.SpotApi.SpotAccountTrade.GetUserTradesAsync(
@@ -743,87 +746,42 @@ static async Task TestSpotAccountTradeEndpoints()
             startTime: DateTime.UtcNow.AddDays(-6),
             endTime: DateTime.UtcNow,
             limit: 500,
-            receiveWindow: 60000), 
+            receiveWindow: 60000),
             result => string.Join("", result.Select(s => $"\r\nSymbol:{s.Symbol.ToString().PadRight(12, ' ')}{s.OrderId.ToString().PadRight(33, ' ')}Price:{s.Price.ToString().PadRight(14, ' ')}Quantity:{s.Quantity.ToString().PadRight(11, ' ')}QuoteQuantity:{s.QuoteQuantity.ToString().PadRight(14, ' ')}").Take(50)) + "\r\n......"
             );
         #endregion
 
-        #region 未实现功能
         #region 现货批量下单（支持单次批量下20单,限频2次/秒）
-        //测试结构1
-        //PlacedOrder placedOrderA = new PlacedOrder
-        //{
-        //    Symbol = "USDCUSDT",
-        //    Side = OrderSide.Buy,
-        //    Type = SpotOrderType.Limit,
-        //    Quantity = 12,
-        //    QuoteQuantity = null,
-        //    Price = (decimal)0.9,
-        //    ClientOrderId = $"BatchOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        //};
-        //PlacedOrder placedOrderB = new PlacedOrder
-        //{
-        //    Symbol = "USDCUSDT",
-        //    Side = OrderSide.Buy,
-        //    Type = SpotOrderType.Limit,
-        //    Quantity = 10,
-        //    QuoteQuantity = null,
-        //    Price = (decimal)0.8,
-        //    ClientOrderId = $"BatchOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        //};
+        MexcV3SubmitOrder testA = new MexcV3SubmitOrder
+        {
+            Symbol = "USDCUSDT",
+            Side = OrderSide.Buy,
+            Type = SpotOrderType.Limit,
+            Quantity = 6,
+            QuoteQuantity = null,
+            Price = (decimal)0.9,
+            ClientOrderId = $"BatchOrderA{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        };
+        MexcV3SubmitOrder testB = new MexcV3SubmitOrder
+        {
+            Symbol = "USDCUSDT",
+            Side = OrderSide.Buy,
+            Type = SpotOrderType.Limit,
+            Quantity = 7,
+            QuoteQuantity = null,
+            Price = (decimal)0.8,
+            ClientOrderId = $"BatchOrderB{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
+        };
+        List<MexcV3SubmitOrder> list = new List<MexcV3SubmitOrder>();
+        list.Add(testA);
+        list.Add(testB);
+        IEnumerable<MexcV3SubmitOrder> mexcV3BatchPlacedOrderRequestTestList = (IEnumerable<MexcV3SubmitOrder>)list;
 
-
-        //MexcV3BatchPlacedOrderRequest mexcV3BatchPlacedOrderRequest = new MexcV3BatchPlacedOrderRequest();
-        //mexcV3BatchPlacedOrderRequest.placedOrderList = new List<PlacedOrder>() { placedOrderA, placedOrderB };
-
-        //await HandleRequest("Batch Orders", () => client.SpotApi.SpotAccountTrade.BatchPlaceOrderAsync(
-        //    mexcV3BatchPlacedOrderRequest,
-        //    receiveWindow: 60000), result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}");
-
-        //测试结构2
-        //MexcV3BatchPlacedOrderRequestTest testA = new MexcV3BatchPlacedOrderRequestTest
-        //{
-        //    Symbol = "USDCUSDT",
-        //    Side = OrderSide.Buy,
-        //    Type = SpotOrderType.Limit,
-        //    Quantity = 12,
-        //    QuoteQuantity = null,
-        //    Price = (decimal)0.9,
-        //    ClientOrderId = $"BatchOrderA{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        //};
-        //MexcV3BatchPlacedOrderRequestTest testB = new MexcV3BatchPlacedOrderRequestTest
-        //{
-        //    Symbol = "USDCUSDT",
-        //    Side = OrderSide.Buy,
-        //    Type = SpotOrderType.Limit,
-        //    Quantity = 10,
-        //    QuoteQuantity = null,
-        //    Price = (decimal)0.8,
-        //    ClientOrderId = $"BatchOrderB{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}"
-        //};
-        //IEnumerable<MexcV3BatchPlacedOrderRequestTest> items = new List<MexcV3BatchPlacedOrderRequestTest>();
-        //List<MexcV3BatchPlacedOrderRequestTest> list = items.ToList();
-        //list.Add(testA);
-        //list.Add(testB);
-        //items = (IEnumerable<MexcV3BatchPlacedOrderRequestTest>)list;
-
-        //string? jsontestA = JsonConvert.SerializeObject(testA);
-        //string? jsontestB = JsonConvert.SerializeObject(testB);
-        //List<string> strings = new List<string>();
-        //strings.Add(jsontestA);
-        //strings.Add(jsontestB);
-        //string stringTemp = $"[{jsontestA},{jsontestB}]";
-        //Dictionary<string, string>? values = JsonConvert.DeserializeObject<Dictionary<string, string>>(stringTemp);
-
-        //mexcV3BatchPlacedOrderRequestTestList.Concat(new[] { testA, testB });
-        //mexcV3BatchPlacedOrderRequestTestList.Append(testA);
-        //mexcV3BatchPlacedOrderRequestTestList.Append(testB);
-
-        //await HandleRequest("Batch Orders Test", () => client.SpotApi.SpotAccountTrade.BatchPlaceOrderTestAsync(
-        //    stringTemp,
-        //    receiveWindow: 60000),
-        //    result => $"{(object.Equals(result.ErrorCode, null) ? $"{result.Symbol} {result.OrderId} {result.Quantity} {result.Price}" : $"{result.ErrorCode} {result.ErrorMessage}")}");
-        #endregion
+        await HandleRequest("Batch Orders Test", () => mexcV3RestClient.SpotApi.SpotAccountTrade.BatchPlaceOrderAsync(
+            mexcV3BatchPlacedOrderRequestTestList,
+            receiveWindow: 60000),
+            result => string.Join("", result.Select(s => $"\r\n用户自定义单号:{s.ClientOrderId.ToString().PadRight(10, ' ')}").Take(50)) + "\r\n......"
+            );
         #endregion
     }
 }
@@ -849,7 +807,7 @@ static async Task TestWalletEndpoints()
     }
 }
 
-//ETF接口测试-开发中...
+//ETF接口测试-已完成
 static async Task TestETFEndpoints()
 {
     using (var mexcV3RestClient = new MexcV3RestClient())
@@ -861,18 +819,22 @@ static async Task TestETFEndpoints()
         //client.SetApiCredentials(apiCredentials);
         #endregion
 
-        #region 获取杠杆ETF基础信息(测试返回OK，但是接收返回值有问题，不知道啥情况啊！！！)
-        Console.WriteLine("获取杠杆ETF基础信息");
+        #region 获取指定杠杆币种ETF基础信息
+        Console.WriteLine("获取指定杠杆币种ETF基础信息");
         await HandleRequest("ETF Info", () => mexcV3RestClient.SpotApi.ExchangeTradedFunds.GetETFInfoAsync(
-            //symbol: "OP3SUSDT",
-            //receiveWindow: 60000
+            symbol: "BTC3LUSDT",
+            receiveWindow: 60000
             ),
-            result => string.Join(", ", result.Data.Select(s => $"\r\n")));
-        //result => string.Join(", ", result.Select(s => $"\r\n" +
-        //    $"ETF Symbol:{(string.IsNullOrWhiteSpace(s.Symbol) ? string.Empty : s.Symbol).PadRight(12, ' ')}" +
-        //    $"Net Value:{(string.IsNullOrWhiteSpace(s.NetValue.ToString()) ? string.Empty : s.NetValue.ToString()).PadRight(12, ' ')}" +
-        //    $"Fee Rate:{(string.IsNullOrWhiteSpace(s.FeeRate.ToString()) ? string.Empty : s.FeeRate.ToString()).PadRight(12, ' ')}" +
-        //    $"Time Stamp:{s.Timestamp.ToString().PadRight(12, ' ')}").Take(10)) + "\r\netc......"
+            result => $"Symbol:{result.Symbol.PadRight(12, ' ')}NetValue:{result.NetValue.ToString().PadRight(33, ' ')}FeeRate:{result.FeeRate.ToString().PadRight(14, ' ')}Timestamp:{result.Timestamp.ToString().PadRight(11, ' ')}RealLeverage:{result.RealLeverage.ToString().PadRight(14, ' ')}");
+        #endregion
+
+        #region 获取所有杠杆币种ETF基础信息
+        Console.WriteLine("获取所有杠杆币种ETF基础信息");
+        await HandleRequest("ETF Info", () => mexcV3RestClient.SpotApi.ExchangeTradedFunds.GetAllETFInfoAsync(
+            receiveWindow: 60000
+            ),
+            result => string.Join("", result.Select(s => $"\r\nSymbol:{s.Symbol.PadRight(12, ' ')}NetValue:{s.NetValue.ToString().PadRight(33, ' ')}FeeRate:{s.FeeRate.ToString().PadRight(14, ' ')}Timestamp:{s.Timestamp.ToString().PadRight(11, ' ')}RealLeverage:{s.RealLeverage.ToString().PadRight(14, ' ')}").Take(50)) + "\r\n......"
+            );
         #endregion
     }
 }

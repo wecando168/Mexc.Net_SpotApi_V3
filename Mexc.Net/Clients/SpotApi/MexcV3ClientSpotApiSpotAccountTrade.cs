@@ -108,10 +108,10 @@ namespace Mexc.Net.Clients.SpotApi
 
         #endregion
 
-        #region 3.Batch Orders
+        #region 3.Batch Orders 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderAsync(
-            IEnumerable<MexcV3BatchPlacedOrderRequest> mexcV3BatchPlacedOrderRequestTestList,
+            IEnumerable<MexcV3SubmitOrder> mexcV3BatchPlacedOrderRequestTestList,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -125,7 +125,6 @@ namespace Mexc.Net.Clients.SpotApi
                 //_baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.OrderId.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
-
         #endregion
 
         #region 4.Cancel Order

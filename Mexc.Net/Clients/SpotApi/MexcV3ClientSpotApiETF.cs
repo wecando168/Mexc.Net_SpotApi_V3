@@ -83,7 +83,26 @@ namespace Mexc.Net.Clients.SpotApi
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
-                signed: true,
+                signed: false,
+                postPosition: HttpMethodParameterPosition.InUri,
+                weight: 10).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<MexcV3EtfInfoResponse>>> GetAllETFInfoAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            WebCallResult<IEnumerable<MexcV3EtfInfoResponse>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3EtfInfoResponse>>(
+                uri: _baseClient.GetUrl(etfInfoEndpoint, api, signedVersion),
+                method: HttpMethod.Get,
+                cancellationToken: ct,
+                parameters: parameters,
+                signed: false,
                 postPosition: HttpMethodParameterPosition.InUri,
                 weight: 10).ConfigureAwait(false);
             return response;

@@ -65,7 +65,7 @@ namespace Mexc.Net.Clients.GeneralApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await SendRequestAsync<T>(
+            var result = await MexcV3SendRequestAsync<T>(
                 uri: uri,
                 method: method,
                 cancellationToken: cancellationToken,
