@@ -20,14 +20,15 @@ using Mexc.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Mexc.Net.Objects.Models.Spot.Margin;
+using Newtonsoft.Json.Linq;
 
 namespace Mexc.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IMexcV3ClientSpotApi" />
     public class MexcV3ClientSpotApi : RestApiClient, IMexcV3ClientSpotApi, ISpotClient
     {
+
         #region fields 
-        private readonly MexcV3RestClient _baseClient;
         internal new readonly MexcV3ClientOptions Options;
 
         internal MexcV3ExchangeInfo? ExchangeInfo;
@@ -36,6 +37,7 @@ namespace Mexc.Net.Clients.SpotApi
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
 
         private readonly Log _log;
+
         #endregion
 
         #region Api clients
@@ -77,11 +79,11 @@ namespace Mexc.Net.Clients.SpotApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal MexcV3ClientSpotApi(Log log, MexcV3RestClient baseClient, MexcV3ClientOptions options) : base(options, options.SpotApiOptions)
+        internal MexcV3ClientSpotApi(Log log, MexcV3ClientOptions options) 
+            : base(log, options, options.SpotApiOptions)
         {
             Options = options;
             _log = log;
-            _baseClient = baseClient;
             
             MarketData = new MexcV3ClientSpotApiMarketData(log, this);
             SubAccount = new MexcV3ClientSpotApiSubAccount(log, this);
@@ -96,6 +98,21 @@ namespace Mexc.Net.Clients.SpotApi
             arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
         #endregion
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(JToken error)
+        {
+            if (!error.HasValues)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] == null && error["code"] == null)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] != null && error["code"] == null)
+                return new ServerError((string)error["msg"]!);
+
+            return new ServerError((int)error["code"]!, (string)error["msg"]!);
+        }
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
@@ -124,6 +141,7 @@ namespace Mexc.Net.Clients.SpotApi
                 throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
 
             var rulesCheck = await CheckTestTradeRules(symbol, quantity, quoteQuantity, price, type, ct).ConfigureAwait(false);
+            
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
@@ -146,7 +164,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);            
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3PlacedTestOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3PlacedTestOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<MexcV3PlacedOrderResponse>> PlaceOrderInternal(
@@ -193,7 +211,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3PlacedOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3PlacedOrderResponse>(uri, HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri, weight: weight).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<IEnumerable<MexcV3BatchPlacedOrderResponse>>> BatchPlaceOrderInternal(
@@ -219,7 +237,7 @@ namespace Mexc.Net.Clients.SpotApi
 
             Dictionary<string, object> parameters = new Dictionary<string, object>();            
             parameters.AddOptionalParameter("batchOrders", mexcV3BatchPlacedOrderRequests);
-            var response = await MexcV3SendRequestInternal<IEnumerable<MexcV3BatchPlacedOrderResponse>>(
+            var response = await MexcV3SendRequest<IEnumerable<MexcV3BatchPlacedOrderResponse>>(
                 uri: uri, 
                 method: HttpMethod.Post, 
                 cancellationToken: ct, 
@@ -255,7 +273,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3CancelOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3CancelOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<MexcV3GetOrderResponse>> GetOrderInternal(
@@ -280,7 +298,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3GetOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3GetOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<MexcV3MarginTradeModeResponse>> MarginTradeModeInternal(
@@ -301,7 +319,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("tradeMode", tradeMode);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3MarginTradeModeResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3MarginTradeModeResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<MexcV3MarginPlacedOrderResponse>> MarginPlacedOrderInternal(
@@ -334,7 +352,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await MexcV3SendRequestInternal<MexcV3MarginPlacedOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
+            return await MexcV3SendRequest<MexcV3MarginPlacedOrderResponse>(uri, HttpMethod.Delete, ct, parameters, true, HttpMethodParameterPosition.InUri, null, weight: weight).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -354,16 +372,26 @@ namespace Mexc.Net.Clients.SpotApi
             return new Uri(result.AppendPath(endpoint));
         }
 
+        /// <summary>
+        /// 效验下单参数
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="quantity"></param>
+        /// <param name="quoteQuantity"></param>
+        /// <param name="price"></param>
+        /// <param name="type"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         internal async Task<MexcV3TradeRuleResult> CheckTestTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, SpotOrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
 
-            if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
+            if (Options.TradeRulesBehaviour == TradeRulesBehaviour.None)
                 return MexcV3TradeRuleResult.CreateTestPassed(outputQuantity, outputQuoteQuantity, outputPrice);
 
-            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
+            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.TradeRulesUpdateInterval.TotalMinutes)
                 await MarketData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
@@ -392,16 +420,16 @@ namespace Mexc.Net.Clients.SpotApi
             var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
 
-            if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
+            if (Options.TradeRulesBehaviour == TradeRulesBehaviour.None)
                 return MexcV3TradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice);
 
             if (!object.Equals(ct, null))
             {
-                if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
+                if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.TradeRulesUpdateInterval.TotalMinutes)
                     await MarketData.GetExchangeInfoAsync((CancellationToken)ct).ConfigureAwait(false);
             }
 
-            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
+            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.TradeRulesUpdateInterval.TotalMinutes)
                 await MarketData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
@@ -441,12 +469,22 @@ namespace Mexc.Net.Clients.SpotApi
         /// <param name="weight">权重</param>
         /// <param name="ignoreRateLimit">是否忽略速率限制</param>
         /// <returns></returns>
-        internal async Task<WebCallResult<T>> MexcV3SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+        internal async Task<WebCallResult<T>> MexcV3SendRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
-        {
-            
-            WebCallResult<T> result = await _baseClient.MexcV3SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+        {            
+            WebCallResult<T> result = await SendRequestAsync<T>(
+                uri:uri,
+                method:method,
+                cancellationToken: cancellationToken,
+                parameters: parameters,
+                signed:signed,
+                parameterPosition: postPosition,
+                arraySerialization:arraySerialization,
+                requestWeight:weight,
+                deserializer:null,
+                additionalHeaders:null,
+                ignoreRatelimit:ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == 700003 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -469,11 +507,23 @@ namespace Mexc.Net.Clients.SpotApi
         /// <param name="weight">权重</param>
         /// <param name="ignoreRateLimit">是否忽略速率限制</param>
         /// <returns></returns>
-        internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+        internal async Task<WebCallResult<T>> SendRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(
+                uri: uri,
+                method: method,
+                cancellationToken: cancellationToken,
+                parameters: parameters,
+                signed: signed,
+                parameterPosition: postPosition,
+                arraySerialization: arraySerialization,
+                requestWeight: weight,
+                deserializer: null,
+                additionalHeaders: null,
+                ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false); 
+                      
             if (!result && result.Error!.Code == 700003 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");

@@ -12,6 +12,7 @@ using Mexc.Net.Interfaces.Clients.SpotApi;
 using Mexc.Net.Clients.SpotApi;
 using Mexc.Net.Clients.GeneralApi;
 using Mexc.Net.Interfaces.Clients.GeneralApi;
+using Mexc.Net.Interfaces.Clients.Futures;
 
 namespace Mexc.Net.Clients
 {
@@ -22,8 +23,12 @@ namespace Mexc.Net.Clients
 
         /// <inheritdoc />
         public IMexcV3ClientGeneralApi GeneralApi { get; }
+
         /// <inheritdoc />
         public IMexcV3ClientSpotApi SpotApi { get; }
+
+        /// <inheritdoc />
+        public IMexcClientFutresApi FutresApi { get; }
 
         #endregion
 
@@ -44,7 +49,7 @@ namespace Mexc.Net.Clients
         public MexcV3RestClient(MexcV3ClientOptions options) : base("Mexc", options)
         {
             GeneralApi = AddApiClient(new MexcV3ClientGeneralApi(log, this, options));
-            SpotApi = AddApiClient(new MexcV3ClientSpotApi(log, this, options));
+            SpotApi = AddApiClient(new MexcV3ClientSpotApi(log, options));
         }
         #endregion
 
@@ -56,36 +61,6 @@ namespace Mexc.Net.Clients
         public static void SetDefaultOptions(MexcV3ClientOptions options)
         {
             MexcV3ClientOptions.Default = options;
-        }
-
-        /// <inheritdoc />
-        protected override Error ParseErrorResponse(JToken error)
-        {
-            if (!error.HasValues)
-                return new ServerError(error.ToString());
-
-            if (error["msg"] == null && error["code"] == null)
-                return new ServerError(error.ToString());
-
-            if (error["msg"] != null && error["code"] == null)
-                return new ServerError((string)error["msg"]!);
-
-            return new ServerError((int)error["code"]!, (string)error["msg"]!);
-        }
-        
-        internal Task<WebCallResult<T>> MexcV3SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
-        {            
-            Task<WebCallResult<T>>? response = base.MexcV3SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight, ignoreRatelimit: ignoreRateLimit);
-            return response;
-        }
-
-        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
-        {
-            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight, ignoreRatelimit: ignoreRateLimit);
         }
     }
 }

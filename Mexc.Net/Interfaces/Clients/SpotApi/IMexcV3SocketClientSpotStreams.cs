@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mexc.Net.Objects.Models.Spot.Socket;
+using CryptoExchange.Net.Interfaces;
 
 namespace Mexc.Net.Interfaces.Clients.SpotApi
 {
@@ -13,7 +14,12 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
     /// Mexc Spot streams
     /// </summary>
     public interface IMexcV3SocketClientSpotStreams : IDisposable
-    {        
+    {
+        /// <summary>
+        /// The factory for creating sockets. Used for unit testing
+        /// </summary>
+        IWebsocketFactory SocketFactory { get; set; }
+
         /// <summary>
         /// 逐笔交易(实时) Trade Streams
         /// The Trade Streams push raw trade information; each trade has a unique buyer and seller.

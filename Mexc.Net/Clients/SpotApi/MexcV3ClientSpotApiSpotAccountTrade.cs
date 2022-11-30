@@ -171,7 +171,7 @@ namespace Mexc.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3CancelOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3CancelOrderResponse>>(
+            WebCallResult<IEnumerable<MexcV3CancelOrderResponse>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3CancelOrderResponse>>(
                 uri: _baseClient.GetUrl(cancelAllOpenOrderEndpoint, api, signedVersion),
                 method: HttpMethod.Delete,
                 cancellationToken: ct,
@@ -200,7 +200,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<MexcV3GetOrderResponse>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3GetOrderResponse>(
+            WebCallResult<MexcV3GetOrderResponse>? response = await _baseClient.MexcV3SendRequest<MexcV3GetOrderResponse>(
                 uri: _baseClient.GetUrl(queryOrderEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -241,7 +241,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("symbol", symbolString);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             
-            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
+            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(openOrdersEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -271,7 +271,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
+            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(allOrdersEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -292,7 +292,7 @@ namespace Mexc.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<MexcV3AccountInfo>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3AccountInfo>(
+            WebCallResult<MexcV3AccountInfo>? response = await _baseClient.MexcV3SendRequest<MexcV3AccountInfo>(
                 uri: _baseClient.GetUrl(accountInfoEndpoint, "api", "3"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -330,7 +330,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3Trade>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3Trade>>(
+            WebCallResult<IEnumerable<MexcV3Trade>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3Trade>>(
                 uri: _baseClient.GetUrl(myTradesEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,

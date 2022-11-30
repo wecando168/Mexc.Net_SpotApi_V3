@@ -50,7 +50,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3GetOrderResponse>>(
+            WebCallResult<IEnumerable<MexcV3GetOrderResponse>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3GetOrderResponse>>(
                 uri: _baseClient.GetUrl(allOrdersEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -78,7 +78,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<MexcV3EtfInfoResponse> ? response = await _baseClient.MexcV3SendRequestInternal<MexcV3EtfInfoResponse>(
+            WebCallResult<MexcV3EtfInfoResponse> ? response = await _baseClient.MexcV3SendRequest<MexcV3EtfInfoResponse>(
                 uri: _baseClient.GetUrl(etfInfoEndpoint, api, signedVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,

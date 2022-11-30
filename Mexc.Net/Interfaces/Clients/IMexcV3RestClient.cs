@@ -1,5 +1,6 @@
 ﻿using Mexc.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Interfaces;
+using Mexc.Net.Interfaces.Clients.Futures;
 
 namespace Mexc.Net.Interfaces.Clients
 {
@@ -12,5 +13,10 @@ namespace Mexc.Net.Interfaces.Clients
         /// Spot API endpoints
         /// </summary>
         IMexcV3ClientSpotApi SpotApi { get; }
+
+        /// <summary>
+        /// Usdt margin swap endpoints
+        /// </summary>
+        IMexcClientFutresApi FutresApi { get; }
     }
 }

@@ -8,7 +8,7 @@
         /// <summary>
         /// The address used by the MexcClient for the Spot API
         /// </summary>
-        public string RestClientAddress { get; set; } = string.Empty;
+        public string SpotRestClientAddress { get; set; } = string.Empty;
 
         /// <summary>
         /// The address used by the MexcSocketClient for the Spot Public API
@@ -18,27 +18,34 @@
         /// <summary>
         /// The address used by the MexcSocketClient for the Spot Private API
         /// </summary>
-        public string SpotUserSocketClientAddress { get; set; } = string.Empty;
+        public string SpotPrivaeSocketClientAddress { get; set; } = string.Empty;
 
         /// <summary>
         /// The address used by the MexcClient for the futures API
         /// </summary>
         public string? FuturesRestClientAddress { get; set; }
+
         /// <summary>
-        /// The address used by the MexcSocketClient for the futures API
+        /// The address used by the MexcSocketClient for the publice futures API
         /// </summary>
-        public string? FuturesSocketClientAddress { get; set; }
+        public string? FuturesPublicSocketClientAddress { get; set; }
+
+        /// <summary>
+        /// The address used by the MexcSocketClient for the private futures API
+        /// </summary>
+        public string? FuturesPrivateSocketClientAddress { get; set; }
 
         /// <summary>
         /// The default addresses to connect to the mexc.com API
         /// </summary>
         public static MexcV3ApiAddresses Default = new MexcV3ApiAddresses
         {
-            RestClientAddress = "https://api.mexc.com",
+            SpotRestClientAddress = "https://api.mexc.com",
             SpotPublicSocketClientAddress = "wss://wbs.mexc.com",
-            SpotUserSocketClientAddress = "wss://wbs.mexc.me",
+            SpotPrivaeSocketClientAddress = "wss://wbs.mexc.me",
             FuturesRestClientAddress = "https://contract.mexc.com",
-            FuturesSocketClientAddress = "wss://contract.mexc.com/ws",
+            FuturesPublicSocketClientAddress = "wss://contract.mexc.com/ws",
+            FuturesPrivateSocketClientAddress = "wss://contract.mexc.com/ws",
         };
 
         /// <summary>
@@ -46,11 +53,12 @@
         /// </summary>
         public static MexcV3ApiAddresses TestNet = new MexcV3ApiAddresses
         {
-            RestClientAddress = "",
+            SpotRestClientAddress = "",
             SpotPublicSocketClientAddress = "",
-            SpotUserSocketClientAddress = "",
+            SpotPrivaeSocketClientAddress = "",
             FuturesRestClientAddress = "",
-            FuturesSocketClientAddress = "",
+            FuturesPublicSocketClientAddress = "",
+            FuturesPrivateSocketClientAddress = "",
         };
     }
 }
