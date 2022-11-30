@@ -4,101 +4,28 @@
         <name>Mexc.Net</name>
     </assembly>
     <members>
-        <member name="T:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi">
-            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.GeneralApi.IMexcV3ClientGeneralApi" />
-        </member>
-        <member name="P:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.SubAccount">
+        <member name="T:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetServerTimestampAsync">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetTimeSyncInfo">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetTimeOffset">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
             <inheritdoc />
         </member>
-        <member name="T:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApiSubAccount">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
             <inheritdoc />
         </member>
-        <member name="T:Mexc.Net.Clients.MexcV3RestClient">
-            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.IMexcV3RestClient" />
-        </member>
-        <member name="P:Mexc.Net.Clients.MexcV3RestClient.GeneralApi">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="P:Mexc.Net.Clients.MexcV3RestClient.SpotApi">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3RestClient.#ctor">
-            <summary>
-            Create a new instance of MexcClient using the default options
-            使用默认选项创建 MexcClient 的新实例
-            </summary>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3RestClient.#ctor(Mexc.Net.Objects.MexcV3ClientOptions)">
-            <summary>
-            Create a new instance of MexcClient using provided options
-            使用提供的选项创建 MexcClient 的新实例
-            </summary>
-            <param name="options">The options to use for this client</param>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3RestClient.SetDefaultOptions(Mexc.Net.Objects.MexcV3ClientOptions)">
-            <summary>
-            Set the default options to be used when creating new clients
-            设置创建新客户端时要使用的默认选项
-            </summary>
-            <param name="options">Options to use as default</param>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3RestClient.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Mexc.Net.Clients.MexcV3SocketClient">
-            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient" />
-        </member>
-        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.SpotPublicStreams">
-            <inheritdoc />
-        </member>
-        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.SpotPrivateStreams">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.#ctor">
-            <summary>
-            Create a new instance of MexcSocketClientSpot with default options
-            </summary>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.#ctor(Mexc.Net.Objects.MexcV3SocketClientOptions)">
-            <summary>
-            Create a new instance of MexcSocketClientSpot using provided options
-            </summary>
-            <param name="options">The options to use for this client</param>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.SetDefaultOptions(Mexc.Net.Objects.MexcV3SocketClientOptions)">
-            <summary>
-            Set the default options to be used when creating new clients
-            </summary>
-            <param name="options">Options to use as default</param>
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
-            <inheritdoc />
-        </member>
-        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientFuturesStreams.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
             <inheritdoc />
         </member>
         <member name="T:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi">
@@ -141,6 +68,9 @@
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
         </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -153,7 +83,19 @@
             <param name="version">版本</param>
             <returns></returns>
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.MexcV3SendRequestInternal``1(System.Uri,System.Net.Http.HttpMethod,System.Threading.CancellationToken,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,System.Nullable{CryptoExchange.Net.Objects.HttpMethodParameterPosition},System.Nullable{CryptoExchange.Net.Objects.ArrayParametersSerialization},System.Int32,System.Boolean)">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.CheckTestTradeRules(System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Mexc.Net.Enums.SpotOrderType},System.Threading.CancellationToken)">
+            <summary>
+            效验下单参数
+            </summary>
+            <param name="symbol"></param>
+            <param name="quantity"></param>
+            <param name="quoteQuantity"></param>
+            <param name="price"></param>
+            <param name="type"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.MexcV3SendRequest``1(System.Uri,System.Net.Http.HttpMethod,System.Threading.CancellationToken,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,System.Nullable{CryptoExchange.Net.Objects.HttpMethodParameterPosition},System.Nullable{CryptoExchange.Net.Objects.ArrayParametersSerialization},System.Int32,System.Boolean)">
             <summary>
             内部发送请求(这个发送是不对参数进行字典排序的，抹茶交易系统的V3版API必须按照指定顺序，不能自己排序，一定要用这个！！！）
             </summary>
@@ -169,7 +111,7 @@
             <param name="ignoreRateLimit">是否忽略速率限制</param>
             <returns></returns>
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.SendRequestInternal``1(System.Uri,System.Net.Http.HttpMethod,System.Threading.CancellationToken,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,System.Nullable{CryptoExchange.Net.Objects.HttpMethodParameterPosition},System.Nullable{CryptoExchange.Net.Objects.ArrayParametersSerialization},System.Int32,System.Boolean)">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApi.SendRequest``1(System.Uri,System.Net.Http.HttpMethod,System.Threading.CancellationToken,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,System.Nullable{CryptoExchange.Net.Objects.HttpMethodParameterPosition},System.Nullable{CryptoExchange.Net.Objects.ArrayParametersSerialization},System.Int32,System.Boolean)">
             <summary>
             内部发送请求(这个发送是对参数进行默认字典排序的，抹茶交易系统的V3版API如果排序了，会报错，不要用！！！）
             </summary>
@@ -344,7 +286,7 @@
         <member name="T:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.#ctor(CryptoExchange.Net.Logging.Log,Mexc.Net.Clients.MexcV3SocketClient,Mexc.Net.Objects.MexcV3SocketClientOptions)">
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.#ctor(CryptoExchange.Net.Logging.Log,Mexc.Net.Objects.MexcV3SocketClientOptions)">
             <summary>
             Create a new public instance of MexcSocketClientSpot with default options
             </summary>
@@ -388,6 +330,110 @@
         <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToPrivateOrdersUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateOrders}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+            <inheritdoc />
+        </member>
+        <member name="T:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi">
+            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.GeneralApi.IMexcV3ClientGeneralApi" />
+        </member>
+        <member name="P:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.SubAccount">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApiSubAccount">
+            <inheritdoc />
+        </member>
+        <member name="T:Mexc.Net.Clients.MexcV3RestClient">
+            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.IMexcV3RestClient" />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3RestClient.GeneralApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3RestClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3RestClient.FutresApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3RestClient.#ctor">
+            <summary>
+            Create a new instance of MexcClient using the default options
+            使用默认选项创建 MexcClient 的新实例
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3RestClient.#ctor(Mexc.Net.Objects.MexcV3ClientOptions)">
+            <summary>
+            Create a new instance of MexcClient using provided options
+            使用提供的选项创建 MexcClient 的新实例
+            </summary>
+            <param name="options">The options to use for this client</param>
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3RestClient.SetDefaultOptions(Mexc.Net.Objects.MexcV3ClientOptions)">
+            <summary>
+            Set the default options to be used when creating new clients
+            设置创建新客户端时要使用的默认选项
+            </summary>
+            <param name="options">Options to use as default</param>
+        </member>
+        <member name="T:Mexc.Net.Clients.MexcV3SocketClient">
+            <inheritdoc cref="T:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient" />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.SpotPublicStreams">
+            <inheritdoc />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.SpotPrivateStreams">
+            <inheritdoc />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.FuturesPublicStreams">
+            <inheritdoc />
+        </member>
+        <member name="P:Mexc.Net.Clients.MexcV3SocketClient.FuturesPrivateStreams">
+            <inheritdoc />
+            <inheritdoc />
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.#ctor">
+            <summary>
+            Create a new instance of MexcSocketClientSpot with default options
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.#ctor(Mexc.Net.Objects.MexcV3SocketClientOptions)">
+            <summary>
+            Create a new instance of MexcSocketClientSpot using provided options
+            </summary>
+            <param name="options">The options to use for this client</param>
+        </member>
+        <member name="M:Mexc.Net.Clients.MexcV3SocketClient.SetDefaultOptions(Mexc.Net.Objects.MexcV3SocketClientOptions)">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="options">Options to use as default</param>
+        </member>
         <member name="T:Mexc.Net.Interfaces.MexcV3EtfInfoResponseData">
             <summary>
             Etf Info
@@ -417,6 +463,21 @@
             系统时间
             </summary>
         </member>
+        <member name="T:Mexc.Net.Interfaces.Clients.Futures.IMexcClientFutresApi">
+            <summary>
+            Usdt margin swap api endpoints
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.Futures.IMexcClientFutresApi.RequestFactory">
+            <summary>
+            The factory for creating requests. Used for unit testing
+            </summary>
+        </member>
+        <member name="T:Mexc.Net.Interfaces.Clients.Futures.IMexcV3SocketClientFuturesStreams">
+            <summary>
+            Mexc Spot streams
+            </summary>
+        </member>
         <member name="T:Mexc.Net.Interfaces.Clients.GeneralApi.IMexcV3ClientGeneralApi">
             <summary>
             Mexc general API endpoints
@@ -442,6 +503,11 @@
             Spot API endpoints
             </summary>
         </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.IMexcV3RestClient.FutresApi">
+            <summary>
+            Usdt margin swap endpoints
+            </summary>
+        </member>
         <member name="T:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient">
             <summary>
             Client for accessing the Mexc websocket API
@@ -452,9 +518,29 @@
             Spot streams
             </summary>
         </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient.SpotPrivateStreams">
+            <summary>
+            Spot streams
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient.FuturesPublicStreams">
+            <summary>
+            Futures streams
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.IMexcV3SocketClient.FuturesPrivateStreams">
+            <summary>
+            Futures streams
+            </summary>
+        </member>
         <member name="T:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3ClientSpotApi">
             <summary>
             Mexc Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3ClientSpotApi.RequestFactory">
+            <summary>
+            The factory for creating requests. Used for unit testing
             </summary>
         </member>
         <member name="P:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3ClientSpotApi.MarketData">
@@ -1206,7 +1292,6 @@
             <param name="symbol">The symbol the order is for</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
-            <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The quantity of the symbol</param>
             <param name="quoteQuantity">The quantity of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
@@ -1300,6 +1385,11 @@
         <member name="T:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams">
             <summary>
             Mexc Spot streams
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SocketFactory">
+            <summary>
+            The factory for creating sockets. Used for unit testing
             </summary>
         </member>
         <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
@@ -4888,11 +4978,27 @@
             Mexc Authentication Provider
             </summary>
         </member>
-        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.#ctor(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.#ctor(CryptoExchange.Net.Authentication.ApiCredentials,System.Boolean)">
             <summary>
             抹茶请求增加签名验证的方法
             </summary>
-            <param name="credentials"></param>
+            <param name="credentials">证书</param>
+            <param name="signPublicRequests">公用数据是否需要签名</param>
+        </member>
+        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.SortedDictionary{System.String,System.Object}@,System.Collections.Generic.SortedDictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
+            <summary>
+            重载请求增加签名验证的方法（底层实现都是使用自动字典排序的参数，但是抹茶不能这样，这个重载的方法保留，但是暂时不用）
+            </summary>
+            <param name="apiClient">API客户端</param>
+            <param name="uri">请求链接</param>
+            <param name="method">请求方法</param>
+            <param name="providedParameters">提供的参数</param>
+            <param name="auth">是否需要授权</param>
+            <param name="arraySerialization">数组序列化</param>
+            <param name="parameterPosition">参数位置</param>
+            <param name="uriParameters">用于存放请求链接中的参数</param>
+            <param name="bodyParameters">用于存放请求体中的参数</param>
+            <param name="headers">用于存放请求头中的参数</param>
         </member>
         <member name="M:Mexc.Net.MexcV3AuthenticationProvider.MexcV3AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
             <summary>
@@ -4909,10 +5015,9 @@
             <param name="bodyParameters">用于存放请求体中的参数</param>
             <param name="headers">用于存放请求头中的参数</param>
         </member>
-        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.SortedDictionary{System.String,System.Object}@,System.Collections.Generic.SortedDictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
+        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.MexcV3AuthenticateRequestTest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
             <summary>
-            重载请求增加签名验证的方法
-            （底层实现都是使用自动字典排序的参数，但是抹茶不能这样，这个重载的方法保留，但是暂时不用）
+            请求增加签名验证的方法（与上面重载得方法是一样得，尝试不使用重载如果可以，删除重载得签名方法）
             </summary>
             <param name="apiClient">API客户端</param>
             <param name="uri">请求链接</param>
@@ -5017,7 +5122,7 @@
             Api addresses
             </summary>
         </member>
-        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.RestClientAddress">
+        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.SpotRestClientAddress">
             <summary>
             The address used by the MexcClient for the Spot API
             </summary>
@@ -5027,7 +5132,7 @@
             The address used by the MexcSocketClient for the Spot Public API
             </summary>
         </member>
-        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.SpotUserSocketClientAddress">
+        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.SpotPrivaeSocketClientAddress">
             <summary>
             The address used by the MexcSocketClient for the Spot Private API
             </summary>
@@ -5037,9 +5142,14 @@
             The address used by the MexcClient for the futures API
             </summary>
         </member>
-        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.FuturesSocketClientAddress">
+        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.FuturesPublicSocketClientAddress">
             <summary>
-            The address used by the MexcSocketClient for the futures API
+            The address used by the MexcSocketClient for the publice futures API
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3ApiAddresses.FuturesPrivateSocketClientAddress">
+            <summary>
+            The address used by the MexcSocketClient for the private futures API
             </summary>
         </member>
         <member name="F:Mexc.Net.Objects.MexcV3ApiAddresses.Default">
@@ -5054,17 +5164,43 @@
         </member>
         <member name="T:Mexc.Net.Objects.MexcV3ClientOptions">
             <summary>
-            Options for the Mexc client
+            MexcV3 client options
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.TradeRulesBehaviour">
+            <summary>
+            Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.TradeRulesUpdateInterval">
+            <summary>
+            How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+            交易规则应多久更新一次（仅在 TradeRulesBehaviour != None 时使用)
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.Default">
             <summary>
-            Default options for the spot client
+            Default options for the client
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.SignPublicRequests">
+            <summary>
+            Whether public requests should be signed if ApiCredentials are provided. Needed for accurate rate limiting.
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.ReceiveWindow">
             <summary>
             The default receive window for requests
+            </summary>
+        </member>
+        <member name="F:Mexc.Net.Objects.MexcV3ClientOptions._spotApiOptions">
+            <summary>
+            现货Api设置
+            </summary>
+        </member>
+        <member name="F:Mexc.Net.Objects.MexcV3ClientOptions._futuresApiOptions">
+            <summary>
+            合约Api设置
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3ClientOptions.SpotApiOptions">
@@ -5090,7 +5226,7 @@
         </member>
         <member name="T:Mexc.Net.Objects.MexcV3SocketClientOptions">
             <summary>
-            Mexc socket client options
+            MexcV3 socket client options
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3SocketClientOptions.Default">
@@ -5101,11 +5237,6 @@
         <member name="P:Mexc.Net.Objects.MexcV3SocketClientOptions.SpotStreamsOptions">
             <summary>
             Spot public streams options
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Objects.MexcV3SocketClientOptions.SpotUserStreamsOptions">
-            <summary>
-            Spot private streams options
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3SocketClientOptions.FuturesStreamsOptions">
@@ -5126,7 +5257,7 @@
         </member>
         <member name="T:Mexc.Net.Objects.MexcV3ApiClientOptions">
             <summary>
-            Mexc API client options
+            MexcV3 api client options
             </summary>
         </member>
         <member name="P:Mexc.Net.Objects.MexcV3ApiClientOptions.TimestampOffset">
@@ -5142,6 +5273,7 @@
         <member name="P:Mexc.Net.Objects.MexcV3ApiClientOptions.TradeRulesUpdateInterval">
             <summary>
             How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+            交易规则应多久更新一次（仅在 TradeRulesBehaviour != None 时使用)
             </summary>
         </member>
         <member name="M:Mexc.Net.Objects.MexcV3ApiClientOptions.#ctor">
@@ -5156,6 +5288,83 @@
             <param name="baseAddress"></param>
         </member>
         <member name="M:Mexc.Net.Objects.MexcV3ApiClientOptions.#ctor(Mexc.Net.Objects.MexcV3ApiClientOptions,Mexc.Net.Objects.MexcV3ApiClientOptions)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseOn"></param>
+            <param name="newValues"></param>
+        </member>
+        <member name="T:Mexc.Net.Objects.MexcV3SocketApiClientOptions">
+            <summary>
+            MexcV3 socket api client options
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3SocketApiClientOptions.BaseAddressAuthenticated">
+            <summary>
+            The base address for the authenticated websocket
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3SocketApiClientOptions.BaseAddressInrementalOrderBook">
+            <summary>
+            The base address for the market by price websocket
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketApiClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketApiClientOptions.#ctor(System.String,System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress"></param>
+            <param name="baseAddressAuthenticated"></param>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketApiClientOptions.#ctor(System.String,System.String,System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress"></param>
+            <param name="baseAddressAuthenticated"></param>
+            <param name="baseAddressIncrementalOrderBook"></param>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketApiClientOptions.#ctor(Mexc.Net.Objects.MexcV3SocketApiClientOptions,Mexc.Net.Objects.MexcV3SocketApiClientOptions)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseOn"></param>
+            <param name="newValues"></param>
+        </member>
+        <member name="T:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions">
+            <summary>
+            Socket API client options
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions.BaseAddressAuthenticated">
+            <summary>
+            The base address for the authenticated websocket
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions.BaseAddressIndex">
+            <summary>
+            The base address for the index api
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions.#ctor(System.String,System.String,System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress"></param>
+            <param name="baseAddressAuthenticated"></param>
+            <param name="baseAddressIndex"></param>
+        </member>
+        <member name="M:Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions.#ctor(Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions,Mexc.Net.Objects.MexcV3SocketFuturesApiClientOptions)">
             <summary>
             ctor
             </summary>

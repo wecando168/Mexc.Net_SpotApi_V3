@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces.CommonClients;
+﻿using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.CommonClients;
 using System;
 
 namespace Mexc.Net.Interfaces.Clients.SpotApi
@@ -8,6 +9,11 @@ namespace Mexc.Net.Interfaces.Clients.SpotApi
     /// </summary>
     public interface IMexcV3ClientSpotApi : IDisposable
     {
+        /// <summary>
+        /// The factory for creating requests. Used for unit testing
+        /// </summary>
+        IRequestFactory RequestFactory { get; set; }
+
         /// <summary>
         /// Market Data Endpoints
         /// 行情接口

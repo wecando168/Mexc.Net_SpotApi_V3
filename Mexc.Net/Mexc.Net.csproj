@@ -54,6 +54,7 @@
   <ItemGroup>
     <Folder Include="Clients\GeneralApi\" />
     <Folder Include="Interfaces\Clients\GeneralApi\" />
+    <Folder Include="Interfaces\FuturesApi\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CryptoExchange.Net-5.2.4\CryptoExchange.Net\CryptoExchange.Net.csproj" />

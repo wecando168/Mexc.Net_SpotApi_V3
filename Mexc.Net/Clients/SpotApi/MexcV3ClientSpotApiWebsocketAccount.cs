@@ -36,7 +36,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
-            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequestInternal<MexcV3ListenKey>(
+            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequest<MexcV3ListenKey>(
                 uri: _baseClient.GetUrl(getListenKeyEndpoint, "api", "3"), 
                 method: HttpMethod.Post, 
                 cancellationToken: ct,
@@ -59,7 +59,7 @@ namespace Mexc.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequestInternal<MexcV3ListenKey>(
+            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequest<MexcV3ListenKey>(
                 uri: _baseClient.GetUrl(keepListenKeyAliveEndpoint, "api", "3"),
                 method: HttpMethod.Put,
                 cancellationToken: ct,
@@ -83,7 +83,7 @@ namespace Mexc.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequestInternal<MexcV3ListenKey>(
+            WebCallResult<MexcV3ListenKey>? result = await _baseClient.MexcV3SendRequest<MexcV3ListenKey>(
                 uri: _baseClient.GetUrl(closeListenKeyEndpoint, "api", "3"), 
                 method: HttpMethod.Delete,
                 cancellationToken: ct,

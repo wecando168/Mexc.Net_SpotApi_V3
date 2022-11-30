@@ -369,7 +369,7 @@ else if (read == "U" || read == "u")
 
     #region 构造可以获取私有账户数据的连接客户端
     MexcV3SocketClientOptions privateOptions = new MexcV3SocketClientOptions();
-    privateOptions.SpotStreamsOptions.BaseAddress = MexcV3ApiAddresses.Default.SpotUserSocketClientAddress;
+    privateOptions.SpotStreamsOptions.BaseAddress = MexcV3ApiAddresses.Default.SpotPrivaeSocketClientAddress;
     privateOptions.SpotStreamsOptions.ApiCredentials = new ApiCredentials(accessKey, secretKey);
     MexcV3SocketClient? mexcV3SocketClient = new MexcV3SocketClient(privateOptions);
     CallResult<UpdateSubscription>? privateSubV3scription = null;

@@ -55,7 +55,7 @@ namespace Mexc.Net.Clients.SpotApi
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             Stopwatch? sw = Stopwatch.StartNew();
-            WebCallResult<object>? result = await _baseClient.MexcV3SendRequestInternal<object>(
+            WebCallResult<object>? result = await _baseClient.MexcV3SendRequest<object>(
                 uri: _baseClient.GetUrl(pingEndpoint, api, publicVersion), 
                 method: HttpMethod.Get, 
                 cancellationToken: ct).ConfigureAwait(false);
@@ -70,7 +70,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<long>> GetServerTimeStampAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.MexcV3SendRequestInternal<MexcV3CheckServerTimeStamp>(
+            var result = await _baseClient.MexcV3SendRequest<MexcV3CheckServerTimeStamp>(
                 uri: _baseClient.GetUrl(checkTimeEndpoint, api, publicVersion), 
                 method: HttpMethod.Get, 
                 cancellationToken: ct, 
@@ -81,7 +81,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.MexcV3SendRequestInternal<MexcV3CheckServerTime>(
+            var result = await _baseClient.MexcV3SendRequest<MexcV3CheckServerTime>(
                 uri: _baseClient.GetUrl(checkTimeEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct, 
@@ -109,7 +109,7 @@ namespace Mexc.Net.Clients.SpotApi
             else if (symbols.Any())
                 parameters.Add("symbol", symbols.First());
 
-            var exchangeInfoResult = await _baseClient.MexcV3SendRequestInternal<MexcV3ExchangeInfo>(
+            var exchangeInfoResult = await _baseClient.MexcV3SendRequest<MexcV3ExchangeInfo>(
                 uri: _baseClient.GetUrl(exchangeInfoEndpoint, api, publicVersion), 
                 method: HttpMethod.Get, 
                 cancellationToken: ct, 
@@ -136,7 +136,7 @@ namespace Mexc.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             var requestWeight = limit == null ? 1 : limit <= 100 ? 1 : limit <= 500 ? 5 : limit <= 1000 ? 10 : 50;
-            WebCallResult<MexcV3OrderBook>? result = await _baseClient.MexcV3SendRequestInternal<MexcV3OrderBook>(
+            WebCallResult<MexcV3OrderBook>? result = await _baseClient.MexcV3SendRequest<MexcV3OrderBook>(
                 uri: _baseClient.GetUrl(orderBookEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -160,7 +160,7 @@ namespace Mexc.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3RecentTradeQuote>>(
+            var result = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3RecentTradeQuote>>(
                 uri: _baseClient.GetUrl(recentTradesEndpoint, api, publicVersion),
                 method:HttpMethod.Get,
                 cancellationToken:ct,
@@ -180,7 +180,7 @@ namespace Mexc.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3RecentTradeQuote>>? result = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3RecentTradeQuote>>(
+            WebCallResult<IEnumerable<MexcV3RecentTradeQuote>>? result = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3RecentTradeQuote>>(
                 uri: _baseClient.GetUrl(historicalTradesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -204,7 +204,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3AggregatedTrade>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3AggregatedTrade>>(
+            WebCallResult<IEnumerable<MexcV3AggregatedTrade>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3AggregatedTrade>>(
                 uri: _baseClient.GetUrl(aggregatedTradesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -229,7 +229,7 @@ namespace Mexc.Net.Clients.SpotApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            WebCallResult<IEnumerable<MexcV3SpotKline>>? result = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3SpotKline>>(
+            WebCallResult<IEnumerable<MexcV3SpotKline>>? result = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3SpotKline>>(
                 uri: _baseClient.GetUrl(klinesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -247,7 +247,7 @@ namespace Mexc.Net.Clients.SpotApi
             symbol.ValidateMexcSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
-            WebCallResult<MexcV3AveragePrice>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3AveragePrice>(
+            WebCallResult<MexcV3AveragePrice>? response = await _baseClient.MexcV3SendRequest<MexcV3AveragePrice>(
                 uri: _baseClient.GetUrl(averagePriceEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -265,7 +265,7 @@ namespace Mexc.Net.Clients.SpotApi
             symbol.ValidateMexcSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
-            WebCallResult<MexcV324HPrice>? result = await _baseClient.MexcV3SendRequestInternal<MexcV324HPrice>(
+            WebCallResult<MexcV324HPrice>? result = await _baseClient.MexcV3SendRequest<MexcV324HPrice>(
                 uri: _baseClient.GetUrl(price24HEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -283,7 +283,7 @@ namespace Mexc.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
             var symbolCount = symbols.Count();
             var weight = symbolCount <= 20 ? 1 : symbolCount <= 100 ? 20 : 40;
-            WebCallResult<IEnumerable<MexcV324HPrice>>? result = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV324HPrice>>(
+            WebCallResult<IEnumerable<MexcV324HPrice>>? result = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV324HPrice>>(
                 uri: _baseClient.GetUrl(price24HEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -295,7 +295,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IMexcV3Tick>>> GetTickersAsync(CancellationToken ct = default)
         {
-            WebCallResult<IEnumerable<MexcV324HPrice>>? result = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV324HPrice>>(
+            WebCallResult<IEnumerable<MexcV324HPrice>>? result = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV324HPrice>>(
                 uri: _baseClient.GetUrl(price24HEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -316,7 +316,7 @@ namespace Mexc.Net.Clients.SpotApi
                 { "symbol", symbol }
             };
 
-            WebCallResult<MexcV3Price>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3Price>(
+            WebCallResult<MexcV3Price>? response = await _baseClient.MexcV3SendRequest<MexcV3Price>(
                 uri: _baseClient.GetUrl(allPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -331,7 +331,7 @@ namespace Mexc.Net.Clients.SpotApi
                 symbol.ValidateMexcSymbol();
 
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
-            WebCallResult<IEnumerable<MexcV3Price>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3Price>>(
+            WebCallResult<IEnumerable<MexcV3Price>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3Price>>(
                 uri: _baseClient.GetUrl(allPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -343,7 +343,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<MexcV3Price>>> GetPricesAsync(CancellationToken ct = default)
         {
-            WebCallResult<IEnumerable<MexcV3Price>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3Price>>(
+            WebCallResult<IEnumerable<MexcV3Price>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3Price>>(
                 uri: _baseClient.GetUrl(allPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -361,7 +361,7 @@ namespace Mexc.Net.Clients.SpotApi
             symbol.ValidateMexcSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
-            WebCallResult<MexcV3BookPrice>? response = await _baseClient.MexcV3SendRequestInternal<MexcV3BookPrice>(
+            WebCallResult<MexcV3BookPrice>? response = await _baseClient.MexcV3SendRequest<MexcV3BookPrice>(
                 uri: _baseClient.GetUrl(bookPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -376,7 +376,7 @@ namespace Mexc.Net.Clients.SpotApi
                 symbol.ValidateMexcSymbol();
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
 
-            WebCallResult<IEnumerable<MexcV3BookPrice>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3BookPrice>>(
+            WebCallResult<IEnumerable<MexcV3BookPrice>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3BookPrice>>(
                 uri: _baseClient.GetUrl(bookPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -388,7 +388,7 @@ namespace Mexc.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<MexcV3BookPrice>>> GetBookPricesAsync(CancellationToken ct = default)
         {
-            WebCallResult<IEnumerable<MexcV3BookPrice>>? response = await _baseClient.MexcV3SendRequestInternal<IEnumerable<MexcV3BookPrice>>(
+            WebCallResult<IEnumerable<MexcV3BookPrice>>? response = await _baseClient.MexcV3SendRequest<IEnumerable<MexcV3BookPrice>>(
                 uri: _baseClient.GetUrl(bookPricesEndpoint, api, publicVersion),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
