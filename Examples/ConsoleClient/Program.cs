@@ -47,7 +47,7 @@ while (read != "R" && read != "r" && read != "P" && read != "p" && read != "U" &
 
 if (read == "R" || read == "r")
 {
-    //一、行情接口测试-已完成
+    //一、行情接口测试-已完成(测试通过）
     Console.WriteLine($"Press enter to test market data endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
