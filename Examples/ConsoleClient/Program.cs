@@ -10,11 +10,11 @@ using Newtonsoft.Json;
 using Mexc.Net.Objects.Models.Spot.Socket;
 using Mexc.Net.Interfaces;
 using Mexc.Net.Objects.Models.Spot;
+using System.Diagnostics;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string accessKey = "Use Your Exchange Access Key";
 const string secretKey = "Use Your Exchange SecretKey Key";
-
 string listenKey = string.Empty;
 #endregion
 
@@ -475,46 +475,143 @@ else if (read == "U" || read == "u")
     #endregion
 }
 
+static void ErrorInfoOutput<T>(WebCallResult<T> webCallResult, string serverName, string taskName)
+{
+    Console.WriteLine($"{serverName}：{taskName}异常\r\n" +
+    $"错误信息：{(webCallResult.Error == null ? "null" : webCallResult.Error)}\r\n" +
+    $"错误代码：{(webCallResult.Error == null ? "null" : webCallResult.Error.Code)}\r\n" +
+    $"错误提示：{(webCallResult.Error == null ? "null" : webCallResult.Error.Data)}");
+    string? read = string.Empty;
+    Console.WriteLine($"Return an error, press Enter to ignore the error and continue to run, Press [S] to stop test!");
+    read = Console.ReadLine();
+    if (read == "S" || read == "s")
+    {
+        Process.GetCurrentProcess().Kill();
+    }
+}
+
 //行情接口测试-已完成
 static async Task TestMarketDataEndpoints()
 {
     using (var mexcV3RestClient = new MexcV3RestClient())
     {
         #region 测试服务器连通性
-        Console.WriteLine("测试服务器连通性");
-        await HandleRequest("Ping Server", () => mexcV3RestClient.SpotApi.MarketData.PingAsync(), 
-            result => $"{result.ToString()}"
-            );
+        {
+            Console.WriteLine("测试服务器连通性");
+            //await HandleRequest("Ping Server", () => mexcV3RestClient.SpotApi.MarketData.PingAsync(),
+            //    result => $"{result.ToString()}"
+            //    );
+            var result = mexcV3RestClient.SpotApi.MarketData.PingAsync();
+            if (result.Result.Success)
+            {
+                Console.WriteLine($"服务器当前延时：{result.Result.Data.ToString()}毫秒\r\n");
+            }
+            else
+            {
+                ErrorInfoOutput<long>(result.Result, "抹茶服务器", "测试服务器连通性");
+            }
+        }
         #endregion
 
         #region 获取服务器当前时间戳
-        Console.WriteLine("获取服务器当前时间戳");
-        await HandleRequest("Server Time Stamp", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync(), 
-            result => $"{result.ToString()}"
-            );
+        {
+            Console.WriteLine("获取服务器当前时间戳");
+            //await HandleRequest("Server Time Stamp", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync(),
+            //    result => $"{result.ToString()}"
+            //    );
+            var result = mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync();
+            if (result.Result.Success)
+            {
+                Console.WriteLine($"服务器当前时间戳：{result.Result.Data.ToString()} 对应时间：{DateTimeConverter.ConvertFromMilliseconds(result.Result.Data)}\r\n");
+            }
+            else
+            {
+                ErrorInfoOutput<long>(result.Result, "抹茶服务器", "获取服务器当前时间戳");
+            }            
+        }
         #endregion
 
         #region 获取服务器当前时间
-        Console.WriteLine("获取服务器当前时间");
-        await HandleRequest("Server Time", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync(), 
-            result => $"{result.Date.ToString()}"
-            );
+        {
+            Console.WriteLine("获取服务器当前时间");
+            //await HandleRequest("Server Time", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync(),
+            //    result => $"{result.Date.ToString()}"
+            //    );
+            var result = mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync();
+            if (result.Result.Success)
+            {
+                Console.WriteLine($"服务器时间：{result.Result.Data.ToString()} 对应本地时间：{result.Result.Data.ToLocalTime()} 时差:{(result.Result.Data.ToLocalTime() - result.Result.Data).TotalHours}小时\r\n");
+            }
+            else
+            {
+                ErrorInfoOutput<DateTime>(result.Result, "抹茶服务器", "获取服务器当前时间");
+            }
+        }
         #endregion
 
         #region 获取交易规范信息，提取交易代码列表
-        Console.WriteLine("获取交易规范信息，提取交易代码列表");
-        await HandleRequest("Symbol list", () => mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync(), 
-            result => string.Join("", result.Symbols.Select(s => $"\r\n{s.SymbolName.PadRight(14,' ')}基础币:{s.BaseAsset.PadRight(10, ' ')}报价币:{s.QuoteAsset.PadRight(10, ' ')}价格精度:{s.QuotePrecision}\t数量精度:{s.QuoteAssetPrecision}").Take(100)) + "\r\n......"
-            );
+        {
+            Console.WriteLine("获取交易规范信息，提取交易代码列表");
+            //await HandleRequest("Symbol list", () => mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync(),
+            //    result => string.Join("", result.Symbols.Select(s => $"\r\n{s.SymbolName.PadRight(14, ' ')}基础币:{s.BaseAsset.PadRight(10, ' ')}报价币:{s.QuoteAsset.PadRight(10, ' ')}价格精度:{s.QuotePrecision}\t数量精度:{s.QuoteAssetPrecision}").Take(100)) + "\r\n......"
+            //    );
+            var result = mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync();
+            if (result.Result.Success)
+            {
+                foreach(var item in result.Result.Data.Symbols)
+                {
+                    Console.WriteLine(
+                        $"交易代码:{item.SymbolName.PadRight(14, ' ')}" +
+                        $"基础币:{item.BaseAsset.PadRight(10, ' ')}" +
+                        $"报价币:{item.QuoteAsset.PadRight(10, ' ')}" +
+                        $"价格精度:{item.QuotePrecision.ToString().PadRight(10, ' ')}" +
+                        $"数量精度:{item.QuoteAssetPrecision}"
+                        );
+                }
+            }
+            else
+            {
+                ErrorInfoOutput<MexcV3ExchangeInfo>(result.Result, "抹茶服务器", "获取交易规范信息，提取交易代码列表");
+            }
+        }
         #endregion
 
-        #region 深度信息
-        Console.WriteLine("深度信息");
-        await HandleRequest("Order Book", () => mexcV3RestClient.SpotApi.MarketData.GetOrderBookAsync(
-            symbol: "SHIBDOGE",
-            limit: 500),
-            result => $"\r\nSymbol:{result.Symbol.PadRight(15, ' ')}Last Update Id:{result.LastUpdateId}" + string.Join(", ", result.Bids.Select(b => $"\r\nBuy Price:{b.Price.ToString().PadRight(12, ' ')}Buy Quantity:{b.Quantity.ToString().PadRight(12, ' ')}").Take(10)) + "\r\netc......"
-            );
+        #region 获取行情深度信息
+        {
+            Console.WriteLine("获取行情深度信息");
+            //await HandleRequest("Order Book", () => mexcV3RestClient.SpotApi.MarketData.GetOrderBookAsync(
+            //    symbol: "SHIBDOGE",
+            //    limit: 500),
+            //    result => $"\r\nSymbol:{result.Symbol.PadRight(15, ' ')}Last Update Id:{result.LastUpdateId}" + string.Join(", ", result.Bids.Select(b => $"\r\nBuy Price:{b.Price.ToString().PadRight(12, ' ')}Buy Quantity:{b.Quantity.ToString().PadRight(12, ' ')}").Take(10)) + "\r\netc......"
+            //    );
+            var result = mexcV3RestClient.SpotApi.MarketData.GetOrderBookAsync(
+                symbol: "SHIBDOGE",
+                limit: 500
+                );
+            if (result.Result.Success)
+            {
+                Console.WriteLine("买盘深度信息");
+                foreach (var item in result.Result.Data.Bids)
+                {
+                    Console.WriteLine(
+                        $"价格:{item.Price.ToString().PadRight(14, ' ')}" +
+                        $"数量:{item.Quantity.ToString().PadRight(10, ' ')}"
+                        );
+                }
+                Console.WriteLine("卖盘深度信息");
+                foreach (var item in result.Result.Data.Asks)
+                {
+                    Console.WriteLine(
+                        $"价格:{item.Price.ToString().PadRight(14, ' ')}" +
+                        $"数量:{item.Quantity.ToString().PadRight(10, ' ')}"
+                        );
+                }
+            }
+            else
+            {
+                ErrorInfoOutput<MexcV3OrderBook>(result.Result, "抹茶服务器", "获取行情深度信息");
+            }
+        }
         #endregion
 
         #region 近期成交列表
