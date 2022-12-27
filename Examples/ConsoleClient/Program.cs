@@ -13,8 +13,10 @@ using Mexc.Net.Objects.Models.Spot;
 using System.Diagnostics;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
-const string accessKey = "Use Your Exchange Access Key";
-const string secretKey = "Use Your Exchange SecretKey Key";
+//const string accessKey = "Use Your Exchange Access Key";
+//const string secretKey = "Use Your Exchange SecretKey Key";
+const string accessKey = "mx0I999PUyKwOtMczT";
+const string secretKey = "193b4c841183480e83dcb5727329022e";
 string listenKey = string.Empty;
 #endregion
 
@@ -501,14 +503,14 @@ static async Task TestMarketDataEndpoints()
             //await HandleRequest("Ping Server", () => mexcV3RestClient.SpotApi.MarketData.PingAsync(),
             //    result => $"{result.ToString()}"
             //    );
-            var result = mexcV3RestClient.SpotApi.MarketData.PingAsync();
-            if (result.Result.Success)
+            var result = await mexcV3RestClient.SpotApi.MarketData.PingAsync();
+            if (result.Success)
             {
-                Console.WriteLine($"服务器当前延时：{result.Result.Data.ToString()}毫秒\r\n");
+                Console.WriteLine($"服务器当前延时：{result.Data.ToString()}毫秒\r\n");
             }
             else
             {
-                ErrorInfoOutput<long>(result.Result, "抹茶服务器", "测试服务器连通性");
+                ErrorInfoOutput<long>(result, "抹茶服务器", "测试服务器连通性");
             }
         }
         #endregion
@@ -519,14 +521,14 @@ static async Task TestMarketDataEndpoints()
             //await HandleRequest("Server Time Stamp", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync(),
             //    result => $"{result.ToString()}"
             //    );
-            var result = mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync();
-            if (result.Result.Success)
+            var result = await mexcV3RestClient.SpotApi.MarketData.GetServerTimeStampAsync();
+            if (result.Success)
             {
-                Console.WriteLine($"服务器当前时间戳：{result.Result.Data.ToString()} 对应时间：{DateTimeConverter.ConvertFromMilliseconds(result.Result.Data)}\r\n");
+                Console.WriteLine($"服务器当前时间戳：{result.Data.ToString()} 对应时间：{DateTimeConverter.ConvertFromMilliseconds(result.Data)}\r\n");
             }
             else
             {
-                ErrorInfoOutput<long>(result.Result, "抹茶服务器", "获取服务器当前时间戳");
+                ErrorInfoOutput<long>(result, "抹茶服务器", "获取服务器当前时间戳");
             }            
         }
         #endregion
@@ -537,14 +539,14 @@ static async Task TestMarketDataEndpoints()
             //await HandleRequest("Server Time", () => mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync(),
             //    result => $"{result.Date.ToString()}"
             //    );
-            var result = mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync();
-            if (result.Result.Success)
+            var result = await mexcV3RestClient.SpotApi.MarketData.GetServerTimeAsync();
+            if (result.Success)
             {
-                Console.WriteLine($"服务器时间：{result.Result.Data.ToString()} 对应本地时间：{result.Result.Data.ToLocalTime()} 时差:{(result.Result.Data.ToLocalTime() - result.Result.Data).TotalHours}小时\r\n");
+                Console.WriteLine($"服务器时间：{result.Data.ToString()} 对应本地时间：{result.Data.ToLocalTime()} 时差:{(result.Data.ToLocalTime() - result.Data).TotalHours}小时\r\n");
             }
             else
             {
-                ErrorInfoOutput<DateTime>(result.Result, "抹茶服务器", "获取服务器当前时间");
+                ErrorInfoOutput<DateTime>(result, "抹茶服务器", "获取服务器当前时间");
             }
         }
         #endregion
@@ -555,10 +557,10 @@ static async Task TestMarketDataEndpoints()
             //await HandleRequest("Symbol list", () => mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync(),
             //    result => string.Join("", result.Symbols.Select(s => $"\r\n{s.SymbolName.PadRight(14, ' ')}基础币:{s.BaseAsset.PadRight(10, ' ')}报价币:{s.QuoteAsset.PadRight(10, ' ')}价格精度:{s.QuotePrecision}\t数量精度:{s.QuoteAssetPrecision}").Take(100)) + "\r\n......"
             //    );
-            var result = mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync();
-            if (result.Result.Success)
+            var result = await mexcV3RestClient.SpotApi.MarketData.GetExchangeInfoAsync();
+            if (result.Success)
             {
-                foreach(var item in result.Result.Data.Symbols)
+                foreach(var item in result.Data.Symbols)
                 {
                     Console.WriteLine(
                         $"交易代码:{item.SymbolName.PadRight(14, ' ')}" +
@@ -571,7 +573,7 @@ static async Task TestMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<MexcV3ExchangeInfo>(result.Result, "抹茶服务器", "获取交易规范信息，提取交易代码列表");
+                ErrorInfoOutput<MexcV3ExchangeInfo>(result, "抹茶服务器", "获取交易规范信息，提取交易代码列表");
             }
         }
         #endregion
@@ -584,14 +586,14 @@ static async Task TestMarketDataEndpoints()
             //    limit: 500),
             //    result => $"\r\nSymbol:{result.Symbol.PadRight(15, ' ')}Last Update Id:{result.LastUpdateId}" + string.Join(", ", result.Bids.Select(b => $"\r\nBuy Price:{b.Price.ToString().PadRight(12, ' ')}Buy Quantity:{b.Quantity.ToString().PadRight(12, ' ')}").Take(10)) + "\r\netc......"
             //    );
-            var result = mexcV3RestClient.SpotApi.MarketData.GetOrderBookAsync(
+            var result = await mexcV3RestClient.SpotApi.MarketData.GetOrderBookAsync(
                 symbol: "SHIBDOGE",
                 limit: 500
                 );
-            if (result.Result.Success)
+            if (result.Success)
             {
                 Console.WriteLine("买盘深度信息");
-                foreach (var item in result.Result.Data.Bids)
+                foreach (var item in result.Data.Bids)
                 {
                     Console.WriteLine(
                         $"价格:{item.Price.ToString().PadRight(14, ' ')}" +
@@ -599,7 +601,7 @@ static async Task TestMarketDataEndpoints()
                         );
                 }
                 Console.WriteLine("卖盘深度信息");
-                foreach (var item in result.Result.Data.Asks)
+                foreach (var item in result.Data.Asks)
                 {
                     Console.WriteLine(
                         $"价格:{item.Price.ToString().PadRight(14, ' ')}" +
@@ -609,7 +611,7 @@ static async Task TestMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<MexcV3OrderBook>(result.Result, "抹茶服务器", "获取行情深度信息");
+                ErrorInfoOutput<MexcV3OrderBook>(result, "抹茶服务器", "获取行情深度信息");
             }
         }
         #endregion

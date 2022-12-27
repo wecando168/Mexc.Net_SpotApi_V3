@@ -4898,24 +4898,9 @@
             <param name="bodyParameters">用于存放请求体中的参数</param>
             <param name="headers">用于存放请求头中的参数</param>
         </member>
-        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.MexcV3AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
+        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
             <summary>
             重载请求增加签名验证的方法（参数不做字典排序）
-            </summary>
-            <param name="apiClient">API客户端</param>
-            <param name="uri">请求链接</param>
-            <param name="method">请求方法</param>
-            <param name="providedParameters">提供的参数</param>
-            <param name="auth">是否需要授权</param>
-            <param name="arraySerialization">数组序列化</param>
-            <param name="parameterPosition">参数位置</param>
-            <param name="uriParameters">用于存放请求链接中的参数</param>
-            <param name="bodyParameters">用于存放请求体中的参数</param>
-            <param name="headers">用于存放请求头中的参数</param>
-        </member>
-        <member name="M:Mexc.Net.MexcV3AuthenticationProvider.MexcV3AuthenticateRequestTest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
-            <summary>
-            请求增加签名验证的方法（与上面重载得方法是一样得，尝试不使用重载如果可以，删除重载得签名方法）
             </summary>
             <param name="apiClient">API客户端</param>
             <param name="uri">请求链接</param>
