@@ -13,10 +13,8 @@ using Mexc.Net.Objects.Models.Spot;
 using System.Diagnostics;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
-//const string accessKey = "Use Your Exchange Access Key";
-//const string secretKey = "Use Your Exchange SecretKey Key";
-const string accessKey = "mx0I999PUyKwOtMczT";
-const string secretKey = "193b4c841183480e83dcb5727329022e";
+const string accessKey = "Use Your Exchange Access Key";
+const string secretKey = "Use Your Exchange SecretKey Key";
 string listenKey = string.Empty;
 #endregion
 
