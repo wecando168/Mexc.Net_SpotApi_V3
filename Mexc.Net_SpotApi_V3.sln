@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mexc.Net", "Mexc.Net\Mexc.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mexc.Net.UnitTests", "Mexc.Net.UnitTests\Mexc.Net.UnitTests.csproj", "{60EB2E29-4B60-4BAF-8634-032029F3EAAB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchange.Net", "..\CryptoExchange.Net-5.3.0\CryptoExchange.Net\CryptoExchange.Net.csproj", "{FDB59214-BBA3-4344-943A-DF2D05D29169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchange.Net", "..\CryptoExchange.Net-5.3.1\CryptoExchange.Net\CryptoExchange.Net.csproj", "{C63DFD07-CF86-4413-A88A-C0AE01AC84D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{60EB2E29-4B60-4BAF-8634-032029F3EAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60EB2E29-4B60-4BAF-8634-032029F3EAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60EB2E29-4B60-4BAF-8634-032029F3EAAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDB59214-BBA3-4344-943A-DF2D05D29169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDB59214-BBA3-4344-943A-DF2D05D29169}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDB59214-BBA3-4344-943A-DF2D05D29169}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDB59214-BBA3-4344-943A-DF2D05D29169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C63DFD07-CF86-4413-A88A-C0AE01AC84D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C63DFD07-CF86-4413-A88A-C0AE01AC84D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C63DFD07-CF86-4413-A88A-C0AE01AC84D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C63DFD07-CF86-4413-A88A-C0AE01AC84D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
