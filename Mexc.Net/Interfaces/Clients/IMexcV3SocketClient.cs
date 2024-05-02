@@ -12,12 +12,12 @@ namespace Mexc.Net.Interfaces.Clients
         /// <summary>
         /// Spot streams
         /// </summary>
-        public IMexcV3SocketClientSpotStreams SpotPublicStreams { get; }
+        public IWWTMexcV3SocketClientSpotStreams SpotPublicStreams { get; }
 
         /// <summary>
         /// Spot streams
         /// </summary>
-        public IMexcV3SocketClientSpotStreams SpotPrivateStreams { get; }
+        public IWWTMexcV3SocketClientSpotStreams SpotPrivateStreams { get; }
 
         /// <summary>
         /// Futures streams

@@ -30,10 +30,10 @@ namespace Mexc.Net.Clients
         #region Api clients
 
         /// <inheritdoc />
-        public IMexcV3SocketClientSpotStreams SpotPublicStreams { get; set; }
+        public IWWTMexcV3SocketClientSpotStreams SpotPublicStreams { get; set; }
 
         /// <inheritdoc />
-        public IMexcV3SocketClientSpotStreams SpotPrivateStreams { get; set; }
+        public IWWTMexcV3SocketClientSpotStreams SpotPrivateStreams { get; set; }
 
         /// <inheritdoc />
         public IMexcV3SocketClientFuturesStreams FuturesPublicStreams { get; set; }
@@ -59,8 +59,8 @@ namespace Mexc.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public MexcV3SocketClient(MexcV3SocketClientOptions options) : base("Mexc", options)
         {
-            SpotPublicStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, options));
-            SpotPrivateStreams = AddApiClient(new MexcV3SocketClientSpotStreams(log, options));
+            SpotPublicStreams = AddApiClient(new WWTMexcV3SocketClientSpotStreams(log, options));
+            SpotPrivateStreams = AddApiClient(new WWTMexcV3SocketClientSpotStreams(log, options));
             FuturesPublicStreams = AddApiClient(new MexcV3SocketClientFuturesStreams (log, options));
             FuturesPrivateStreams = AddApiClient(new MexcV3SocketClientFuturesStreams(log, options));
         }

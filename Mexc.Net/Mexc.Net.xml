@@ -283,21 +283,21 @@
         <member name="M:Mexc.Net.Clients.SpotApi.MexcV3ClientSpotApiWebsocketAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams">
+        <member name="T:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.#ctor(CryptoExchange.Net.Logging.Log,Mexc.Net.Objects.MexcV3SocketClientOptions)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.#ctor(CryptoExchange.Net.Logging.Log,Mexc.Net.Objects.MexcV3SocketClientOptions)">
             <summary>
             Create a new public instance of MexcSocketClientSpot with default options
             </summary>
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
             <summary>
             
             </summary>
@@ -306,46 +306,46 @@
             <param name="ct"></param>
             <returns></returns>
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToPrivateDealsUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateDeals}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToPrivateDealsUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateDeals}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.SubscribeToPrivateOrdersUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateOrders}},System.Threading.CancellationToken)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.SubscribeToPrivateOrdersUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateOrders}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Mexc.Net.Clients.SpotApi.MexcV3SocketClientSpotStreams.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+        <member name="M:Mexc.Net.Clients.SpotApi.WWTMexcV3SocketClientSpotStreams.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
             <inheritdoc />
         </member>
         <member name="T:Mexc.Net.Clients.GeneralApi.MexcV3ClientGeneralApi">
@@ -3523,156 +3523,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="T:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams">
-            <summary>
-            Mexc Spot streams
-            </summary>
-        </member>
-        <member name="P:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SocketFactory">
-            <summary>
-            The factory for creating sockets. Used for unit testing
-            </summary>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
-            <summary>
-            逐笔交易(实时) Trade Streams
-            The Trade Streams push raw trade information; each trade has a unique buyer and seller.
-            逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
-            逐笔交易（指定单一交易代码） 逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#trade-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59" /></para>
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
-            <summary>
-            逐笔交易(实时) Trade Streams
-            The Trade Streams push raw trade information; each trade has a unique buyer and seller.
-            逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
-            逐笔交易（指定多个交易代码） 逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#trade-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59" /></para>
-            </summary>
-            <param name="symbols">The symbol array</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
-            <summary>
-            K线 Streams Kline Streams
-            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
-            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
-            K线 Streams（指定单一交易代码，指定单一时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol 交易代码</param>
-            <param name="interval">The interval of the candlesticks K线的时间间隔</param>
-            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
-            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
-            <summary>
-            K线 Streams Kline Streams
-            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
-            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
-            K线 Streams（指定单一交易代码，指定多个时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol 交易代码</param>
-            <param name="intervals">The interval of the candlesticks K线的时间间隔</param>
-            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
-            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
-            <summary>
-            K线 Streams Kline Streams
-            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
-            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
-            K线 Streams（指定多个交易代码，指定单一时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
-            </summary>
-            <param name="symbols">The symbol 交易代码</param>
-            <param name="interval">The interval of the candlesticks K线的时间间隔</param>
-            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
-            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
-            <summary>
-            K线 Streams Kline Streams
-            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
-            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
-            K线 Streams（指定多个交易代码，指定多个时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
-            </summary>
-            <param name="symbols">The symbol 交易代码</param>
-            <param name="intervals">The interval of the candlesticks K线的时间间隔</param>
-            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
-            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
-            <summary>
-            增量深度信息(实时)
-            Subscribes to the order book updates for the provided symbol
-            如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
-            增量深度信息（指定单一交易代码） 每秒或每100毫秒推送orderbook的变化部分(如果有)
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875" /></para>
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
-            <summary>
-            增量深度信息(实时)
-            Subscribes to the depth update stream for the provided symbols
-            如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
-            增量深度信息（指定多个交易代码） 每秒或每100毫秒推送orderbook的变化部分(如果有)
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875" /></para>
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToPrivateDealsUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateDeals}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the private deals update stream. Prior to using this, the MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync method should be called.
-            订阅帐户成交更新流。 在使用它之前，应该调用 MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync 方法(先生成 Listen Key (USER_STREAM) 再开始一个新的数据流）
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-deals" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#444af6a5fa" /></para>
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onMessage">The event handler for whenever an private deals update is received</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IMexcV3SocketClientSpotStreams.SubscribeToPrivateOrdersUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateOrders}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the private orders update stream. Prior to using this, the MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync method should be called.
-            订阅帐户订单更新流。 在使用它之前，应该调用 MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync 方法(先生成 Listen Key (USER_STREAM) 再开始一个新的数据流）
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ef28329b2a" /></para>
-            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-orders" /></para>
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onMessage">The event handler for whenever an private orders update is received</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
         <member name="T:Mexc.Net.Interfaces.Clients.SpotApi.ITestMexcClientSpotApi">
             <summary>
             Mexc Spot API endpoints
@@ -3702,6 +3552,156 @@
             获取此客户端的 ISpotClient。 这是一个通用接口，允许在不知道任何交换细节的情况下进行一些基本操作。
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams">
+            <summary>
+            Mexc Spot streams
+            </summary>
+        </member>
+        <member name="P:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SocketFactory">
+            <summary>
+            The factory for creating sockets. Used for unit testing
+            </summary>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
+            <summary>
+            逐笔交易(实时) Trade Streams
+            The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+            逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+            逐笔交易（指定单一交易代码） 逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#trade-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamTrade}},System.Threading.CancellationToken)">
+            <summary>
+            逐笔交易(实时) Trade Streams
+            The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+            逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+            逐笔交易（指定多个交易代码） 逐笔交易推送每一笔成交的信息。成交，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#trade-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59" /></para>
+            </summary>
+            <param name="symbols">The symbol array</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            K线 Streams Kline Streams
+            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
+            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
+            K线 Streams（指定单一交易代码，指定单一时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol 交易代码</param>
+            <param name="interval">The interval of the candlesticks K线的时间间隔</param>
+            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
+            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            K线 Streams Kline Streams
+            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
+            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
+            K线 Streams（指定单一交易代码，指定多个时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol 交易代码</param>
+            <param name="intervals">The interval of the candlesticks K线的时间间隔</param>
+            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
+            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Mexc.Net.Enums.MexcV3StreamsKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            K线 Streams Kline Streams
+            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
+            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
+            K线 Streams（指定多个交易代码，指定单一时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
+            </summary>
+            <param name="symbols">The symbol 交易代码</param>
+            <param name="interval">The interval of the candlesticks K线的时间间隔</param>
+            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
+            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Mexc.Net.Enums.MexcV3StreamsKlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            K线 Streams Kline Streams
+            K线逐秒推送所请求的K线种类(最新一根K线)的更新。
+            The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
+            K线 Streams（指定多个交易代码，指定多个时间间隔）  K线stream逐秒推送所请求的K线种类(最新一根K线)的更新。
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams" /></para>
+            </summary>
+            <param name="symbols">The symbol 交易代码</param>
+            <param name="intervals">The interval of the candlesticks K线的时间间隔</param>
+            <param name="onMessage">The event handler for the received data 接收数据的事件处理程序</param>
+            <param name="ct">Cancellation token for closing this subscription 用于关闭此订阅的取消令牌</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
+            <summary>
+            增量深度信息(实时)
+            Subscribes to the order book updates for the provided symbol
+            如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+            增量深度信息（指定单一交易代码） 每秒或每100毫秒推送orderbook的变化部分(如果有)
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToDiffDepthUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamDepth}},System.Threading.CancellationToken)">
+            <summary>
+            增量深度信息(实时)
+            Subscribes to the depth update stream for the provided symbols
+            如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+            增量深度信息（指定多个交易代码） 每秒或每100毫秒推送orderbook的变化部分(如果有)
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToPrivateDealsUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateDeals}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the private deals update stream. Prior to using this, the MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync method should be called.
+            订阅帐户成交更新流。 在使用它之前，应该调用 MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync 方法(先生成 Listen Key (USER_STREAM) 再开始一个新的数据流）
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-deals" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#444af6a5fa" /></para>
+            </summary>
+            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onMessage">The event handler for whenever an private deals update is received</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Mexc.Net.Interfaces.Clients.SpotApi.IWWTMexcV3SocketClientSpotStreams.SubscribeToPrivateOrdersUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Mexc.Net.Objects.Models.Spot.Socket.MexcV3StreamPrivateOrders}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the private orders update stream. Prior to using this, the MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync method should be called.
+            订阅帐户订单更新流。 在使用它之前，应该调用 MexcClient.SpotApi.WebsocketAccount.StartUserStreamAsync 方法(先生成 Listen Key (USER_STREAM) 再开始一个新的数据流）
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ef28329b2a" /></para>
+            <para><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-orders" /></para>
+            </summary>
+            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onMessage">The event handler for whenever an private orders update is received</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="T:Mexc.Net.Interfaces.IMexcV324HPrice">
             <summary>
